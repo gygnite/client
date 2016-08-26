@@ -34,7 +34,6 @@ gulp.task('watch', function() {
 });
 
 gulp.task('fonts', function() {
-    console.log("fonts??")
     del(['fonts', 'public/fonts', 'styles/icons']);
     return gulp.src('fontello.json')
         .pipe(fontello({

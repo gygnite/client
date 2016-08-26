@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha",
-    "dev": "webpack --watch & gulp dev & nodemon",
+    "dev": "pkill gulp && webpack --watch & gulp dev & nodemon",
     "production": "webpack && gulp build-production"
   },
   "repository": {

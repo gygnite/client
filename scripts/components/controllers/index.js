@@ -2,6 +2,9 @@
 var Index = require('../views/index');
 var connect = require('react-redux').connect;
 
+//connect to sockets
+// var io = require('socket.io-client')(BASE_URL);
+
 
 
 function mapStateToProps(state, ownProps) {
