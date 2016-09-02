@@ -1,6 +1,8 @@
 var React = require('react');
 var Navbar = require('./components/controllers/global/navbar');
+var Alert = require('./components/controllers/global/alert');
 var cx = require('classnames');
+var Cache = require('lscache');
 
 var Templates = React.createClass({
     render: function() {
@@ -14,10 +16,12 @@ var Templates = React.createClass({
                         {this.props.children}
                     </div>
                 </Transition>
+                {/*Alert bar, bottom left*/}
+                <Alert alerts={this.props.ui.alerts}/>
             </div>
         )
     }
-})
+});
 
 module.exports = Templates;
 

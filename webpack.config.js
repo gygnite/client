@@ -12,13 +12,13 @@ var config = {
         path: BUILD_DIR,
         filename: '/js/bundle.js',
     },
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-            }
-        })
-    ],
+    // plugins: [
+    //     new webpack.DefinePlugin({
+    //         'process.env': {
+    //             'NODE_ENV': JSON.stringify('production')
+    //         }
+    //     })
+    // ],
     resolve: {
         alias: {
             'react': path.join(__dirname, 'node_modules', 'react')

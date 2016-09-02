@@ -1,14 +1,27 @@
 //external imports
+@import 'https://fonts.googleapis.com/css?family=Comfortaa|Ubuntu';
+
+@import "bourbon";
+@import "neat";
+
+@import "icons/animation";
+@import "icons/fontello";
 
 //globally needed imports
+@import "variables";
+@import "global/modal";
+@import "global/alert";
 
 //main body styling
-
-//rest of internal imports
 
 
 * {
 	box-sizing: border-box;
+}
+
+html {
+	height: auto;
+	width: 100%;
 }
 
 body {
@@ -18,5 +31,65 @@ body {
 	left: 0;
 	margin: 0;
 	width: 100%;
+	height: 100%;
     -webkit-font-smoothing: antialiased;
+	background-color: $main-white;
 }
+body.no-scroll {
+	// overflow-y: : hidden;
+	overflow: hidden;
+}
+
+#app-root, .template {
+	height: 100%;
+}
+
+.main-app {
+	height: calc(100% - #{$navbar-height});
+	position: relative;
+	top: $navbar-height;
+}
+
+.container {
+	@include outer-container;
+}
+
+@import "global/fonts";
+
+
+
+
+
+
+
+
+
+// FIXME: MOVE ME
+.registration {
+	.loading {
+		left: -5%;
+	    position: absolute;
+	    margin-left: 50%;
+		.loader {
+			font-size: 100px;
+			color: black;
+		}
+	}
+}
+
+
+
+
+
+//rest of internal imports
+@import "global/transition";
+@import "global/navbar";
+@import "global/footer";
+@import "global/cal";
+@import "form/global";
+@import "form/button";
+@import "form/modalform";
+@import "form/input";
+@import "pages/index";
+@import "pages/dashboard/index";
+@import "pages/dashboard/bands/new";

@@ -17,7 +17,7 @@ var autoprefixer = require('gulp-autoprefixer'),
 var neat =  require('node-neat').includePaths;
 
 const CSS_BUILD_DIR = path.resolve(__dirname, './public/css');
-const CSS_SOURCE_DIR = './styles/**/*.scss';
+const CSS_SOURCE_DIR = './styles/**/*.*';
 
 gulp.task('dev', function() {
     bs.init(null, {
@@ -66,7 +66,7 @@ gulp.task('sass', function() {
             gutil.log("[sass]", err.toString());
             this.emit('end');
         })
-        .pipe(autoprefixer())
+        // .pipe(autoprefixer())
         .pipe(gulp.dest(CSS_BUILD_DIR))
         .pipe(bs.stream());
 });

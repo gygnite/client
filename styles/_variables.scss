@@ -1,0 +1,21 @@
+$main-white: #f0f4f7;
+$gunmetal: #373737;
+$purple: #7f5ffb;
+$teal: #6ED3CF;
+$crimson: #E62739;
+$main-blue: #2196F3;
+
+
+
+$swift-out: cubic-bezier(.55, 0, .1, 1);
+
+
+$navbar-height: 65px;
+//style guidelines
+//backgrounds - main white
+//navbar - gunmetal
+
+
+$mobile: new-breakpoint(max-width 480px);
+$tablet: new-breakpoint(min-width 481px);
+$desktop: new-breakpoint(min-width 850px);

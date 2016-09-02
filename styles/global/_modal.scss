@@ -1,0 +1,67 @@
+$fall-speed: 350ms;
+
+
+.modal {
+    position: fixed;
+    opacity: 0;
+    display: table;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    @include transition-property(all);
+    @include transition-duration($fall-speed);
+    @include transition-timing-function($swift-out);
+    z-index: 5000;
+    &.in {
+        opacity: 1;
+        .modal-inner.in{
+            opacity: 1;
+            -webkit-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+            height: auto;
+            background-color: $main-white;
+            box-shadow: 0 2px 3px 0 rgba(48, 48, 48, 1);
+            border-radius: 3px;
+            @include transition-property(all);
+            @include transition-duration($fall-speed);
+            @include transition-timing-function($swift-out);
+            // transition: opacity .4s ease-in-out, transform $fall-speed ease-in-out;
+        }
+    }
+    .modal-inner {
+        opacity: 0;
+        transform: translate3d(0,-80px,0);
+        @include transition-property(all);
+        @include transition-duration($fall-speed);
+        @include transition-timing-function($swift-out);
+    }
+    .close-icon {
+        position: absolute;
+        padding: 15px;
+        right: 0;
+        top: 0;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+}
+
+.modal-backdrop {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    background-color: rgba(0,0,0,.65);
+}
+.modal-inner {
+    display: inline-block;
+    text-align: left;
+}
+
+.modal-box {
+    padding: 20px;
+    background-color: $main-white;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px rgba(0,0,0,.2);
+    width: 300px;
+}

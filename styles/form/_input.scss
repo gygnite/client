@@ -1,0 +1,55 @@
+$bottom-border: lighten($gunmetal, 50%);
+.input-group {
+	position: relative;
+	width: 300px;
+	label {
+		color: $gunmetal;
+		font-size:18px;
+		position: absolute;
+		pointer-events: none;
+		left: 17px;
+		top: 30px;
+		transition: all 150ms ease-in-out;
+	}
+	input:focus ~ label, input:valid ~ label, .text-present {
+		transform: translateY(-28px);
+		font-size: 14px;
+		color: $gunmetal;
+	}
+	input {
+		margin: 16px;
+		width: 88%;
+		height: 40px;
+		font-size: 16px;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 400;
+		border: none;
+		border-bottom: solid 1px $bottom-border;
+		outline: none;
+        background-color: transparent;
+	}
+	.bar  {
+		position: relative;
+		display: block;
+		max-width: 100%;
+		top: -14px;
+	}
+	.bar:before, .bar:after   {
+		content: '';
+		height: 2.5px;
+		width: 0;
+		bottom: 1px;
+		position: absolute;
+		background: $purple;
+		transition: all 200ms ease-in-out;
+	}
+	.bar:before {
+		left: 50%;
+	}
+	.bar:after {
+		right: 50%;
+	}
+	input:focus ~ .bar:before, input:focus ~ .bar:after {
+		width: 45%;
+	}
+}

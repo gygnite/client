@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha",
     "dev": "pkill gulp && webpack --watch & gulp dev & nodemon",
-    "production": "webpack && gulp build-production"
+    "build-production": "webpack && gulp build-production && npm start"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,9 @@
     "object-assign": "^4.1.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
+    "react-flickity-component": "^0.1.0",
+    "react-geosuggest": "^1.25.0",
+    "react-infinite-calendar": "^1.1.18",
     "react-redux": "^4.4.5",
     "react-router": "^2.7.0",
     "redux": "^3.5.2",

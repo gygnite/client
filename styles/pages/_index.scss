@@ -1,0 +1,277 @@
+#background-picture-main {
+	@include background-image(url("../assets/microphone.jpeg"));
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: -1;
+	@include filter(brightness(60%));
+    @include media($mobile) {
+        height: 825px;
+    };
+    @include media($tablet) {
+        height: 750px;
+    };
+    @include media($desktop) {
+        height: 700px;
+    };
+}
+
+
+.index-div {
+    @include outer-container;
+    @include pad(0 60px);
+    @include media($mobile) {
+        @include pad(0 10px);
+    }
+    @include media($tablet) {
+        @include pad(0 40px);
+    };
+    @include media($desktop) {
+        @include pad(0 60px);
+    }
+    margin: 0;
+    max-width: 100%;
+    margin-bottom: -1px;
+}
+
+.index-div-full {
+
+    // margin: 0;
+    @include media($mobile) {
+        height: 825px;
+    };
+    @include media($tablet) {
+        height: 750px;
+    };
+    @include media($desktop) {
+        height: 700px;
+    };
+    @include span-columns(12);
+}
+
+.color-purple {
+    background-color: $purple;
+}
+.color-teal {
+    background-color: $teal;
+}
+.color-metal {
+    background-color: $gunmetal;
+}
+
+.index {
+    color: white;
+    .main-content {
+        text-align: center;
+        padding-top: 100px;
+        position: relative;
+        .headline {
+            @include media($mobile) {
+                @include outer-container;
+                font-size: 2.4em;
+            };
+            @include media($tablet) {
+                font-size: 3em;
+            };
+            @include media($desktop) {
+                font-size: 4em;
+            };
+        }
+        .main-subpoints {
+            @include media($mobile) {
+                margin-top: 40px;
+            };
+            @include media($tablet) {
+                margin-top: 80px;
+            };
+            @include media($desktop) {
+                margin-top: 120px;
+            };
+            .sub-point {
+                @include outer-container;
+                .sub-icon {
+                    @include span-columns(12);
+                    font-size: 90px;
+                }
+                .sub-point-text {
+                    font-size: 25px;
+                }
+                @include media($mobile) {
+                    @include span-columns(12);
+                    margin-top: 25px;
+                }
+                @include media($tablet) {
+                    @include span-columns(4);
+                };
+                @include media($desktop) {
+                    @include span-columns(4);
+                }
+            }
+        }
+        .scroll-down-pointer {
+            @include animation(bounce 1.5s ease-out infinite);
+            @include media($mobile) {
+                display: none;
+            }
+            @include outer-container;
+            @include span-columns(12);
+            margin-top: 120px;
+            max-width: inherit;
+            .icon-down-open {
+                font-size: 70px;
+            }
+        }
+    }
+}
+
+@include keyframes(bounce) {
+    0%, 100% {
+        @include transform(translateY(0px));
+    }
+    50% {
+        @include transform(translateY(-5px));
+    }
+};
+
+
+.index-div-short {
+    height: 300px;
+    @include span-columns(12);
+}
+
+.index-div {
+    .float-left {
+        text-align: left;
+    }
+    .float-right {
+        text-align: right;
+    }
+}
+.index-div-tiny {
+    height: 100px;
+    @include span-columns(12);
+}
+.helper-content-header {
+    .helper-small {
+        @include media($mobile) {
+            @include span-columns(12);
+        };
+        @include media($tablet) {
+            @include span-columns(12);
+        };
+        @include media($desktop) {
+            @include span-columns(4);
+        };
+
+    }
+    .helper-large {
+        @include media($mobile) {
+            @include span-columns(12);
+        };
+        @include media($tablet) {
+            @include span-columns(12);
+        };
+        @include media($desktop) {
+            @include span-columns(9);
+        };
+    }
+    .title, .content {
+        // @include span-columns(12 of 8);
+        margin-top: 40px;
+        &.float-left {
+            float: left;
+        }
+        &.float-right {
+            float: right;
+        }
+    }
+    .title {
+        @include media($mobile) {
+            font-size: 1.7em;
+        };
+        @include media($tablet) {
+            font-size: 1.95em;
+        };
+        @include media($desktop) {
+            font-size: 2.1em;
+        };
+    }
+    .content {
+        @include media($mobile) {
+            font-size: 1.3em;
+        };
+        @include media($tablet) {
+            font-size: 1.5em;
+        };
+        @include media($desktop) {
+            font-size: 1.7em;
+        };
+    }
+}
+.helper-content {
+    color: $gunmetal;
+    @include span-columns(12);
+    .header {
+        padding: 5px;
+        @include media($mobile) {
+            font-size: 0.85em;
+        };
+        @include media($tablet) {
+            font-size: 1.1em;
+        };
+        @include media($desktop) {
+            font-size: 1.4em;
+        };
+        @include span-columns(9);
+    }
+    .header-icon {
+        @include media($mobile) {
+            font-size: 30px;
+        };
+        @include media($tablet) {
+            font-size: 40px;
+        };
+        @include media($desktop) {
+            font-size: 50px;
+        };
+        @include span-columns(2);
+    }
+    .header, .header-icon {
+        margin-top: 30px;
+        white-space: nowrap;
+    }
+    .content {
+        @include span-columns(12);
+
+        .content-list-header {
+            left: -30px;
+            position: relative;
+        }
+        .content-list {
+            @include media($tablet) {
+                margin-left: 100px;
+            };
+            @include media($desktop) {
+                margin-left: 175px;
+            };
+        }
+        .content-list-item {
+            font-size: 20px;
+            margin-top: 5px;
+        }
+    }
+}
+
+.call-to-action.button {
+    background: $crimson;
+    position: relative;
+    width: 95%;
+    @include media($mobile) {
+
+    };
+    // margin-top: 30%;
+}

@@ -1,0 +1,30 @@
+$shadow: rgb(60, 58, 58);
+$lighter: lighten($shadow, 10%);
+.button {
+    padding: 13px;
+    bottom: 0;
+    background-color: $teal;
+    text-align: center;
+    margin: 10px;
+    border-radius: 3px;
+    box-shadow: 0 1px 5px rgb(117, 117, 117);
+    transition: all 100ms ease-in-out;
+    -webkit-user-select: none;
+    cursor: pointer;
+    &:hover {
+        box-shadow: 0 3px 8px $lighter;
+        transition: all 200ms ease-in-out;
+    }
+    &.primary {
+        background-color: $teal;
+    }
+    &.error {
+        background-color: #EF5350;
+    }
+    &.success {
+        background-color: #66BB6A;
+    }
+    &.warning {
+        background-color: #FFEE58;
+    }
+}

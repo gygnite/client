@@ -4,3 +4,9 @@ public/js/bundle.js
 fonts
 .sass-cache
 npm-debug.log
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+.DS_Store

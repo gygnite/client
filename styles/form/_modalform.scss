@@ -1,0 +1,37 @@
+.modal-form {
+    overflow: hidden;
+    border-radius: 3px;
+    padding: 10px;
+    .form-header {
+        height: 121px;
+        padding: 40px;
+        text-align: center;
+        background-color: $teal;
+        margin: -10px;
+        margin-bottom: 15px;
+        border-top-right-radius: 3px;
+        border-top-left-radius: 3px;
+    }
+    .form-content {
+        height: auto;
+        width: auto;
+        margin: 10px;
+        input {
+            width: 250px;
+            height: 45px;
+            font-size: 18px;
+        }
+    }
+    .form-submit {
+        float: right;
+        width: 50%;
+        .submit {
+            padding: 13px;
+            bottom: 0;
+            background-color: $teal;
+            text-align: center;
+            margin: 10px;
+            border-radius: 3px;
+        }
+    }
+}

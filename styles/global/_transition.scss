@@ -1,0 +1,21 @@
+
+
+.app-active {
+	opacity: 1;
+	transform: translateX(0);
+	@include transition-property(opacity, transform);
+	@include transition-duration(300ms, 150ms);
+	@include transition-timing-function(ease-in-out);
+}
+.app-enter {
+	opacity: 0;
+	@include transition-property(opacity, transform);
+	@include transition-duration(300ms, 150ms);
+	@include transition-timing-function(ease-in-out);
+}
+.app-leave {
+	opacity: 0;
+	@include transition-property(all);
+	@include transition-duration(0ms);
+	@include transition-timing-function(ease-in-out);
+}
