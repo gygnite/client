@@ -8,5 +8,8 @@ module.exports = {
             All: require('./dashboard/bands/all'),
             New: require('./dashboard/bands/new')
         }
+    },
+    Profile: {
+        Band: require('./profile/band')
     }
 };

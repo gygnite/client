@@ -26,7 +26,7 @@ var Navbar = React.createClass({
         }
     },
     render: function() {
-        console.log("props on nav", this.props);
+        // console.log("props on nav", this.props);
         var menuOpen = cx({
             ' open': this.state.menuOpen
         });
@@ -141,17 +141,17 @@ var Login = React.createClass({
             form: {}
         }
     },
-    _handleInput: function(field, e) {
+    _handleInput: function(field, value) {
         var state = this.state;
-        state.form[field] = e.target.value;
+        state.form[field] = value;
         this.setState(state);
     },
     _loginUser: function() {
         Joi.validate(this.state.form, loginSchema, function(err, success) {
             if (err) {
                 //don't send
-                console.error('invalid input');
-                // FIXME: Handle errors with form input component
+                console.error('Invalid input');
+                // FIXME:20 Handle errors with form input component
             } else {
                 // console.log("props: ", this.props)
                 this.props.login(this.state.form);
@@ -181,11 +181,17 @@ var Login = React.createClass({
                     <h1>Login</h1>
                 </div>
                 <div className="form-content">
-                    <Input label="Email">
-                        <input onChange={this._handleInput.bind(this, 'email')} ref="email" type="email" required/>
+                    <Input
+                        for="email"
+                        label="Email"
+                        handleUserInput={this._handleInput}>
+                        <input type="email" required/>
                     </Input>
-                    <Input label="Password">
-                        <input onChange={this._handleInput.bind(this, 'password')} ref="password" type="password" required/>
+                    <Input
+                        for="password"
+                        label="Password"
+                        handleUserInput={this._handleInput}>
+                        <input type="password" required/>
                     </Input>
                 </div>
                 <div className="form-submit">
@@ -203,28 +209,24 @@ var Signup = React.createClass({
             form: {}
         }
     },
-    _handleInput: function(field, e) {
+    _handleInput: function(field, value) {
         var state = this.state;
-        state.form[field] = e.target.value;
+        state.form[field] = value;
         this.setState(state);
+        console.log("state of form", this.state.form)
     },
     _signupUser: function() {
-
         // console.log("signing up", this.state.form);
-
-
         Joi.validate(this.state.form, signupSchema, function(err, success) {
             if (err) {
                 //don't send
                 console.error('invalid input');
-                // FIXME: Handle errors with form input component
+                // FIXME:30 Handle errors with form input component
             } else {
                 // console.log("props: ", this.props)
                 this.props.signup(this.state.form);
             }
         }.bind(this));
-
-
     },
     render: function() {
         var button = (
@@ -246,17 +248,29 @@ var Signup = React.createClass({
                     <h1>Signup</h1>
                 </div>
                 <div className="form-content">
-                    <Input for="first_name" label="First Name">
-                        <input onChange={this._handleInput.bind(this, 'first_name')} ref="first_name" type="text" required/>
+                    <Input
+                        for="first_name"
+                        label="First Name"
+                        handleUserInput={this._handleInput}>
+                        <input type="text" required/>
                     </Input>
-                    <Input for="last_name" label="Last Name">
-                        <input onChange={this._handleInput.bind(this, 'last_name')} ref="last_name" type="text" required/>
+                    <Input
+                        for="last_name"
+                        label="Last Name"
+                        handleUserInput={this._handleInput}>
+                        <input type="text" required/>
                     </Input>
-                    <Input for="email" label="Email">
-                        <input onChange={this._handleInput.bind(this, 'email')} ref="email" type="email" required />
+                    <Input
+                        for="email"
+                        label="Email"
+                        handleUserInput={this._handleInput}>
+                        <input type="email" required/>
                     </Input>
-                    <Input for="password" label="Password">
-                        <input onChange={this._handleInput.bind(this, 'password')} ref="password" type="password" required />
+                    <Input
+                        for="password"
+                        label="Password"
+                        handleUserInput={this._handleInput}>
+                        <input type="password" required/>
                     </Input>
                 </div>
                 <div className="form-submit">
@@ -297,7 +311,7 @@ var MenuList = React.createClass({
         }
     },
     componentWillReceiveProps: function(nextProps) {
-        console.log("nextProps", nextProps);
+        // console.log("nextProps", nextProps);
         if (nextProps.open) {
             this.setState({
                 enter: true,

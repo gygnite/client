@@ -53,3 +53,30 @@ exports.removeAlert = function () {
         type: UI.REMOVE_ALERT
     }
 };
+
+
+exports.fetchBands = function () {
+    console.log("fetching bands");
+    return {
+        type: UI.FETCH_BANDS
+    }
+};
+
+exports.fetchBandsComplete = function () {
+    return {
+        type: UI.FETCH_BANDS_COMPLETE
+    }
+};
+
+
+exports.fetchVenues = function () {
+    return {
+        type: UI.FETCH_VENUES
+    }
+};
+
+exports.fetchVenuesComplete = function () {
+    return {
+        type: UI.FETCH_VENUES_COMPLETE
+    }
+};

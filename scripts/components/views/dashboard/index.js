@@ -1,41 +1,38 @@
 var React = require('react');
+var AssetCard = require('./assetCard');
+var assign = require('object-assign');
 var Link = require('react-router').Link;
-// import InfiniteCalendar from 'react-infinite-calendar';
-var InfiniteCalendar = require('react-infinite-calendar').default;
-var Flickity = require('react-flickity-component')(React);
-var moment = require('moment');
-var Input = require('../global/input');
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
-var dateFormat = "MMM Do";
 
-var Dashboard = React.createClass({
-    getInitialState: function() {
-        return {
-            date: moment().format(dateFormat),
-            selectedDate: moment()
-        }
-    },
-    _noBodyScroll: function() {
-        document.body.classList.add('no-scroll');
-    },
-    _removeNoBodyScroll: function() {
-        setTimeout(function() {
-            document.body.classList.remove('no-scroll');
-        }, 150);
-    },
-    _setSelectedDate: function(e) {
-        this.setState({
-            selectedDate:  moment(e.target.value)
-        });
-        this._showDate(e.target.value);
-    },
-    _showDate: function(date) {
-        console.log("date selected:", date);
-        this.setState({
-            date: moment(date).format(dateFormat)
-        });
+var Index = React.createClass({
+    componentWillMount: function() {
+        this.props.fetchDashboard();
     },
     render: function() {
+        var bandLoader = (<i className="icon-loader animate-spin"></i>);
+        var assets = [];
+        if (!this.props.bands.isFetchingBands || this.props.venues.isFetchingVenues) {
+            bandLoader = null;
+        };
+        var bands = this.props.bands.allbands.map(function(band) {
+            return assign({}, band, {
+                type: 'band'
+            });
+        });
+        var venues = this.props.venues.allvenues.map(function(venue) {
+            return assign({}, venue, {
+                type: 'venue'
+            });
+        });
+        if (bands.length > venues.length) {
+            assets = bands.concat(venues);
+        } else {
+            assets = venues.concat(bands);
+        }
+        var assetCards = assets.map(function(asset, index) {
+            return (<AssetCard key={"card-"+index} data={asset}/>)
+        });
         return (
             <div className="dashboard">
                 <section className="dash-section">
@@ -63,108 +60,48 @@ var Dashboard = React.createClass({
                     <div className="dash-section-12 user-assets">
                         <div className="dash-section-header">
                             <h1>Current Bands and Venues</h1>
-                            <p><i>To move between cards, click the tabs or grab and swipe</i></p>
                         </div>
-                        <div className="user-assets-cards">
-                            <Flickity
-                            className={'carousel'}
-                            elementType={'div'}
-                            options={{
-                                setGallerySize: false,
-                                resize: false,
-                                cellAlign: 'left',
-                                selectedAttraction: 0.2,
-                                friction: 0.8,
-                                prevNextButtons: false,
-                                wrapAround: true
-                            }}>
-                                <div className="asset-card new-card">
-                                    <h1>Band 1</h1>
-                                </div>
-                                <div className="asset-card new-card">
-                                    <h1>Band 2</h1>
-                                </div>
-                                <div className="asset-card new-card">
-                                    <h1>Venue 1</h1>
-                                </div>
-                            </Flickity>
-                        </div>
-                    </div>
-                </section>
-                <section className="dash-section">
-                    <div className="dash-section-12 band-music">
-                        <InfiniteCalendar
-                            onScroll={this._noBodyScroll}
-                            onScrollEnd={this._removeNoBodyScroll}
-                            className="calendar"
-                            min={Date.now()}
-                            minDate={Date.now()}
-                            theme={calTheme}
-                            layout="portrait"
-                            width={'50%'}
-                            height={433}
-                            display={'days'}
-                            onSelect={this._showDate}
-                            selectedDate={this.state.selectedDate}/>
-                        <div className="date-details">
-                            <div className="form modal-form">
-                                <Input>
-                                    <input onChange={this._setSelectedDate} ref="email" type="date" required/>
-                                </Input>
-                            </div>
-                            <div className="header">
-                                <h1>{this.state.date}</h1>
-                            </div>
-                            <div className="edit">
-                                <i className="icon-pencil"></i>
-                            </div>
-                            <div className="timeslots">
-                                <Timeslot time={'7:00 PM'}/>
-                                <Timeslot time={'8:30 PM'}/>
-                                <Timeslot time={'10:00 PM'}/>
-                            </div>
-                        </div>
+                        <ul className="user-assets-cards">
+
+                            {bandLoader}
+
+                            {assetCards}
+
+                            <NewAssetCard />
+
+                        </ul>
                     </div>
                 </section>
             </div>
         )
     }
-});
+})
 
-module.exports = Dashboard;
-
-
-
-var calTheme = {
-    selectionColor: 'rgb(146, 118, 255)',
-    textColor: {
-        default: '#333',
-        active: '#FFF'
-    },
-    weekdayColor: 'rgb(146, 118, 255)',
-    headerColor: 'rgb(127, 95, 251)',
-    floatingNav: {
-        background: 'rgba(81, 67, 138, 0.96)',
-        color: '#FFF',
-        chevron: '#FFA726'
-    }
-};
+module.exports = Index;
 
 
 
 
-var Timeslot = React.createClass({
+var NewAssetCard = React.createClass({
     render: function() {
         return (
-            <div className="slot">
-                <div className="time">
-                    <h2>{this.props.time}</h2>
-                </div>
-                <div className="slot-content">
-                    <h2>Muscular Housecat</h2>
-                    <p>Any details about the show?</p>
-                </div>
-            </div>
+            <li className="asset-card new-asset">
+
+                <Link to="/bands/new">
+                    <div className="new-item section">
+                            <h3 className="new-asset-text">New Band</h3>
+                            <i className="icon-plus-circled"></i>
+                    </div>
+                </Link>
+
+                <Link to="/venues/new">
+                    <div className="new-item section last">
+                        <h3 className="new-asset-text">New Venue</h3>
+                        <i className="icon-plus-circled"></i>
+                    </div>
+                </Link>
+
+            </li>
         )
     }
 });

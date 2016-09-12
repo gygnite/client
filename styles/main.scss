@@ -64,7 +64,7 @@ body.no-scroll {
 
 
 
-// FIXME: MOVE ME
+// FIXME:40 MOVE ME
 .registration {
 	.loading {
 		left: -5%;
@@ -93,3 +93,4 @@ body.no-scroll {
 @import "pages/index";
 @import "pages/dashboard/index";
 @import "pages/dashboard/bands/new";
+@import "pages/profile/profile";

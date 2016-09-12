@@ -113,6 +113,12 @@
       "css": "github-circled",
       "code": 59405,
       "src": "zocial"
+    },
+    {
+      "uid": "5211af474d3a9848f67f945e2ccaf143",
+      "css": "cancel",
+      "code": 59406,
+      "src": "fontawesome"
     }
   ]
 }

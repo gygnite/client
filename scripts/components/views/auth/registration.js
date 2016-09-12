@@ -1,5 +1,6 @@
 var React = require('react');
 var cx = require('classnames');
+var request = require('superagent');
 
 var Registration = React.createClass({
 
@@ -7,9 +8,14 @@ var Registration = React.createClass({
         //request data
         var code = this.props.params.code;
 
-        // FIXME: What if no code?
+        // FIXME:60 What if no code?
 
         this.props.fetchRegistration(code); //call action to show spinner
+
+        request.get('http://api.gygnite.dev/data/1')
+            .end(function(err, res) {
+                console.log("response: ", err, res);
+            });
     },
 
     render: function() {

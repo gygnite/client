@@ -51,6 +51,16 @@ function ui(state, action) {
             return assign({}, state, {
                 alerts:  state.alerts
             });
+        case UI.FETCH_BANDS:
+            return assign({}, state, {
+                isFetchingBands: true
+            });
+            break;
+        case UI.FETCH_BANDS_COMPLETE:
+            return assign({}, state, {
+                isFetchingBands: false
+            });
+            break;
         default: return state;
     }
     return state;

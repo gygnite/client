@@ -28,9 +28,6 @@ function mapDispatchToProps(dispatch) {
                     dispatch(ACTIONS.ui.fetchUserComplete());
                     // dispatch(ACTIONS.ui.createAlert('Logged in as ' + res.body.user.first_name, 'success'));
                 });
-            setTimeout(function() {
-                dispatch(ACTIONS.ui.fetchUserComplete());
-            }, 5000);
         },
         login: function(user) {
             dispatch(ACTIONS.ui.fetchUser());
@@ -38,7 +35,6 @@ function mapDispatchToProps(dispatch) {
             request.post(BASE_URL+'/auth/login')
                 .send(user)
                 .end(function(err, res) {
-                    console.log("res?? ", res);
                     dispatch(ACTIONS.ui.fetchUserComplete());
                     //if err, set err state
                     //else set user
@@ -50,8 +46,10 @@ function mapDispatchToProps(dispatch) {
                         dispatch(ACTIONS.ui.createAlert('Login failed', 'error'));
                         dispatch(ACTIONS.user.clearUser());
                         Cache.remove(ACTIONS.cache.AUTH_TOKEN);
+                        Cache.remove(ACTIONS.cache.USER);
                     } else {
                         Cache.set(ACTIONS.cache.AUTH_TOKEN, res.body.token);
+                        Cache.set(ACTIONS.cache.USER, res.body.user);
                         dispatch(ACTIONS.user.setUser(
                             assign({}, res.body.user, {
                                 token: res.body.token
@@ -59,7 +57,7 @@ function mapDispatchToProps(dispatch) {
                         ));
                         dispatch(ACTIONS.ui.closeModal());
                         dispatch(ACTIONS.ui.createAlert('Login successful', 'success'));
-                        console.log("browserHistory: ", browserHistory);
+
                         browserHistory.push('/dashboard');
                     }
                 });
@@ -77,7 +75,7 @@ function mapDispatchToProps(dispatch) {
                             dispatch(ACTIONS.ui.createAlert(res.body.message, 'error'));
                         }
                     } else {
-                        // FIXME: SEND TO REGISTRATION PAGE
+                        // FIXME:50 SEND TO REGISTRATION PAGE
                             //User should check email
                         dispatch(ACTIONS.ui.closeModal());
                         dispatch(ACTIONS.ui.createAlert(res.body.message, 'success'));

@@ -1,0 +1,61 @@
+.profile {
+    @include outer-container;
+    position: relative;
+    margin-top: 50px;
+    .header-box {
+        @include span-columns(12);
+        height: 200px;
+        .img {
+            @include span-columns(3);
+            height: 100%;
+            background: blue;
+            border-radius: 10em;
+            width: 200px;
+        }
+        .headline {
+            @include span-columns(9);
+            position: relative;
+            height: 100%;
+            text-align: left;
+            .headline-text {
+                margin-top: 8%;
+                font-size: 44px;
+            }
+        }
+    }
+    .main-box {
+        @include span-columns(12);
+        margin-top: 50px;
+        .details-box {
+            @include span-columns(3);
+            .details-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                .detail {
+                    
+                }
+            }
+        }
+        .bio-box {
+            @include span-columns(9);
+            // @include outer-container;
+            p {
+                line-height: 1.5;
+            }
+        }
+
+    }
+    .links-box {
+        @include span-columns(12);
+        margin-top: 30px;
+        .link-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            .link-inner {
+
+            }
+        }
+    }
+}

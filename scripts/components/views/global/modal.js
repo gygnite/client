@@ -43,7 +43,7 @@ var Modal = React.createClass({
     },
 
     doRender: function(props) {
-        var closeIcon = (<i className="fa fa-times close-icon" onClick={this.handleClick} />);
+        var closeIcon = (<i className="icon-cancel close-icon" onClick={this.handleClick} />);
         if (!this.props.showCloseIcon) {
             closeIcon = null;
         }

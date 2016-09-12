@@ -25,12 +25,13 @@ var Template = require('./components/controllers/template');
 var Main = require('./components/controllers/Main');
 var Dashboard = Main.Dashboard;
 var Bands = Dashboard.Bands;
+var Profile = Main.Profile;
 
 var AppRouter = React.createClass({
     render: function() {
         return (
             <Provider store={store}>
-                <Router history={browserHistory} onUpdate={() => window.scrollTo(0, 0)}>
+                <Router history={browserHistory}>
                     <Route path={ROUTE_CONSTANTS.INDEX} component={Template}>
                         {/*Home Page*/}
                         <IndexRoute component={Main.Index}/>
@@ -48,6 +49,7 @@ var AppRouter = React.createClass({
                             </Route>
                         </Route>
 
+                        <Route path="/bands/:slug" component={Profile.Band}/>
 
                         {/*Add Catchall 404*/}
 
@@ -63,7 +65,7 @@ var ROUTE_CONSTANTS = {
     INDEX: '/',
     DASHBOARD: 'dashboard',
     BANDS: {
-        BASE: 'bands',
+        BASE: '/bands',
         NEW: 'new'
     }
 };
@@ -76,21 +78,12 @@ module.exports = {
 
 function AuthMiddleware(nextState, replace, callback) {
     var token = Cache.get(ACTIONS.cache.AUTH_TOKEN);
-    if (token) {
-        // console.log("token?", )
-        request(BASE_URL + '/auth')
-            .authBearer(token)
-            .end(function(err, res) {
-                // console.log("res: ", res);
-                if (err || !res.body.user || !res.body.user.first_name) {
-                    // console.log("should redirect?")
-                    replace('/');
-                    callback();
-                } else {
-                    callback();
-                }
-            });
+    var user = Cache.get(ACTIONS.cache.USER);
+    if (token && user) {
+        callback();
     } else {
+        Cache.remove(ACTIONS.cache.AUTH_TOKEN);
+        Cache.remove(ACTIONS.cache.USER);
         replace('/');
         callback();
     }

@@ -10,7 +10,11 @@ module.exports = {
         CREATE_ALERT: 'CREATE_ALERT',
         REMOVE_ALERT: 'REMOVE_ALERT',
         FETCH_USER: 'FETCH_USER',
-        FETCH_USER_COMPLETE: 'FETCH_USER_COMPLETE'
+        FETCH_USER_COMPLETE: 'FETCH_USER_COMPLETE',
+        FETCH_BANDS: 'FETCH_BANDS',
+        FETCH_BANDS_COMPLETE: 'FETCH_BANDS_COMPLETE',
+        FETCH_VENUES: 'FETCH_VENUES',
+        FETCH_VENUES_COMPLETE: 'FETCH_VENUES_COMPLETE',
     },
     USER: {
         SET_USER: 'SET_USER',
@@ -19,5 +23,18 @@ module.exports = {
     CACHE: {
         AUTH_TOKEN: 'auth-token',
         USER: 'user'
+    },
+    DASHBOARD: {
+        FETCH_DASHBOARD: 'FETCH_DASHBOARD',
+        FETCH_DASHBOARD_COMPLETE: 'FETCH_DASHBOARD_COMPLETE'
+    },
+    BANDS: {
+        SET_BANDS: 'SET_BANDS'
+    },
+    VENUES: {
+        SET_VENUES: 'SET_VENUES'
+    },
+    PROFILE: {
+        SET_BAND: 'SET_BAND'
     }
 };
