@@ -1,26 +1,33 @@
 $bottom-border: lighten($gunmetal, 50%);
 .input-group {
 	position: relative;
-	width: 300px;
+	min-width: 300px;
+	width: 100%;
 	padding: 16px;
 	label {
 		color: $gunmetal;
-		font-size:18px;
+		font-size: 18px;
 		position: absolute;
 		pointer-events: none;
 		left: 17px;
 		top: 30px;
 		transition: all 150ms ease-in-out;
 	}
-	input:focus ~ label, &.text-present > label {
-		transform: translateY(-28px);
-		font-size: 14px;
-		color: $gunmetal;
+	input:focus ~ label,
+	&.text-present > label,
+	textarea:focus ~ label,
+	&.text-present > label {
+		transform: translateY(-35px);
+		font-size: 16px;
+	}
+	input:focus ~ label,
+	textarea:focus ~ label {
+		color: $purple;
 	}
 	input {
 		width: 100%;
 		height: 40px;
-		font-size: 16px;
+		font-size: 18px;
 		font-family: 'Open Sans', sans-serif;
 		font-weight: 400;
 		border: none;
@@ -32,7 +39,7 @@ $bottom-border: lighten($gunmetal, 50%);
 		position: relative;
 		display: block;
 		max-width: 100%;
-		top: 2px;
+		top: 1px;
 	}
 	.bar:before, .bar:after   {
 		content: '';
@@ -49,7 +56,10 @@ $bottom-border: lighten($gunmetal, 50%);
 	.bar:after {
 		right: 50%;
 	}
-	input:focus ~ .bar:before, input:focus ~ .bar:after {
+	input:focus ~ .bar:before,
+	input:focus ~ .bar:after,
+	textarea:focus ~ .bar:before,
+	textarea:focus ~ .bar:after {
 		width: 50%;
 	}
 }
@@ -58,4 +68,67 @@ $bottom-border: lighten($gunmetal, 50%);
 .input-group.half {
 	width: 50%;
 	float: left;
+}
+
+.input-group {
+	textarea {
+		width: 100%;
+		min-height: 50px;
+		height: 200px;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 400;
+		border: none;
+		border-bottom: solid 1px $bottom-border;
+		background-color: transparent;
+		outline: none;
+		resize: none;
+		font-size: 18px;
+		white-space: pre-wrap;
+		margin-top: 10px;
+		height: auto;
+		& ~ .bar {
+			top: -2px;
+		}
+	}
+}
+
+
+
+.tag-input {
+	.input {
+		background: none;
+		border: 0;
+		color: rgba(0,0,0,0.6);
+		display: inline-block;
+		font-size: 13px;
+		font-weight: 500;
+		height: 32px;
+		margin-right: 20px;
+		line-height: 32px;
+		outline: 0;
+		padding: 0 !important;
+		width: 120px !important;
+	}
+}
+.tag {
+	display: inline-block;
+	height: 32px;
+	font-size: 14px;
+	font-weight: 500;
+	color: rgba(0,0,0,0.6);
+	line-height: 32px;
+	padding: 0 12px;
+	border-radius: 16px;
+	background-color: #e4e4e4;
+	margin-bottom: 5px;
+	margin-right: 5px;
+	@include transform(translateY(5px));
+}
+
+
+label, input, .tag, textarea {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
 }

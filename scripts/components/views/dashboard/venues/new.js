@@ -5,8 +5,7 @@ var TagInput = require('../../global/taginput');
 var Geosuggest = require('react-geosuggest').default;
 var Joi = require('joi-browser');
 
-
-var NewBand = React.createClass({
+var NewVenue = React.createClass({
     getInitialState: function() {
         return {
             form: {},
@@ -17,19 +16,18 @@ var NewBand = React.createClass({
         var state = this.state;
         state.form[field] = value;
         this.setState(state);
-        // console.log("state!", this.state);
     },
     captureLocation: function(location) {
         var state = this.state;
         state.form['location'] = location;
         this.setState(state);
     },
-    _createBand: function() {
+    _createVenue: function() {
         var errors = [];
         console.log("this state form: ", this.state.form);
 
         if (!this.state.form.hasOwnProperty('name')) {
-            errors.push('You must include a band name');
+            errors.push('You must include a venue name');
         }
         if (!this.state.form.location) {
             errors.push('Please choose a valid input from the location dropdown.');
@@ -43,7 +41,7 @@ var NewBand = React.createClass({
         }
 
         if (errors.length < 1) {
-            this.props.createBand(this.state.form);
+            this.props.createVenue(this.state.form);
         } else {
             console.log("validation errors", errors);
             this.setState({
@@ -58,11 +56,11 @@ var NewBand = React.createClass({
     },
     render: function() {
         var button = (
-            <div onClick={this._createBand} className="button submit">
-                <h3>Create my band!</h3>
+            <div onClick={this._createVenue} className="button submit">
+                <h3>Create my venue!</h3>
             </div>
         );
-        if (this.props.ui.isFetchingBands) {
+        if (this.props.ui.isFetchingVenues) {
             button = (
                 <div className="button submit loader">
                     <i className="loader icon-loader animate-spin"></i>
@@ -78,12 +76,12 @@ var NewBand = React.createClass({
         });
         return (
             <div className="container">
-                <h1 className="headline">New Band</h1>
+                <h1 className="headline">New Venue</h1>
                 {errors}
                 <div className="new-band-form">
 
                     <section className="new-band-section">
-                        <h1>About you</h1>
+                        <h1>About</h1>
                     </section>
 
                     <Input
@@ -93,58 +91,33 @@ var NewBand = React.createClass({
                         <input type="text"/>
                     </Input>
 
-                    <Input
-                        for="location"
-                        label="* Location"
-                        className="text-present"
-                        handleUserInput={this.handleInput}>
-                        <Geosuggest
-                            placeholder="City and State"
-                            onSuggestSelect={this.captureLocation}
-                            types={['(cities)']}
-                            queryDelay={150}/>
-                    </Input>
-
                     <TextArea
                         for="bio"
-                        label="Biography / Tell us about your band!"
-                        handleUserInput={this.handleInput}/>
+                        label="Biography"
+                        handleUserInput={this.handleInput} />
 
                     <section className="new-band-section">
                         <h1>Details</h1>
                     </section>
 
                     <Input
-                        for="year_established"
-                        label="Band Since (year)"
+                        for="location"
+                        label="* Location (Address)"
+                        className="text-present"
                         handleUserInput={this.handleInput}>
-                        <input type="text" />
+                        <Geosuggest
+                            placeholder="Address"
+                            onSuggestSelect={this.captureLocation}
+                            types={['address']}
+                            queryDelay={150}/>
                     </Input>
 
                     <Input
-                        for="avg_set_length"
-                        label="Average Set Length (in minutes)"
+                        for="capacity"
+                        label="Capacity"
                         handleUserInput={this.handleInput}>
-                        <input type="text" />
+                        <input type="text"/>
                     </Input>
-
-                    <TagInput
-                        for="influences"
-                        label="Influences"
-                        placeholder="+ influence"
-                        handleUserInput={this.handleInput}/>
-
-                    <TagInput
-                        for="gear_owned"
-                        label="Gear You Have"
-                        placeholder="+ item"
-                        handleUserInput={this.handleInput}/>
-
-                    <TagInput
-                        for="gear_needed"
-                        label="Gear You Need Provided"
-                        placeholder="+ item"
-                        handleUserInput={this.handleInput}/>
 
                     <section className="new-band-section">
                         <h1>Social Media</h1>
@@ -162,24 +135,6 @@ var NewBand = React.createClass({
                         handleUserInput={this.handleInput}>
                         <input type="text" />
                     </Input>
-                    <Input
-                        for="soundcloud_url"
-                        label="SoundCloud"
-                        handleUserInput={this.handleInput}>
-                        <input type="text" />
-                    </Input>
-                    <Input
-                        for="bandcamp_url"
-                        label="Bandcamp"
-                        handleUserInput={this.handleInput}>
-                        <input type="text" />
-                    </Input>
-                    <Input
-                        for="myspace_url"
-                        label="Myspace"
-                        handleUserInput={this.handleInput}>
-                        <input type="text" />
-                    </Input>
 
                     {button}
 
@@ -189,4 +144,4 @@ var NewBand = React.createClass({
     }
 });
 
-module.exports = NewBand;
+module.exports = NewVenue;

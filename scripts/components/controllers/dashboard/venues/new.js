@@ -1,7 +1,6 @@
 'use strict';
 
-//NewBandinclude view component here
-var NewBand = require('../../../views/dashboard/bands/new');
+var NewVenue = require('../../../views/dashboard/venues/new');
 var request = require('superagent');
 require('superagent-auth-bearer');
 var Cache = require('lscache');
@@ -15,29 +14,27 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        createBand: function(band) {
+        createVenue: function(band) {
 
-            dispatch(ACTIONS.ui.fetchBands());
+            dispatch(ACTIONS.ui.fetchVenues());
 
-            request.post(BASE_URL+'/api/admins/bands')
+            request.post(BASE_URL+'/api/admins/venues')
                 .send(band)
                 .authBearer(Cache.get(ACTIONS.cache.AUTH_TOKEN))
                 .end(function(err, res) {
-                    console.log("log err", err, res.body);
-
                     if (!err && !res.body.error) {
-                        dispatch(ACTIONS.ui.createAlert(res.body.data.band.name + ' created successfully!', 'success'));
+                        dispatch(ACTIONS.ui.createAlert(res.body.data.venue.name + ' created successfully!', 'success'));
                         browserHistory.push('/dashboard');
                     } else{
                         //error
                         // FIXME: New Band Error
-                        var message = 'Unable to create band.';
+                        var message = 'Unable to create venue.';
                         if (res.body.message) {
                             message = res.body.message;
                         }
                         dispatch(ACTIONS.ui.createAlert(message, 'error'));
                     }
-                    dispatch(ACTIONS.ui.fetchBandsComplete());
+                    dispatch(ACTIONS.ui.fetchVenuesComplete());
                 });
         }
     }
@@ -46,4 +43,4 @@ function mapDispatchToProps(dispatch) {
 module.exports = connect(
     mapStateToProps,
     mapDispatchToProps
-)(NewBand);
+)(NewVenue);

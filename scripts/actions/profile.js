@@ -8,3 +8,10 @@ exports.setBand = function (band) {
         band: band
     }
 };
+
+exports.setVenue = function (venue) {
+    return {
+        type: PROFILE.SET_VENUE,
+        venue: venue
+    }
+};

@@ -32,9 +32,6 @@
                 list-style: none;
                 padding: 0;
                 margin: 0;
-                .detail {
-                    
-                }
             }
         }
         .bio-box {
@@ -42,6 +39,7 @@
             // @include outer-container;
             p {
                 line-height: 1.5;
+                white-space: pre-wrap;
             }
         }
 

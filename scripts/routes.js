@@ -25,13 +25,14 @@ var Template = require('./components/controllers/template');
 var Main = require('./components/controllers/Main');
 var Dashboard = Main.Dashboard;
 var Bands = Dashboard.Bands;
+var Venues = Dashboard.Venues;
 var Profile = Main.Profile;
 
 var AppRouter = React.createClass({
     render: function() {
         return (
             <Provider store={store}>
-                <Router history={browserHistory}>
+                <Router history={browserHistory} >
                     <Route path={ROUTE_CONSTANTS.INDEX} component={Template}>
                         {/*Home Page*/}
                         <IndexRoute component={Main.Index}/>
@@ -47,9 +48,14 @@ var AppRouter = React.createClass({
                                 <IndexRoute component={Bands.All}/>
                                 <Route path={ROUTE_CONSTANTS.BANDS.NEW} component={Bands.New}/>
                             </Route>
+                            <Route path={ROUTE_CONSTANTS.VENUES.BASE}>
+                                <Route path={ROUTE_CONSTANTS.VENUES.NEW} component={Venues.New}/>
+                            </Route>
                         </Route>
 
+                        {/* FIXME: Update CWU to not need auth token */}
                         <Route path="/bands/:slug" component={Profile.Band}/>
+                        <Route path="/venues/:slug" component={Profile.Venue}/>
 
                         {/*Add Catchall 404*/}
 
@@ -66,6 +72,10 @@ var ROUTE_CONSTANTS = {
     DASHBOARD: 'dashboard',
     BANDS: {
         BASE: '/bands',
+        NEW: 'new'
+    },
+    VENUES: {
+        BASE: '/venues',
         NEW: 'new'
     }
 };

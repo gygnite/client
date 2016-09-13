@@ -7,9 +7,13 @@ module.exports = {
         Bands: {
             All: require('./dashboard/bands/all'),
             New: require('./dashboard/bands/new')
+        },
+        Venues: {
+            New: require('./dashboard/venues/new')
         }
     },
     Profile: {
-        Band: require('./profile/band')
+        Band: require('./profile/band'),
+        Venue: require('./profile/venue')
     }
 };

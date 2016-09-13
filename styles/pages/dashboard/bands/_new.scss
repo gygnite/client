@@ -1,3 +1,39 @@
 .new-band-form {
+    margin-top: 50px;
     @include span-columns(12);
+    @include outer-container;
+    .new-band-section {
+        @include span-columns(12);
+        margin: auto;
+        margin-top: 25px;
+        margin-bottom: 40px;
+        float: none;
+        text-align: center;
+        padding: 10px;
+        background-color: $purple;
+        width: 60%;
+        padding: 20px;
+        color: $main-white;
+        @include media($mobile) {
+            left: 0;
+            margin: 0;
+            margin-top: 25px;
+            margin-bottom: 40px;
+        };
+        @include media($tablet) {
+            left: 0;
+            margin: 0;
+            margin-top: 25px;
+            margin-bottom: 40px;
+        };
+    }
+    .input-group {
+        margin-bottom: 20px;
+    }
+}
+
+
+.headline {
+    margin-top: 50px;
+    text-align: center;
 }

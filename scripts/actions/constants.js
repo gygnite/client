@@ -35,6 +35,7 @@ module.exports = {
         SET_VENUES: 'SET_VENUES'
     },
     PROFILE: {
-        SET_BAND: 'SET_BAND'
+        SET_BAND: 'SET_BAND',
+        SET_VENUE: 'SET_VENUE'
     }
 };

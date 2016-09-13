@@ -21,9 +21,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-
-
-
 module.exports = connect(
     mapStateToProps,
     mapDispatchToProps

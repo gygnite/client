@@ -13,6 +13,9 @@ function profile(state, action) {
         case PROFILE.SET_BAND:
             return assign({}, state, action.band);
             break;
+        case PROFILE.SET_VENUE:
+            return assign({}, state, action.venue);
+            break;
         default: return state;
     }
     return state;
