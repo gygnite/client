@@ -20,13 +20,14 @@ function mapDispatchToProps(dispatch) {
                 .authBearer(token)
                 .end(function(err, res) {
                     console.log("err?", err);
-                    dispatch(ACTIONS.user.setUser(
-                        assign({}, res.body.user, {
-                            token: res.body.token
-                        })
-                    ));
+                    if (!err && res.body) {
+                        dispatch(ACTIONS.user.setUser(
+                            assign({}, res.body.user, {
+                                token: res.body.token
+                            })
+                        ));
+                    }
                     dispatch(ACTIONS.ui.fetchUserComplete());
-                    // dispatch(ACTIONS.ui.createAlert('Logged in as ' + res.body.user.first_name, 'success'));
                 });
         },
         login: function(user) {

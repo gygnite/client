@@ -27,6 +27,7 @@ var Dashboard = Main.Dashboard;
 var Bands = Dashboard.Bands;
 var Venues = Dashboard.Venues;
 var Profile = Main.Profile;
+var Search = Main.Search;
 
 var AppRouter = React.createClass({
     render: function() {
@@ -49,14 +50,19 @@ var AppRouter = React.createClass({
                                 <Route path={ROUTE_CONSTANTS.BANDS.NEW} component={Bands.New}/>
                             </Route>
                             <Route path={ROUTE_CONSTANTS.VENUES.BASE}>
+
                                 <Route path={ROUTE_CONSTANTS.VENUES.NEW} component={Venues.New}/>
                             </Route>
                         </Route>
 
                         {/* FIXME: Update CWU to not need auth token */}
-                        <Route path="/bands/:slug" component={Profile.Band}/>
-                        <Route path="/venues/:slug" component={Profile.Venue}/>
+                        <Route path="/bands/:slug" component={Profile.Band} onLeave={clearProfileStore} />
+                        <Route path="/venues/:slug" component={Profile.Venue} onLeave={clearProfileStore} />
 
+                        <Route path="/search">
+                            <Route path="bands" component={Search.Band}/>
+
+                        </Route>
                         {/*Add Catchall 404*/}
 
                     </Route>
@@ -97,4 +103,12 @@ function AuthMiddleware(nextState, replace, callback) {
         replace('/');
         callback();
     }
+}
+
+
+function clearProfileStore(prevState) {
+    console.log("prevstate: ", prevState);
+    console.log("store state on exit: ", store.getState());
+    store.dispatch(ACTIONS.profile.clearProfile());
+    console.log("store state after clear exit: ", store.getState());
 }

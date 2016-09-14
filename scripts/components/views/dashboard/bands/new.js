@@ -17,7 +17,7 @@ var NewBand = React.createClass({
         var state = this.state;
         state.form[field] = value;
         this.setState(state);
-        // console.log("state!", this.state);
+        console.log("field; ", field, value);
     },
     captureLocation: function(location) {
         var state = this.state;

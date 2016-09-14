@@ -119,6 +119,18 @@
       "css": "cancel",
       "code": 59406,
       "src": "fontawesome"
+    },
+    {
+      "uid": "513ac180ff85bd275f2b736720cbbf5e",
+      "css": "home",
+      "code": 59407,
+      "src": "entypo"
+    },
+    {
+      "uid": "5308d824454af8ec7835786e272361a9",
+      "css": "level-up",
+      "code": 59408,
+      "src": "entypo"
     }
   ]
 }

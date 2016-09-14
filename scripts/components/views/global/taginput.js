@@ -31,7 +31,7 @@ var Input = React.createClass({
     _addTag: function(e) {
         var tags = this.state.tags;
         console.log("this.state.value.trim() ", this.state.value.trim() === '')
-        if ((e.keyCode === 13 || e.charCode === 13) && this.state.value.trim() !== '') {
+        if (!e || (e.keyCode === 13 || e.charCode === 13) && this.state.value.trim() !== '') {
             tags.push(this.state.value);
             this.setState({
                 value: '',
@@ -79,6 +79,14 @@ var Input = React.createClass({
                 </div>
             );
         }.bind(this));
+        var enterIconStyle = {
+            transform: 'translateX('+(100 + this.state.value.length*7)+'px)',
+            zIndex: '0'
+        };
+        var inputIndexStyle = {
+            zIndex: 1
+        };
+        console.log("enter icon style!", enterIconStyle)
         return (
             <div className={this.props.className + " input-group text-present" + textPresent}>
                 {tags}
@@ -89,7 +97,12 @@ var Input = React.createClass({
                     onChange={this.handleChange}
                     ref={this.props.for}
                     type="text"
-                    className="tag-input"/>
+                    className="tag-input"
+                    style={inputIndexStyle}/>
+                <i className="icon-level-up enter-on-tag"
+                    style={enterIconStyle}
+                    onClick={this._addTag}>
+                </i>
                 <label htmlFor={this.props.for}>{this.props.label}</label>
                 <span className="bar"></span>
             </div>

@@ -67,7 +67,7 @@
     color: white;
     .main-content {
         text-align: center;
-        padding-top: 100px;
+        padding-top: 10px;
         position: relative;
         .headline {
             @include media($mobile) {

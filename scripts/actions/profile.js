@@ -15,3 +15,9 @@ exports.setVenue = function (venue) {
         venue: venue
     }
 };
+
+exports.clearProfile = function () {
+    return {
+        type: PROFILE.CLEAR_PROFILE
+    }
+};

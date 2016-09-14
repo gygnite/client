@@ -14,7 +14,6 @@
 
 //main body styling
 
-
 * {
 	box-sizing: border-box;
 }
@@ -95,3 +94,4 @@ body.no-scroll {
 @import "pages/dashboard/index";
 @import "pages/dashboard/bands/new";
 @import "pages/profile/profile";
+@import "search/results";

@@ -122,7 +122,7 @@ var MenuLabel = React.createClass({
                 <h3 className="navbar-link">{this.props.label}</h3>
                 <Modal
                     className="modal-inner"
-                    showCloseIcon={false}
+                    showCloseIcon={true}
                     open={this.state.open}
                     close={this.toggleModal.bind(this, 'close')}>
                     {this.props.children}
@@ -356,28 +356,49 @@ var MenuList = React.createClass({
         return (
             <div className={'container menu-content' + state}>
                 <ul className="menu-content-list">
-                    <div className="menu-list-item" onClick={this.props.close}>
-                        <Link to="/">
-                            <h1>Dashboard</h1>
-                        </Link>
+
+                    <div className="menu-section">
+                        <i className="menu-section-icon icon-home"></i>
+                        <h2>Navigation</h2>
+                        <div className="menu-list-item" onClick={this.props.close}>
+                            <div className="menu-list-item" onClick={this.props.close}>
+                                <Link to="/">
+                                    <h3>Home</h3>
+                                </Link>
+                            </div>
+                            <div className="menu-list-item" onClick={this.props.close}>
+                                <Link to="/dashboard">
+                                    <h3>Dashboard</h3>
+                                </Link>
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="menu-list-item" onClick={this.props.close}>
-                        <Link to="/">
-                            <h1>Stuff</h1>
-                        </Link>
+                    <div className="menu-section">
+                        <i className="menu-section-icon icon-search"></i>
+                        <h2>Search</h2>
+
+                        <div className="menu-list-item" onClick={this.props.close}>
+                            <Link to="/search/bands">
+                                <h3>Bands</h3>
+                            </Link>
+                        </div>
+
+                        <div className="menu-list-item" onClick={this.props.close}>
+                            <Link to="/search/venues">
+                                <h3>Venues</h3>
+                            </Link>
+                        </div>
                     </div>
 
-                    <div className="menu-list-item" onClick={this.props.close}>
-                        <Link to="/">
-                            <h1>More stuff</h1>
-                        </Link>
-                    </div>
-
-                    <div className="menu-list-item" onClick={this.props.close}>
-                        <Link to="/">
-                            <h1>Things</h1>
-                        </Link>
+                    <div className="menu-section">
+                        <i className="menu-section-icon icon-home"></i>
+                        <h2>Navigation</h2>
+                        <div className="menu-list-item" onClick={this.props.close}>
+                            <Link to="/">
+                                <h3>Things</h3>
+                            </Link>
+                        </div>
                     </div>
 
                 </ul>

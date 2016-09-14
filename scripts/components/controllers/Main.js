@@ -15,5 +15,9 @@ module.exports = {
     Profile: {
         Band: require('./profile/band'),
         Venue: require('./profile/venue')
+    },
+    Search: {
+        Band: require('./search/band')
+        // Venue: require('./search/band')
     }
 };

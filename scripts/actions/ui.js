@@ -54,7 +54,6 @@ exports.removeAlert = function () {
     }
 };
 
-
 exports.fetchBands = function () {
     console.log("fetching bands");
     return {
@@ -68,7 +67,6 @@ exports.fetchBandsComplete = function () {
     }
 };
 
-
 exports.fetchVenues = function () {
     return {
         type: UI.FETCH_VENUES
@@ -78,5 +76,17 @@ exports.fetchVenues = function () {
 exports.fetchVenuesComplete = function () {
     return {
         type: UI.FETCH_VENUES_COMPLETE
+    }
+};
+
+exports.fetchResults = function () {
+    return {
+        type: UI.FETCH_RESULTS
+    }
+};
+
+exports.fetchResultsComplete = function () {
+    return {
+        type: UI.FETCH_RESULTS_COMPLETE
     }
 };

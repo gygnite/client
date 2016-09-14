@@ -86,7 +86,6 @@ $transition: all cubic-bezier(.62,.28,.23,.99) $menu-speed;
 .menu {
     width: 100%;
     transition: all cubic-bezier(0.62, 0.28, 0.23, 0.99) 350ms;
-    top: 65px;
     height: 0px;
     top: 0;
     left: 0;
@@ -95,7 +94,7 @@ $transition: all cubic-bezier(.62,.28,.23,.99) $menu-speed;
     z-index: 2000;
     transition: $transition;
     top: $navbar-height;
-    overflow: hidden;
+    overflow: scroll;
     &.open {
         max-height: 1600px;
         height: 100vh;
@@ -123,12 +122,24 @@ $transition: all cubic-bezier(.62,.28,.23,.99) $menu-speed;
             margin: 0;
             display: table-cell;
             vertical-align: middle;
-            transform: translateY(-75px);
+            transform: translateY(-1px);
             padding: 0;
-            text-align: center;
+            // text-align: center;
+        }
+        .menu-section {
+            @include span-columns(12);
             .menu-list-item {
-                margin: 20px;
+                @include span-columns(12);
+                margin-bottom: 20px;
+                margin-top: 20px;
+
             }
+        }
+        .menu-section-icon {
+            position: absolute;
+            left: -60px;
+            padding: 7px;
+            font-size: 25px;
         }
     }
 }

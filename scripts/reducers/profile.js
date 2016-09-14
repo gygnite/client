@@ -16,6 +16,9 @@ function profile(state, action) {
         case PROFILE.SET_VENUE:
             return assign({}, state, action.venue);
             break;
+        case PROFILE.CLEAR_PROFILE:
+            return {};
+            break;
         default: return state;
     }
     return state;

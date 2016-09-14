@@ -24,10 +24,20 @@ var Input = React.createClass({
         //check if has content on mount
         if (this.props.initialValue) {
             this.setState({
-                textPresent: true
+                textPresent: true,
+                value: this.props.initialValue
             });
         }
     },
+    // componentWillReceiveProps: function(nextProps) {
+    //     console.log("input receving props: ", nextProps);
+    //     if (!this.state.value) {
+    //         this.setState({
+    //             value: nextProps.initialValue,
+    //             textPresent: true
+    //         });
+    //     }
+    // },
     handleChange: function(e) {
         // console.log("changing", this.refs[this.props.for].value);
         var value = this.refs[this.props.for].value;
@@ -40,7 +50,6 @@ var Input = React.createClass({
         if (this.props.shouldValidate) {
 
         }
-
 
         this.props.handleUserInput(this.props.for, value);
     },

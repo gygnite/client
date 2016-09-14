@@ -6,5 +6,6 @@ module.exports = {
     profile: require('./profile'),
     bands: require('./bands'),
     venues: require('./venues'),
+    search: require('./search'),
     cache: require('./constants').CACHE
 };
