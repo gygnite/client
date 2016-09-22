@@ -1,0 +1,187 @@
+
+.band-selection {
+    padding: 20px;
+    position: relative;
+    max-width: 80%;
+    .headline {
+        margin: 0;
+        margin-bottom: 15px;
+    }
+    .date {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .order {
+        text-align: center;
+        position: relative;
+        &:before {
+            content: '';
+            position: absolute;
+            height: 7px;
+            top: 6px;
+            width: 30%;
+            left: 0;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+        }
+        &:after {
+            content: '';
+            position: absolute;
+            height: 7px;
+            top: 6px;
+            width: 30%;
+            right: 0;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+        }
+    }
+    .select-headline {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .band-list {
+        padding: 0;
+        list-style: none;
+        .band-list-item {
+            padding: 10px;
+            margin: 10px;
+            height: 75px;
+            cursor: pointer;
+            border-radius: 2px;
+            @include card-shadow;
+            &:hover {
+                background-color: lighten($main-blue, 5%);
+                color: white;
+            }
+            .band-image {
+                @include span-columns(2);
+                overflow: hidden;
+                border-radius: 20em;
+                border: solid 1px black;
+                height: 50px;
+                width: 50px;
+                img {
+                    width: auto;
+                    max-width: 150px;
+                    height: auto;
+                    max-height: 150px;
+                }
+            }
+            .band-title {
+                @include span-columns(8);
+                width: 80%;
+                overflow: hidden;
+                .text {
+                    padding: 15px;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+    .select-headline {
+        margin-top: 15px;
+    }
+}
+
+.booking-page {
+    background-image: url('../assets/shattered_textile.png');
+    .booking-checkout {
+        @include outer-container;
+        .title, .disclaimer {
+            text-align: center;
+        }
+        .title {
+            font-size: 40px;
+        }
+        .disclaimer {
+            line-height: 1.4;
+            margin-top: 10px;
+        }
+        .booking-header {
+            border-bottom: solid 1px black;
+            margin-bottom: 25px;
+        }
+    }
+    .booking-details {
+        .details-section {
+            margin-bottom: 20px;
+            margin-top: 30px;
+            @include outer-container;
+            .details-header {
+                @include span-columns(3);
+                margin: 0;
+                text-align: center;
+                padding: 10px;
+                background-color: $purple;
+                padding: 20px;
+                color: $main-white;
+                position: relative;
+                border-radius: 6px;
+                @include media($desktop) {
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        height: 81px;
+                        right: -12px;
+                        top: 0;
+                        width: 0;
+                        border-top: 10px solid transparent;
+                        border-bottom: 10px solid transparent;
+                        border-right: 12px solid $purple;
+                    }
+                };
+                @include media($tablet) {
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        height: 81px;
+                        right: -12px;
+                        top: 0;
+                        width: 0;
+                        border-top: 10px solid transparent;
+                        border-bottom: 10px solid transparent;
+                        border-right: 12px solid $purple;
+                    }
+                };
+
+                @include media($mobile) {
+                    @include span-columns(12);
+                    left: 0;
+                    margin: 0;
+                    margin-top: 25px;
+                    margin-bottom: 40px;
+                };
+                @include media($tablet) {
+                    // left: 0;
+                    // margin: 0;
+                    // margin-top: 25px;
+                    // margin-bottom: 40px;
+                };
+            }
+            .details-content {
+                @include span-columns(6);
+                padding: 25px;
+                @include media($mobile) {
+                    @include span-columns(12);
+                    text-align: center;
+                };
+                @include media($tablet) {
+                    // margin-top: 25px;
+                    // margin-bottom: 40px;
+                };
+            }
+            &:nth-last-child(2) .details-content {
+                padding: 0px;
+            }
+            .button {
+                @include span-columns(6);
+                margin: 0;
+
+                @include media($mobile) {
+                    @include span-columns(12);
+                };
+            }
+        }
+    }
+}

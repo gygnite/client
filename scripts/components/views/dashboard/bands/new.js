@@ -2,6 +2,7 @@ var React = require('react');
 var Input = require('../../global/input');
 var TextArea = require('../../global/textarea');
 var TagInput = require('../../global/taginput');
+var Uploader = require('../../global/uploader');
 var Geosuggest = require('react-geosuggest').default;
 var Joi = require('joi-browser');
 
@@ -17,7 +18,6 @@ var NewBand = React.createClass({
         var state = this.state;
         state.form[field] = value;
         this.setState(state);
-        console.log("field; ", field, value);
     },
     captureLocation: function(location) {
         var state = this.state;
@@ -26,7 +26,7 @@ var NewBand = React.createClass({
     },
     _createBand: function() {
         var errors = [];
-        console.log("this state form: ", this.state.form);
+        // console.log("this state form: ", this.state.form);
 
         if (!this.state.form.hasOwnProperty('name')) {
             errors.push('You must include a band name');
@@ -43,6 +43,7 @@ var NewBand = React.createClass({
         }
 
         if (errors.length < 1) {
+            console.log("form!", this.state.form);
             this.props.createBand(this.state.form);
         } else {
             console.log("validation errors", errors);

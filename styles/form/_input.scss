@@ -140,3 +140,23 @@ label, input, .tag, textarea {
     left: 0;
     padding: 15px;
 }
+
+
+.uploader-input {
+	// @include span-columns(12);
+	height: 120px;
+	.upload-button {
+		@include span-columns(3);
+	}
+	.image-preview {
+		@include span-columns(2);
+		height: 50px;
+		max-width: 50px;
+		border-radius: 20em;
+		margin: 5px;
+	}
+	.file-name {
+		@include span-columns(7);
+		padding: 20px;
+	}
+}

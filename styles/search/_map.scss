@@ -1,0 +1,119 @@
+#map-component {
+    @include span-columns(12);
+    height: calc(100vh - #{$navbar-height});
+    overflow: hidden;
+    .icon-location {
+    	position: absolute;
+        text-align: center;
+        color: $purple;
+        font-size: 45px;
+        cursor: pointer;
+        text-shadow: 1px -1px 3px rgb(66, 66, 66);
+        @include transition(all 250ms #{$swift-out});
+        transform: rotateX(10deg);
+        // width: 40px;
+        // height: 40px;
+        // left: -10px;
+        // top: -20px;
+    	&.hover {
+    		color: $teal;
+            transform: scale(1.2);
+            z-index: 1000;
+    	}
+    	&:before {
+    		margin: 0;
+    		width: inherit;
+    	}
+        &.show-balloon {
+            display: none;
+        }
+
+    }
+}
+
+.true-map-box {
+    @include span-columns(8);
+    height: 100%;
+    margin-right: 0;
+    @include media($mobile) {
+        @include span-columns(0.3);
+        left: -10px;
+        position: relative;
+    };
+    @include media($tablet) {
+        display: block;
+    };
+    @include media($tablet) {
+        display: block;
+    };
+}
+
+
+.map-components-box {
+    margin-top: 10px;
+    @include span-columns(4);
+    @include media($mobile) {
+        @include span-columns(11);
+    };
+    overflow: scroll;
+}
+
+
+.marker-balloon-container {
+	opacity: 0;
+	// @include transition(all 200ms ease-in-out);
+    z-index: 1300;
+	&.show-balloon {
+		// @include transition(all 200ms ease-in-out);
+        opacity: 1;
+        // height: 50px;
+        width: 120px;
+        border-radius: 2px;
+        position: relative;
+        bottom: 25px;
+        left: -45px;
+        color: white;
+        background: $gunmetal;
+        box-shadow: 0 2px 7px #8e8e8e;
+        text-align: center;
+        font-size: 14px;
+        padding: 10px;
+	}
+    &:before {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: calc(50% - 10px);
+        width: 0px;
+        height: 0px;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid $gunmetal;
+    }
+}
+
+.venue-marker-modal {
+    padding: 20px;
+    & i {
+        padding: 3px !important;
+        font-size: 18px !important;
+    }
+}
+
+.marker-list {
+    padding: 0;
+    list-style: none;
+    .marker-list-item {
+        padding: 20px;
+        border-bottom: solid 1px;
+        cursor: pointer;
+        &:last-child {
+            border-bottom: 0px;
+        }
+        &.active {
+            background-color: $teal;
+            color: white;
+            @include transition(all 150ms #{$swift-out});
+        }
+    }
+}

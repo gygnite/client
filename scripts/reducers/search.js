@@ -33,7 +33,6 @@ function search(state, action) {
             });
             break;
         case SEARCH.CLEAR_GENRES:
-        console.log("state on clear gens", state.genres);
             return assign({}, state, {
                 genres: []
             });
@@ -48,6 +47,30 @@ function search(state, action) {
                 query: ''
             });
             break;
+        case SEARCH.SET_ACTIVE_HOVER:
+            var items = state.results.map(function(item) {
+                if (item.id === action.id) {
+                    return marker(item, action);
+                } else {
+                    return marker(item, SEARCH.CLEAR_ACTIVE_HOVER);
+                }
+            });
+            return assign({}, state, {
+                results: items
+            });
+            break;
+        case SEARCH.CLEAR_ACTIVE_HOVER:
+            var items = state.results.map(function(item) {
+                if (item.id === action.id) {
+                    return marker(item, action);
+                } else {
+                    return item;
+                }
+            });
+            return assign({}, state, {
+                results: items
+            });
+            break;
         default: return state;
     }
     return state;
@@ -55,3 +78,27 @@ function search(state, action) {
 
 
 module.exports = search;
+
+
+
+
+function marker(state, action) {
+    if (!state) {
+        state = {};
+    }
+    switch(action.type) {
+        case SEARCH.SET_ACTIVE_HOVER:
+            return assign({}, state, {
+                isActive: true
+            });
+            break;
+        case SEARCH.CLEAR_ACTIVE_HOVER:
+            return assign({}, state, {
+                isActive: false
+            });
+            break;
+        default: return state;
+    }
+
+    return state;
+}

@@ -7,5 +7,6 @@ module.exports = {
     bands: require('./bands'),
     venues: require('./venues'),
     search: require('./search'),
+    messages: require('./messages'),
     cache: require('./constants').CACHE
 };

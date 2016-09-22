@@ -54,10 +54,6 @@ var BandSearch = React.createClass({
         }
     },
 
-    // componentWillReceiveProps: function(nextProps) {
-    //     console.log("nextProps", nextProps)
-    // },
-
     _doSearchWait: function() {
         this.updateSearchWait = setTimeout(function() {
             this.props.updateSearchQuery(this.state.searchInput);

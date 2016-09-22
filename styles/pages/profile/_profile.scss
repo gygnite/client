@@ -1,16 +1,19 @@
 .profile {
     @include outer-container;
     position: relative;
-    margin-top: 50px;
+    margin-top: 20px;
     .header-box {
         @include span-columns(12);
         height: 200px;
         .img {
             @include span-columns(3);
             height: 100%;
-            background: blue;
+            background: rgb(134, 134, 134);
             border-radius: 10em;
             width: 200px;
+            background-size: 250px, cover;
+            background-repeat: no-repeat;
+            background-position: center;
         }
         .headline {
             @include span-columns(9);
@@ -18,10 +21,12 @@
             height: 100%;
             text-align: left;
             .headline-text {
-                margin-top: 8%;
+                margin-top: 20px;
                 font-size: 44px;
+                margin-left: 50px;
             }
         }
+
     }
     .main-box {
         @include span-columns(12);

@@ -61,6 +61,16 @@ function ui(state, action) {
                 isFetchingBands: false
             });
             break;
+        case UI.FETCH_POST_BOOKING:
+            return assign({}, state, {
+                isPostingBooking: true
+            });
+            break;
+        case UI.FETCH_POST_BOOKING_COMPLETE:
+            return assign({}, state, {
+                isPostingBooking: false
+            });
+            break;
         default: return state;
     }
     return state;
@@ -95,6 +105,5 @@ function singleAlert(state, action) {
             });
             break;
         default: return state;
-
     }
 }

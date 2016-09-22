@@ -58,3 +58,18 @@ exports.clearSearchQuery = function() {
         type: SEARCH.CLEAR_SEARCH_QUERY
     }
 };
+
+
+exports.setActiveHover = function (id) {
+    return {
+        type: SEARCH.SET_ACTIVE_HOVER,
+        id: id
+    }
+};
+
+exports.clearActiveHover = function (id) {
+    return {
+        type: SEARCH.CLEAR_ACTIVE_HOVER,
+        id: id
+    }
+};

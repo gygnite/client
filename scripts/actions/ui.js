@@ -90,3 +90,17 @@ exports.fetchResultsComplete = function () {
         type: UI.FETCH_RESULTS_COMPLETE
     }
 };
+
+
+exports.fetchPostBooking = function () {
+    return {
+        type: UI.FETCH_POST_BOOKING
+    }
+};
+
+
+exports.fetchPostBookingComplete = function () {
+    return {
+        type: UI.FETCH_POST_BOOKING_COMPLETE
+    }
+};

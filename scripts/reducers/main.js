@@ -8,6 +8,7 @@ var bands       = require('./bands');
 var venues      = require('./venues');
 var profile     = require('./profile');
 var search      = require('./search');
+var messages    = require('./messages');
 
 module.exports = combineReducers({
     user: user,
@@ -17,5 +18,6 @@ module.exports = combineReducers({
     bands: bands,
     venues: venues,
     profile: profile,
-    search: search
+    search: search,
+    messages: messages
 });

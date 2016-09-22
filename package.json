@@ -27,6 +27,7 @@
     "object-assign": "^4.1.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
+    "react-dropzone": "^3.6.0",
     "react-flickity-component": "^0.1.0",
     "react-geosuggest": "^1.25.0",
     "react-infinite-calendar": "^1.1.18",

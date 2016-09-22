@@ -15,6 +15,17 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         getUser: function(token) {
+            var user = Cache.get(ACTIONS.cache.USER);
+            var token = Cache.get(ACTIONS.cache.AUTH_TOKEN);
+            if (user) {
+                dispatch(ACTIONS.user.setUser(
+                    assign({}, user, {
+                        token: token
+                    })
+                ));
+                return;
+            }
+
             dispatch(ACTIONS.ui.fetchUser());
             request.get(BASE_URL + '/auth')
                 .authBearer(token)

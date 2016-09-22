@@ -17,6 +17,8 @@ function mapDispatchToProps(dispatch) {
     return {
         createBand: function(band) {
 
+            // console.log("band.profileimage", band.profile_image);
+
             dispatch(ACTIONS.ui.fetchBands());
 
             request.post(BASE_URL+'/api/admins/bands')

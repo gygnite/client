@@ -74,6 +74,7 @@ var Modal = React.createClass({
     },
 
     unmount: function() {
+        console.log("portal: ", this.portal)
         if (this.portal) {
             this.hide(function() {
                 ReactDOM.unmountComponentAtNode(this.portal);
@@ -81,8 +82,8 @@ var Modal = React.createClass({
                 this.portal = false;
                 this.props.close();
             }.bind(this));
+            document.body.classList.remove('no-scroll');
         }
-        document.body.classList.remove('no-scroll');
     },
 
     hide: function(callback) {

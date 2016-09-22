@@ -2,7 +2,6 @@
 
 var VenueProfile = require('../../views/profile/venue');
 var request = require('superagent');
-require('superagent-auth-bearer')(request);
 var Cache = require('lscache');
 
 var connect = require('react-redux').connect;
@@ -14,10 +13,9 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         fetchVenue: function(slug) {
-            // FIXME: Change from /admins to global/unauthed
+            console.log("fetching!")
             dispatch(ACTIONS.ui.fetchVenues());
-            request.get(BASE_URL+'/api/admins/venues/'+slug)
-            .authBearer(Cache.get(ACTIONS.cache.AUTH_TOKEN))
+            request.get(BASE_URL+'/venues/'+slug)
             .end(function(err,res) {
                 console.log("res.body: ", res.body);
                 // console.log("ACTIONS: ", ACTIONS);

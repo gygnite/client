@@ -3,6 +3,7 @@
 'use strict';
 
 var assign = require('object-assign');
+var moment = require('moment');
 var PROFILE = require('../actions/constants').PROFILE;
 
 function profile(state, action) {
@@ -11,7 +12,13 @@ function profile(state, action) {
     }
     switch (action.type) {
         case PROFILE.SET_BAND:
-            return assign({}, state, action.band);
+            var tss =  action.band.timeslots.map(function(ts, index) {
+                return  timeslot(ts, action);
+            });
+            // var band = assign()
+            return assign({}, action.band, {
+                timeslots: tss
+            });
             break;
         case PROFILE.SET_VENUE:
             return assign({}, state, action.venue);
@@ -26,3 +33,26 @@ function profile(state, action) {
 
 
 module.exports = profile;
+
+
+
+
+function timeslot(state, action) {
+    if (!state) {
+        state = {};
+    }
+    switch(action.type) {
+        case PROFILE.SET_BAND:
+            if (moment().isSame(state.start_time, 'day')) {
+                return assign({}, state, {
+                    today: true
+                });
+            }
+            return state;
+            break;
+        default: return state;
+    }
+
+    return state;
+
+}

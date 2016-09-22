@@ -28,6 +28,8 @@ var Bands = Dashboard.Bands;
 var Venues = Dashboard.Venues;
 var Profile = Main.Profile;
 var Search = Main.Search;
+var Booking = Main.Booking;
+var Messages = Main.Messages;
 
 var AppRouter = React.createClass({
     render: function() {
@@ -43,16 +45,20 @@ var AppRouter = React.createClass({
                         <Route path="/register/:code" component={Main.Registration}/>
 
 
-                        <Route path={ROUTE_CONSTANTS.DASHBOARD} onEnter={AuthMiddleware}>
+                        <Route path={ROUTE_CONSTANTS.DASHBOARD.BASE} onEnter={AuthMiddleware}>
                             <IndexRoute component={Dashboard.Index}/>
                             <Route path={ROUTE_CONSTANTS.BANDS.BASE}>
                                 <IndexRoute component={Bands.All}/>
                                 <Route path={ROUTE_CONSTANTS.BANDS.NEW} component={Bands.New}/>
                             </Route>
                             <Route path={ROUTE_CONSTANTS.VENUES.BASE}>
-
                                 <Route path={ROUTE_CONSTANTS.VENUES.NEW} component={Venues.New}/>
                             </Route>
+                            <Route path={ROUTE_CONSTANTS.DASHBOARD.SETTINGS} component={Dashboard.Settings}/>
+                            <Route path="/booking">
+                                <Route path="new" component={Booking.New} onEnter={validateStateBeforeBooking}/>
+                            </Route>
+                            <Route path="/messages" component={Messages.Index}/>
                         </Route>
 
                         {/* FIXME: Update CWU to not need auth token */}
@@ -61,7 +67,7 @@ var AppRouter = React.createClass({
 
                         <Route path="/search">
                             <Route path="bands" component={Search.Band}/>
-
+                            <Route path="venues" component={Search.Venue}/>
                         </Route>
                         {/*Add Catchall 404*/}
 
@@ -75,7 +81,10 @@ var AppRouter = React.createClass({
 
 var ROUTE_CONSTANTS = {
     INDEX: '/',
-    DASHBOARD: 'dashboard',
+    DASHBOARD: {
+        BASE: 'dashboard',
+        SETTINGS: 'settings'
+    },
     BANDS: {
         BASE: '/bands',
         NEW: 'new'
@@ -111,4 +120,19 @@ function clearProfileStore(prevState) {
     console.log("store state on exit: ", store.getState());
     store.dispatch(ACTIONS.profile.clearProfile());
     console.log("store state after clear exit: ", store.getState());
+}
+
+
+function validateStateBeforeBooking(nextState, replace) {
+    if (!nextState.location.state) {
+        store.dispatch(ACTIONS.ui.createAlert('Please choose a venue and date.', 'error'))
+        replace('/search/venues');
+    } else if (!nextState.location.state.date && !nextState.location.state.order && !nextState.location.state.venue) {
+        store.dispatch(ACTIONS.ui.createAlert('Please choose a venue and date.', 'error'))
+        replace('/search/venues');
+    } else {
+        //go
+    }
+    // console.log("replace", replace);
+    // console.log("nextState", callback());
 }

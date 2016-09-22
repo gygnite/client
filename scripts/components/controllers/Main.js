@@ -4,6 +4,7 @@ module.exports = {
     Registration: require('./auth/registration'),
     Dashboard: {
         Index: require('./dashboard/index'),
+        Settings: require('./profile/userSettings'),
         Bands: {
             All: require('./dashboard/bands/all'),
             New: require('./dashboard/bands/new')
@@ -17,7 +18,13 @@ module.exports = {
         Venue: require('./profile/venue')
     },
     Search: {
-        Band: require('./search/band')
-        // Venue: require('./search/band')
+        Band: require('./search/band'),
+        Venue: require('./search/venue')
+    },
+    Booking: {
+        New: require('./booking/new')
+    },
+    Messages: {
+        Index: require('./messages/index')
     }
 };

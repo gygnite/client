@@ -29,15 +29,6 @@ var Input = React.createClass({
             });
         }
     },
-    // componentWillReceiveProps: function(nextProps) {
-    //     console.log("input receving props: ", nextProps);
-    //     if (!this.state.value) {
-    //         this.setState({
-    //             value: nextProps.initialValue,
-    //             textPresent: true
-    //         });
-    //     }
-    // },
     handleChange: function(e) {
         // console.log("changing", this.refs[this.props.for].value);
         var value = this.refs[this.props.for].value;

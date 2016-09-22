@@ -1,4 +1,5 @@
 var React = require('react');
+var CalendarView = require('./calendar');
 
 var VenueProfile = React.createClass({
     componentWillMount: function() {
@@ -25,10 +26,15 @@ var VenueProfile = React.createClass({
         if (this.props.profile.capacity) {
             details.push('Capacity: ' + this.props.profile.capacity);
         }
+
+        var profileImage = this.props.profile.profile_image;
+        var imageStyle = {
+            backgroundImage: 'url('+profileImage+')'
+        };
         return (
             <div className="profile band-profile">
                 <div className="header-box">
-                    <div className="img"></div>
+                    <div className="img" style={imageStyle}></div>
                     <div className="headline">
                         <h1 className="headline-text">
                             {this.props.profile.name}
@@ -59,6 +65,7 @@ var VenueProfile = React.createClass({
                         <p>{this.props.profile.bio}</p>
                     </div>
                 </div>
+                <CalendarView type="venue" data={this.props.profile}/>
             </div>
         )
     }

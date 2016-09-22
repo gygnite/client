@@ -31,7 +31,6 @@ var Dashboard = React.createClass({
         this._showDate(e.target.value);
     },
     _showDate: function(date) {
-        console.log("date selected:", date);
         this.setState({
             date: moment(date).format(dateFormat)
         });

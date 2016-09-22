@@ -73,8 +73,26 @@ $transition: all cubic-bezier(.62,.28,.23,.99) $menu-speed;
         display: inline-block;
         margin: 6.6px;
         cursor: pointer;
+        margin-right: 30px;
         .navbar-link {
-            padding: 15px;
+            top: -23px;
+            position: relative;
+        }
+        .user-image {
+            height: 50px;
+            width: 50px;
+            border-radius: 20em;
+            border: 2px solid $main-white;
+            background-size: cover;
+            background-position: center;
+        }
+    }
+    &.no-user {
+        .navbar-link {
+            top: 0;
+        }
+        .navbar-list-item {
+            margin: 18.6px;
         }
     }
     .messages {
@@ -102,9 +120,9 @@ $transition: all cubic-bezier(.62,.28,.23,.99) $menu-speed;
         transition: $transition;
     }
     .menu-content {
-        width: 50%;
-        display: table;
+        width: 60%;
         height: 100%;
+        margin-top: 50px;
         &.enter {
             opacity: 0;
         }
@@ -128,11 +146,18 @@ $transition: all cubic-bezier(.62,.28,.23,.99) $menu-speed;
         }
         .menu-section {
             @include span-columns(12);
+            margin-bottom: 30px;
+            .menu-list-group {
+                margin-bottom: 15px;
+            }
             .menu-list-item {
                 @include span-columns(12);
-                margin-bottom: 20px;
-                margin-top: 20px;
-
+                margin-top: 15px;
+                padding-left: 10px;
+                // margin-top: 50px;
+                // &:last-child {
+                //     margin-top: 0px;
+                // }
             }
         }
         .menu-section-icon {

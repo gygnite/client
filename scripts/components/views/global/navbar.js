@@ -26,7 +26,7 @@ var Navbar = React.createClass({
         }
     },
     render: function() {
-        // console.log("props on nav", this.props);
+        // console.log("props on nav", this.props.user);
         var menuOpen = cx({
             ' open': this.state.menuOpen
         });
@@ -37,12 +37,13 @@ var Navbar = React.createClass({
                     <i className="loader icon-loader animate-spin"></i>
                 </ul>
             )
-        } else if (this.props.user.first_name) {
+        } else if (this.props.user.id) {
+            var image = this.props.user.profile_image;
+            var imageBoxStyle = {
+                backgroundImage: 'url('+image+')'
+            };
             mainNavigation = (
                 <ul className="navbar-list">
-                    <li className="navbar-list-item">
-                        <i className="messages icon-comment"></i>
-                    </li>
                     <li className="navbar-list-item">
                         <Link to="/dashboard">
                             <h3 className="navbar-link">
@@ -50,11 +51,14 @@ var Navbar = React.createClass({
                             </h3>
                         </Link>
                     </li>
+                    <li className="navbar-list-item">
+                        <div className="user-image profile_image" style={imageBoxStyle}></div>
+                    </li>
                 </ul>
             );
         } else {
             mainNavigation = (
-                <ul className="navbar-list">
+                <ul className="navbar-list no-user">
                     <MenuLabel label="Login" close={closeModal}>
                         <Login {...this.props} />
                     </MenuLabel>
@@ -360,7 +364,7 @@ var MenuList = React.createClass({
                     <div className="menu-section">
                         <i className="menu-section-icon icon-home"></i>
                         <h2>Navigation</h2>
-                        <div className="menu-list-item" onClick={this.props.close}>
+                        <div className="menu-list-group" onClick={this.props.close}>
                             <div className="menu-list-item" onClick={this.props.close}>
                                 <Link to="/">
                                     <h3>Home</h3>
@@ -377,29 +381,21 @@ var MenuList = React.createClass({
                     <div className="menu-section">
                         <i className="menu-section-icon icon-search"></i>
                         <h2>Search</h2>
-
-                        <div className="menu-list-item" onClick={this.props.close}>
-                            <Link to="/search/bands">
-                                <h3>Bands</h3>
-                            </Link>
-                        </div>
-
-                        <div className="menu-list-item" onClick={this.props.close}>
-                            <Link to="/search/venues">
-                                <h3>Venues</h3>
-                            </Link>
-                        </div>
-                    </div>
-
-                    <div className="menu-section">
-                        <i className="menu-section-icon icon-home"></i>
-                        <h2>Navigation</h2>
-                        <div className="menu-list-item" onClick={this.props.close}>
-                            <Link to="/">
-                                <h3>Things</h3>
-                            </Link>
+                        <div className="menu-list-group">
+                            <div className="menu-list-item" onClick={this.props.close}>
+                                <Link to="/search/bands">
+                                    <h3>Bands</h3>
+                                </Link>
+                            </div>
+                            <div className="menu-list-item" onClick={this.props.close}>
+                                <Link to="/search/venues">
+                                    <h3>Venues</h3>
+                                </Link>
+                            </div>
                         </div>
                     </div>
+
+                    
 
                 </ul>
             </div>

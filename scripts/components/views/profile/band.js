@@ -1,10 +1,16 @@
 var React = require('react');
+var cx = require('classnames');
+var CalendarView = require('./calendar');
 
 var BandProfile = React.createClass({
     componentWillMount: function() {
         this.props.fetchBand(this.props.params.slug);
     },
+    componentDidMount: function() {
+        window.scrollTo(0,0);
+    },
     render: function() {
+        console.log("this.props.profile: ", this.props.profile);
         //handle graceful degredation for links
         var urls = [];
         for (var url in this.props.profile) {
@@ -31,11 +37,16 @@ var BandProfile = React.createClass({
         if (this.props.profile.influences) {
             details.push('Influences: ' + this.props.profile.influences);
         }
-        console.log("details: ", details)
+
+        var profileImage = this.props.profile.profile_image;
+        var imageStyle = {
+            backgroundImage: 'url('+profileImage+')'
+        };
+
         return (
             <div className="profile band-profile">
-                <div className="header-box">
-                    <div className="img"></div>
+                <div className={"header-box"}>
+                    <div className="img" style={imageStyle}></div>
                     <div className="headline">
                         <h1 className="headline-text">
                             {this.props.profile.name}
@@ -66,6 +77,7 @@ var BandProfile = React.createClass({
                         <p>{this.props.profile.bio}</p>
                     </div>
                 </div>
+                <CalendarView type="band" data={this.props.profile}/>
             </div>
         )
     }

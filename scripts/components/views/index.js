@@ -50,6 +50,7 @@ var Index = React.createClass({
                             <p>Looking to book more shows?</p>
                         </div>
                     </div>
+                    <div className="arrow-down purple"></div>
                 </div>
                 <div className="index-div">
                     <div className="helper-content index-div-full">
@@ -106,6 +107,7 @@ var Index = React.createClass({
                             <p>Have unfilled timeslots?</p><p>Need more artists to play?</p>
                         </div>
                     </div>
+                    <div className="arrow-down teal"></div>
                 </div>
                 <div className="index-div">
                     <div className="helper-content index-div-full">

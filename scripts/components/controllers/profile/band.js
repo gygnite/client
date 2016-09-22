@@ -17,11 +17,10 @@ function mapDispatchToProps(dispatch) {
         fetchBand: function(slug) {
             // FIXME: Change from /admins to global/unauthed
             dispatch(ACTIONS.ui.fetchBands());
-            request.get(BASE_URL+'/api/admins/bands/'+slug)
-            .authBearer(Cache.get(ACTIONS.cache.AUTH_TOKEN))
+            request.get(BASE_URL+'/bands/'+slug)
+            // .authBearer(Cache.get(ACTIONS.cache.AUTH_TOKEN))
             .end(function(err,res) {
-                // console.log("res.body: ", res.body);
-                // console.log("ACTIONS: ", ACTIONS);
+                console.log("res.body: ", res.body);
                 dispatch(ACTIONS.profile.setBand(res.body.band));
                 dispatch(ACTIONS.ui.fetchBandsComplete());
             });

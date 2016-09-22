@@ -1,0 +1,223 @@
+
+
+.message-page {
+    height: calc(100vh - #{$navbar-height});
+    @include outer-container;
+    .messages-main {
+        height: 627px;
+        width: 100%;
+        position: relative;
+        .inbox-list {
+            @include span-columns(3);
+            height: 100%;
+            border: solid 1px;
+            margin-right: 0;
+            .select-inbox-box {
+                height: 75px;
+                border-bottom: solid 1px;
+            }
+        }
+        .messages-window {
+            @include span-columns(9);
+            height: auto;
+            border: solid 1px;
+            // border-left: 0;
+            .current-message-chain {
+                height: 75px;
+                border-bottom: solid 1px;
+                overflow: hidden;
+                padding: 20px;
+            }
+            .digest {
+                border: solid 1px;
+                height: 450px;
+            }
+            .reply {
+                height: 100px;
+            }
+        }
+    }
+}
+
+
+.select-inbox-box {
+    cursor: pointer;
+    position: relative;
+    .current-active {
+        height: 100%;
+        padding: 25px;
+        font-size: 20px;
+        white-space: nowrap;
+        overflow: hidden;
+        @include span-columns(10);
+    }
+    .current-active-select {
+        @include span-columns(2);
+        padding: 5px;
+        text-align: center;
+        margin-top: 17px;
+        font-size: 20px;
+        margin-right: 0;
+    }
+    .inactive-inbox-dropdown {
+        overflow: hidden;
+        position: absolute;
+        width: 250px;
+        background: white;
+        max-height: 0px;
+        top: 75px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.32), 0 1px 2px rgba(0,0,0,0.44);
+        @include transition(all 250ms $swift-out);
+        &.show {
+            display: block;
+            height: auto;
+            max-height: 1500px;
+            @include transition(all 550ms $swift-out);
+        }
+        .inactive-inbox-list {
+            padding: 0px;
+            font-size: 20px;
+            list-style: none;
+            margin: 0;
+            li {
+                margin: 5px;
+                padding: 10px;
+                &:hover {
+                    background-color: $main-blue;
+                    border-radius: 2px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+
+.messages-group {
+    .messages-group-title {
+        padding: 20px;
+        border-bottom: solid 1px;
+        background-color: lighten($gunmetal, 60%);
+    }
+    .messages-group-list {
+        padding: 0;
+        list-style: none;
+        margin: 0;
+        .messages-group-item {
+            padding: 20px;
+            font-size: 20px;
+            &:hover {
+                background-color: lighten($main-blue, 10%);
+                cursor: pointer;
+            }
+            &.active {
+                background-color: darken($main-blue, 20%);
+                color: $main-white;
+            }
+        }
+    }
+}
+
+.messages-window {
+    .digest {
+        .digest-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            .message-body {
+                height: auto;
+                padding: 10px;
+                min-height: 50px;
+                width: 55%;
+                position: relative;
+                margin: 10px;
+                border-radius: 5px;
+                &.isme {
+                    float: right;
+                    background-color: lighten($main-blue, 15%);
+                    &:before {
+                        border-width: 20px 0 0px 30px;
+                        content: "";
+                        position: absolute;
+                        bottom: -12px;
+                        border-style: solid;
+                        display: block;
+                        width: 0;
+                        right: 10px;
+                        border-width: 12px 0 0 30px;
+                        border-color: lighten($main-blue, 15%) transparent;
+                    }
+                }
+                &.notme {
+                    float: left;
+                    background-color: lighten($teal, 10%);
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        bottom: -12px;
+                        border-style: solid;
+                        display: block;
+                        width: 0;
+                        border-color: lighten($teal, 10%) transparent;
+                        left: 10px;
+                        border-width: 12px 30px 0 0;
+                    }
+                }
+                .timestamp {
+                    font-size: 14px;
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+}
+
+
+
+.messagebox-enter {
+    opacity: 0.01;
+    transform: translateY(30px);
+}
+
+.messagebox-enter.messagebox-enter-active {
+    opacity: 1;
+    transform: translateY(0px);
+    @include transition(all 150ms $swift-out);
+}
+
+.messagebox-leave {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.messagebox-leave.messagebox-leave-active {
+    opacity: 0.01;
+    transform: translateY(-30px);
+    @include transition(all 150ms $swift-out);
+}
+
+
+
+.grouptitle-enter {
+    position: absolute;
+    opacity: 0;
+    transform: translateY(-50px);
+    @include transition(all 350ms $swift-out);
+}
+
+.grouptitle-enter.grouptitle-enter-active {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.grouptitle-leave {
+    opacity: 1;
+    position: absolute;
+    transform: translateY(0px);
+}
+
+.grouptitle-leave.grouptitle-leave-active {
+    opacity: 0;
+    transform: translateY(20px);
+    @include transition(all 150ms $swift-out);
+}
