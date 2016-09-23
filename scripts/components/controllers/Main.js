@@ -22,7 +22,8 @@ module.exports = {
         Venue: require('./search/venue')
     },
     Booking: {
-        New: require('./booking/new')
+        New: require('./booking/new'),
+        View: require('./booking/view')
     },
     Messages: {
         Index: require('./messages/index')

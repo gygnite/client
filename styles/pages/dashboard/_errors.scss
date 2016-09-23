@@ -1,0 +1,10 @@
+.error-box {
+    top: -20px;
+    margin-bottom: 20px;
+    position: relative;
+    color: red;
+    padding-left: 20px;
+    .icon-error {
+        float: left;
+    }
+}

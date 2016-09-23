@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 var Navbar = require('./components/controllers/global/navbar');
 var Alert = require('./components/controllers/global/alert');
 var cx = require('classnames');
@@ -16,6 +17,7 @@ var Templates = React.createClass({
                         {this.props.children}
                     </div>
                 </Transition>
+            
                 {/*Alert bar, bottom left*/}
                 <Alert alerts={this.props.ui.alerts}/>
             </div>

@@ -12,8 +12,7 @@ $blue: darken(mix($teal, $main-blue, 80%), 35%);
             @include span-columns(3);
             height: 100%;
             min-width: 200px;
-            background-color: $main-blue;
-            background-size: 100px contain;
+            background-color: $purple;
             position: relative;
             overflow: hidden;
             @include media($mobile) {
@@ -156,7 +155,7 @@ $blue: darken(mix($teal, $main-blue, 80%), 35%);
                     height: 50%;
                     background-color: lighten($main-white, 30%);
                     &.img {
-                        background-color: $teal;
+                        background-color: $main-blue;
                         background-position: center;
                         background-size: 370px, cover;
                         background-repeat: no-repeat;

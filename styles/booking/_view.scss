@@ -1,0 +1,218 @@
+.list-section-header {
+    // @include span-columns(12);
+    width: 65%;
+    margin-left: auto;
+    margin-top: 40px;
+    margin-bottom: 25px;
+    margin-right: 45%;
+    text-align: center;
+    padding: 10px;
+    // background-color: $purple;
+    width: 100%;
+    padding: 20px;
+    color: $gunmetal;
+    float: left;
+    @include transition(all 350ms $swift-out);
+    @include media($mobile) {
+        left: 0;
+        margin: 0;
+        margin-top: 25px;
+        margin-bottom: 40px;
+    };
+    @include media($tablet) {
+        left: 0;
+        margin: 0;
+        margin-top: 25px;
+        margin-bottom: 40px;
+    };
+}
+
+.booking-header {
+    width: 100%;
+    text-align: center;
+    height: 100px;
+    color: $gunmetal;
+    margin-top: 50px;
+    border-bottom: solid 1px rgba(174, 175, 172, 0.75);
+}
+
+.booking-item-box {
+    height: 350px;
+    @include span-columns(6);
+    @include media($mobile) {
+        @include span-columns(12);
+        margin-bottom: 30px;
+    };
+
+    .content {
+        padding-right: 50px;
+    }
+    .item-header {
+        height: 15%;
+        position: relative;
+        .item-image {
+            @include transition(all 250ms $swift-out);
+            z-index: 1000;
+            height: 100px;
+            width: 100px;
+            border-radius: 20em;
+            position: absolute;
+            left: 50%;
+            @include transform(translateX(-75px));
+            background-color: $main-blue;
+            background-position: center;
+            background-size: 200px, cover;
+            background-repeat: no-repeat;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.32), 0 1px 2px rgba(0,0,0,0.44);
+        }
+    }
+    .booking-item-inner {
+        border-radius: 3px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.32), 0 1px 2px rgba(0,0,0,0.44);
+        height: 85%;
+        padding: 7px;
+        position: relative;
+        @include transition(all 250ms $swift-out);
+        .item-info {
+            margin-top: 50px;
+            text-align: center;
+            color: $gunmetal;
+            .block {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+            .status {
+                background-color: lighten($main-blue, 10%);
+                color: $gunmetal;
+                padding: 5px;
+                width: 50%;
+                margin: auto;
+                &.accepted {
+                    background-color: #66BB6A;
+                }
+                &.rejected {
+                    background-color: lighten($crimson, 10%);
+                }
+            }
+        }
+    }
+    &:hover {
+        .booking-item-inner {
+            // border: solid 0px rgba(194, 194, 194, 0.69);
+            @include transition(all 150ms $swift-out);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.35), 0 4px 7px rgba(0,0,0,0.32);
+        }
+        .item-image {
+            @include transition(all 150ms $swift-out);
+            box-shadow: 0 0 0;
+        }
+    }
+}
+
+
+.item-actions {
+    @include span-columns(12);
+    // padding: 5px;
+    .action {
+        @include span-columns(6);
+        text-align: center;
+        // padding: 15px;
+        font-size: 40px;
+        p {font-size: 16px;}
+        cursor: pointer;
+        &.accept {
+            color: #66BB6A;
+        }
+        &.reject {
+            color: lighten($crimson, 10%);
+        }
+        &:hover {
+            .action-icon, p {
+                @include transition(all 200ms $swift-out);
+                text-shadow: 0 2px 4px rgba(0,0,0,0.15), 0 2px 3px rgba(0,0,0,0.22);
+            }
+        }
+    }
+}
+
+.booking-message-box {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: 0;
+    background-color: $purple;
+    width: 50px;
+    @include transition(all 200ms $swift-out);
+    overflow: hidden;
+    .toggle-bar {
+        position: relative;
+        height: 100%;
+        width: 50px;
+        float: right;
+        top: 0;
+        cursor: pointer;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.32), 0 1px 2px rgba(0,0,0,0.44);
+        .toggle-bar-text {
+            color: white;
+            @include transform(rotate(90deg));
+            top: 45%;
+            margin: 0;
+            left: -5px;
+            position: absolute;
+        }
+    }
+    &.open {
+        @include span-columns(12);
+        @include transition(all 200ms $swift-out);
+
+    }
+    .message-box-inner {
+        overflow: hidden;
+        margin-top: 50px;
+        height: calc(100% - 50px);
+        padding: 10px;
+        .input {
+            width: 100%;
+            height: 75%;
+            resize: none;
+            padding: 10px;
+            font-size: 18px;
+        }
+        .send-message {
+            width: 100%;
+            background-color: $main-white;
+            color: $gunmetal;
+            text-align: center;
+            padding: 10px;
+            font-size: 20px;
+            border-radius: 3px;
+            width: 50%;
+            float: right;
+            cursor: pointer;
+            @include card-shadow;
+        }
+    }
+}
+
+
+.bookingstatus-enter {
+    opacity: 0.01;
+    transform: translateY(30px);
+}
+
+.bookingstatus-enter.bookingstatus-enter-active {
+    opacity: 1;
+    transform: translateY(0px);
+    @include transition(all 550ms $swift-out);
+}
+
+.bookingstatus-leave {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.bookingstatus-leave.bookingstatus-leave-active {
+    opacity: 0.01;
+    transform: translateY(-30px);
+    @include transition(all 550ms $swift-out);
+}

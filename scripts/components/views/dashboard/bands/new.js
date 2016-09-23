@@ -18,28 +18,77 @@ var NewBand = React.createClass({
         var state = this.state;
         state.form[field] = value;
         this.setState(state);
+        this._validate(field);
     },
     captureLocation: function(location) {
         var state = this.state;
         state.form['location'] = location;
         this.setState(state);
+        this._validate('location');
+    },
+    _validate: function(field) {
+        var errors = this.state.errors;
+        switch (field) {
+            case 'location':
+                if (this.state.form.location && this.state.form.location.location) {
+                    errors = errors.filter(function(err) {
+                        return err.type !== 'location';
+                    });
+                }
+                break;
+            case 'name':
+                if (this.refs[field].refs[field].value.trim()) {
+                    errors = errors.filter(function(err) {
+                        return err.type !== 'name';
+                    });
+                }
+                break;
+            case 'genres':
+                console.log("has genres?", this.state.form.genres);
+                if (this.state.form.genres.length > 0) {
+                    errors = errors.filter(function(err) {
+                        return err.type !== 'genre';
+                    });
+                }
+                break;
+            default: break;
+        }
+        console.log("errors!", errors);
+        this.setState({
+            errors: errors
+        });
     },
     _createBand: function() {
         var errors = [];
         // console.log("this state form: ", this.state.form);
 
-        if (!this.state.form.hasOwnProperty('name')) {
-            errors.push('You must include a band name');
+        if (!this.state.form.name) {
+            errors.push({
+                type: 'name',
+                message: 'You must include a band name'
+            });
         }
         if (!this.state.form.location) {
-            errors.push('Please choose a valid input from the location dropdown.');
+            errors.push({
+                type: 'location',
+                message: 'Please choose a valid input from the location dropdown.'
+            });
         }
         if (this.state.form.location) {
             if (!this.state.form.location.location.hasOwnProperty('lat')
                 || !this.state.form.location.location.hasOwnProperty('lng')
                 || !this.state.form.location.hasOwnProperty('placeId')) {
-                    errors.push('Please choose a valid input from the location dropdown.')
+                    errors.push({
+                        type: 'location',
+                        message: 'Please choose a valid input from the location dropdown.'
+                    });
                 }
+        }
+        if (!this.state.form.genres || this.state.form.genres.length < 1) {
+            errors.push({
+                type: 'genre',
+                message: 'You must include at least one genre. The more genres you add, the easier you will be found in search!'
+            });
         }
 
         if (errors.length < 1) {
@@ -70,17 +119,22 @@ var NewBand = React.createClass({
                 </div>
             );
         }
-        var errors = this.state.errors.map(function(err, index) {
-            return (
-                <div key={"err-"+index} className="errors">
-                    <div className="err">{err}</div>
-                </div>
-            );
+
+        var errors = {
+            name: [],
+            location: [],
+            genre: []
+        }
+        this.state.errors.map(function(err, index) {
+            if (errors.hasOwnProperty(err.type)) {
+                errors[err.type].push(err.message);
+            }
         });
+
         return (
             <div className="container">
                 <h1 className="headline">New Band</h1>
-                {errors}
+
                 <div className="new-band-form">
 
                     <section className="new-band-section">
@@ -88,13 +142,19 @@ var NewBand = React.createClass({
                     </section>
 
                     <Input
+                        ref="name"
                         for="name"
                         label="* Name"
                         handleUserInput={this.handleInput}>
                         <input type="text"/>
                     </Input>
 
+                    {errors.name.map(function(err, i) {
+                        return (<ErrorMessage key={"name-err"+i} message={err}/>);
+                    })}
+
                     <Input
+                        ref="location"
                         for="location"
                         label="* Location"
                         className="text-present"
@@ -105,6 +165,21 @@ var NewBand = React.createClass({
                             types={['(cities)']}
                             queryDelay={150}/>
                     </Input>
+
+                    {errors.location.map(function(err, i) {
+                        return (<ErrorMessage key={"location-err"+i} message={err}/>);
+                    })}
+
+                    <TagInput
+                        ref="genre"
+                        for="genres"
+                        label="* Genres (adding more will help with search)"
+                        placeholder="+ genres"
+                        handleUserInput={this.handleInput}/>
+
+                    {errors.genre.map(function(err, i) {
+                        return (<ErrorMessage key={"genre-err"+i} message={err}/>);
+                    })}
 
                     <TextArea
                         for="bio"
@@ -191,3 +266,18 @@ var NewBand = React.createClass({
 });
 
 module.exports = NewBand;
+
+
+
+var ErrorMessage = React.createClass({
+    render: function() {
+        return (
+            <div className="error-box">
+                <div className="icon-error"></div>
+                <div className="error-message">
+                    <h4><i>{this.props.message}</i></h4>
+                </div>
+            </div>
+        );
+    }
+});

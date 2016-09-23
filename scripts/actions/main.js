@@ -8,5 +8,6 @@ module.exports = {
     venues: require('./venues'),
     search: require('./search'),
     messages: require('./messages'),
+    bookings: require('./bookings'),
     cache: require('./constants').CACHE
 };

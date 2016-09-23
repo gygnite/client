@@ -101,9 +101,11 @@ body.no-scroll {
 @import "pages/dashboard/index";
 @import "pages/dashboard/settings";
 @import "pages/dashboard/bands/new";
+@import "pages/dashboard/errors";
 @import "pages/profile/profile";
 @import "pages/profile/calendar";
 @import "search/results";
 @import "search/map";
 @import "booking/new";
+@import "booking/view";
 @import "messages/index";

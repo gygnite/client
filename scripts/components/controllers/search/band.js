@@ -51,7 +51,6 @@ function mapDispatchToProps(dispatch) {
             dispatch(ACTIONS.search.clearGenres());
         },
         updateSearchQuery: function(input) {
-            console.log("is there no fucking input???????", input)
             dispatch(ACTIONS.search.setSearchQuery(input));
         }
     }

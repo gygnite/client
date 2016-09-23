@@ -29,7 +29,7 @@ function mapDispatchToProps(dispatch) {
 
                     if (!err && !res.body.error) {
                         dispatch(ACTIONS.ui.createAlert(res.body.data.band.name + ' created successfully!', 'success'));
-                        browserHistory.push('/dashboard');
+                        browserHistory.replace('/dashboard');
                     } else{
                         //error
                         // FIXME: New Band Error

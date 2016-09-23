@@ -9,6 +9,7 @@ var venues      = require('./venues');
 var profile     = require('./profile');
 var search      = require('./search');
 var messages    = require('./messages');
+var bookings     = require('./bookings');
 
 module.exports = combineReducers({
     user: user,
@@ -19,5 +20,6 @@ module.exports = combineReducers({
     venues: venues,
     profile: profile,
     search: search,
-    messages: messages
+    messages: messages,
+    bookings: bookings
 });

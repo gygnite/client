@@ -3,6 +3,8 @@ var CalendarView = require('./calendar');
 
 var VenueProfile = React.createClass({
     componentWillMount: function() {
+        console.log("venue loading?");
+        console.log("props: ", this.props)
         this.props.fetchVenue(this.props.params.slug);
     },
     render: function() {

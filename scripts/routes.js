@@ -41,9 +41,16 @@ var AppRouter = React.createClass({
                         <IndexRoute component={Main.Index}/>
 
 
-                        {/*Registration Completion*/}
+                        {/*FIXME:0 Registration Completion*/}
                         <Route path="/register/:code" component={Main.Registration}/>
 
+                        <Route path="/bands/:slug" component={Profile.Band} onLeave={clearProfileStore} />
+                        <Route path="/venues/:slug" component={Profile.Venue} onLeave={clearProfileStore} />
+
+                        <Route path="/search">
+                            <Route path="bands" component={Search.Band}/>
+                            <Route path="venues" component={Search.Venue}/>
+                        </Route>
 
                         <Route path={ROUTE_CONSTANTS.DASHBOARD.BASE} onEnter={AuthMiddleware}>
                             <IndexRoute component={Dashboard.Index}/>
@@ -57,19 +64,12 @@ var AppRouter = React.createClass({
                             <Route path={ROUTE_CONSTANTS.DASHBOARD.SETTINGS} component={Dashboard.Settings}/>
                             <Route path="/booking">
                                 <Route path="new" component={Booking.New} onEnter={validateStateBeforeBooking}/>
+                                <Route path="e/:entity_slug/t/:booking_id" component={Booking.View}/>
                             </Route>
                             <Route path="/messages" component={Messages.Index}/>
                         </Route>
 
-                        {/* FIXME: Update CWU to not need auth token */}
-                        <Route path="/bands/:slug" component={Profile.Band} onLeave={clearProfileStore} />
-                        <Route path="/venues/:slug" component={Profile.Venue} onLeave={clearProfileStore} />
-
-                        <Route path="/search">
-                            <Route path="bands" component={Search.Band}/>
-                            <Route path="venues" component={Search.Venue}/>
-                        </Route>
-                        {/*Add Catchall 404*/}
+                        {/*FIXME:0 Add Catchall 404*/}
 
                     </Route>
                 </Router>

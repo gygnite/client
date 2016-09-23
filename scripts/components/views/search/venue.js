@@ -121,11 +121,9 @@ var VenueSearch = React.createClass({
                     <div className="map-search-box">
                         <Input
                             for="search"
-                            label="Search"
-                            className="text-present"
                             handleUserInput={this._handleInput}>
                             <Geosuggest
-                                placeholder="City and State"
+                                placeholder="Search Venues!"
                                 onSuggestSelect={this._captureLocation}
                                 types={['geocode', 'establishment']}
                                 queryDelay={150}/>
