@@ -17,10 +17,25 @@ exports.setActiveInbox = function (slug) {
     }
 };
 
-
 exports.setActiveMessageGroup = function (slug) {
     return {
         type: MESSAGES.SET_ACTIVE_MESSAGE_GROUP,
         slug: slug
+    }
+};
+
+exports.markGroupAsRead = function (slug) {
+    return {
+        type: MESSAGES.MARK_GROUP_AS_READ,
+        slug: slug
+    }
+};
+
+exports.addMessage = function (message, sender, receiver) {
+    return {
+        type: MESSAGES.ADD_MESSAGE,
+        message: message,
+        sender: sender,
+        receiver: receiver
     }
 };

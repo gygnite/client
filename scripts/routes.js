@@ -44,8 +44,6 @@ var AppRouter = React.createClass({
                         {/*FIXME:0 Registration Completion*/}
                         <Route path="/register/:code" component={Main.Registration}/>
 
-                        <Route path="/bands/:slug" component={Profile.Band} onLeave={clearProfileStore} />
-                        <Route path="/venues/:slug" component={Profile.Venue} onLeave={clearProfileStore} />
 
                         <Route path="/search">
                             <Route path="bands" component={Search.Band}/>
@@ -64,10 +62,14 @@ var AppRouter = React.createClass({
                             <Route path={ROUTE_CONSTANTS.DASHBOARD.SETTINGS} component={Dashboard.Settings}/>
                             <Route path="/booking">
                                 <Route path="new" component={Booking.New} onEnter={validateStateBeforeBooking}/>
-                                <Route path="e/:entity_slug/t/:booking_id" component={Booking.View}/>
+                                <Route path="e/:entity_slug" component={Booking.SingleEntity}/>
+                                <Route path="e/:entity_slug/t/:booking_id" component={Booking.SingleDate}/>
                             </Route>
                             <Route path="/messages" component={Messages.Index}/>
                         </Route>
+
+                        <Route path="/bands/:slug" component={Profile.Band} onLeave={clearProfileStore} />
+                        <Route path="/venues/:slug" component={Profile.Venue} onLeave={clearProfileStore} />
 
                         {/*FIXME:0 Add Catchall 404*/}
 

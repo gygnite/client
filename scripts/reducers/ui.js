@@ -71,6 +71,26 @@ function ui(state, action) {
                 isPostingBooking: false
             });
             break;
+        case UI.FETCH_MESSAGES:
+            return assign({}, state, {
+                isFetchingMessages: true
+            });
+            break
+        case UI.FETCH_MESSAGES_COMPLETE:
+            return assign({}, state, {
+                isFetchingMessages: false
+            });
+            break;
+        case UI.SENDING_MESSAGE:
+            return assign({}, state, {
+                isSendingMessage: true
+            });
+            break;
+        case UI.SENDING_MESSAGE_COMPLETE:
+            return assign({}, state, {
+                isSendingMessage: false
+            });
+            break;
         default: return state;
     }
     return state;

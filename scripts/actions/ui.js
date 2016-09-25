@@ -98,9 +98,32 @@ exports.fetchPostBooking = function () {
     }
 };
 
-
 exports.fetchPostBookingComplete = function () {
     return {
         type: UI.FETCH_POST_BOOKING_COMPLETE
+    }
+};
+
+exports.fetchMessages = function () {
+    return {
+        type: UI.FETCH_MESSAGES
+    }
+};
+
+exports.fetchMessagesComplete = function () {
+    return {
+        type: UI.FETCH_MESSAGES_COMPLETE
+    }
+};
+
+exports.sendingMessage = function () {
+    return {
+        type: UI.SENDING_MESSAGE
+    }
+};
+
+exports.sendingMessageComplete = function () {
+    return {
+        type: UI.SENDING_MESSAGE_COMPLETE
     }
 };

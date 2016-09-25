@@ -1,7 +1,7 @@
 'use strict';
 
 //BookingViewinclude view component here
-var BookingView = require('../../views/booking/view');
+var BookingSingleDate = require('../../views/booking/singleDate');
 var connect = require('react-redux').connect;
 var request = require('superagent');
 require('superagent-auth-bearer')(request);
@@ -15,7 +15,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         fetchBookings: function(id) {
-            request(BASE_URL+'/api/booking/'+id)
+            request(BASE_URL+'/api/booking/date/'+id)
                 .authBearer(Cache.get(ACTIONS.cache.AUTH_TOKEN))
                 .end(function(err, res) {
                     console.log("res!", res.body);
@@ -70,4 +70,4 @@ function mapDispatchToProps(dispatch) {
 module.exports = connect(
     mapStateToProps,
     mapDispatchToProps
-)(BookingView);
+)(BookingSingleDate);

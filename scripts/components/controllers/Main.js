@@ -23,7 +23,8 @@ module.exports = {
     },
     Booking: {
         New: require('./booking/new'),
-        View: require('./booking/view')
+        SingleDate: require('./booking/singledate'),
+        SingleEntity: require('./booking/entity')
     },
     Messages: {
         Index: require('./messages/index')

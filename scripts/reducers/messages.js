@@ -62,6 +62,48 @@ function messages(state, action) {
                 inboxes: inboxes
             });
             break;
+        case MESSAGES.ADD_MESSAGE:
+            var inboxes = state.inboxes.map(function(inb, i) {
+                // console.log("inb before!", inb);
+                if (inb.identity.slug === action.sender) {
+                    if (inb.messageGroups.hasOwnProperty(action.receiver)) {
+                        console.log("action here!!!", action);
+                        //message group exists
+                        inb.messageGroups[action.receiver].messages.unshift(action.message);
+                        console.log("inb.messageGroups[action.receiver]", inb.messageGroups[action.receiver])
+                    } else {
+                        //
+                        console.log("message group doesn't exist :( ", state, action);
+                    }
+                }
+                //in case user owns both sender and reciever inboxes
+                if (inb.identity.slug === action.receiver) {
+                    if (inb.messageGroups.hasOwnProperty(action.sender)) {
+                        console.log("action here!!!", action);
+                        inb.messageGroups[action.sender].messages.unshift(action.message);
+
+                    } else {
+                        //
+                        console.log("message group doesn't exist :( ", state, action);
+                    }
+                }
+                return inb;
+            });
+            return assign({}, state, {
+                inboxes: inboxes
+            });
+            break;
+        case MESSAGES.MARK_GROUP_AS_READ:
+            var inboxes = state.inboxes.map(function(inb, i) {
+                if (inb.identity.isActive && inb.messageGroups.hasOwnProperty(action.slug)) {
+                    inb.messageGroups[action.slug].hasUnread = false;
+                }
+                return inb;
+            });
+            return assign({}, state, {
+                inboxes: inboxes
+            });
+            break;
         default: return state;
     }
     return state;
@@ -114,6 +156,11 @@ function group(state, action) {
             identity.isActive = false;
             return assign({}, state, {
                 identity: identity
+            });
+            break;
+        case MESSAGES.MARK_GROUP_AS_READ:
+            return assign({}, state, {
+                hasUnread: false
             });
             break;
         default: return state;

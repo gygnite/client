@@ -9,20 +9,14 @@ var Messages = React.createClass({
     getInitialState: function() {
         return {
             showInactiveInboxList: false,
-            confirmNavigateBox: false
+            confirmNavigateBox: false,
+            activeInbox: {},
+            activeGroup: {}
         }
     },
     componentWillMount: function() {
         this.props.fetchAllInboxes();
     },
-    // componentWillUpdate: function(nextProps, nextState) {
-    //     this.refs.digestbox.scrollTop = this.refs.digestbox.scrollHeight;
-    //     console.log("digestbox:", this.refs.digestbox.scrollTop)
-    // },
-    // componentDidMount: function() {
-    //     this.refs.digestbox.scrollTop = this.refs.digestbox.scrollHeight;
-    //     console.log("digestbox:", this.refs.digestbox.scrollHeight)
-    // },
     _toggleCurrentActiveInboxDropdown: function() {
         this.setState({
             showInactiveInboxList: !this.state.showInactiveInboxList
@@ -38,8 +32,17 @@ var Messages = React.createClass({
         this._closeConfirmNavigation();
         this.props.setActiveMessageGroup(slug);
     },
-    _handleSubmitMessage: function() {
-        
+    _markGroupAsRead: function(group) {
+        this.props.markGroupAsRead(group);
+    },
+    _handleSubmitMessage: function(data) {
+        var content = this.refs.replybox.value.trim();
+        var type = data.sender.type;
+        var receiver_id = data.receiver.id;
+        var sender_id = data.sender.id;
+        // FIXME:0 What if no data?? don't send message!
+        this.props.sendMessage(content, type, receiver_id, sender_id);
+        this.refs.replybox.value = '';
     },
     _confirmNavigateAway: function(callback, slug) {
         if (!this.refs.replybox.value.trim()) {
@@ -56,7 +59,14 @@ var Messages = React.createClass({
             confirmNavigateBox: false
         });
     },
+    componentWillUpdate: function(nextProps, nextState) {
+        console.log("updating", nextProps, nextState);
+    },
     render: function() {
+
+        var coverReplyOnSending = cx({
+            ' show': this.props.ui.isSendingMessage
+        });
 
         var inactiveInboxList = cx({
             ' show': this.state.showInactiveInboxList
@@ -106,11 +116,15 @@ var Messages = React.createClass({
             var activeGroup = cx({
                 ' active': mg.identity.isActive
             });
+            var hasUnread = cx({
+                ' hasUnread': mg.hasUnread
+            });
             return (
                 <li key={"mg-"+mg.identity.slug}
                     className={"messages-group-item"+activeGroup}
                     onClick={this._confirmNavigateAway.bind(this, this._selectAsActiveMessageGroup, mg.identity.slug)}>
                     {mg.identity.name}
+                    <div className={"unread-badge"+hasUnread}></div>
                 </li>
             );
         }.bind(this));
@@ -217,6 +231,17 @@ var Messages = React.createClass({
             }.bind(this));
         }
 
+        var messageData = {sender: null, receiver: {name: ''}};
+        var activeGroup = {};
+        if (currentActiveMessageGroup[0] && activeInbox[0]) {
+            messageData = {
+                sender: activeInbox[0],
+                receiver: currentActiveMessageGroup[0].identity
+            };
+            activeGroup = currentActiveMessageGroup[0];
+        }
+
+
 
         return (
             <div className="message-page">
@@ -252,22 +277,22 @@ var Messages = React.createClass({
                             {currentActiveMessageGroupTitles}
                             </ReactCSSTransitionGroup>
                         </div>
-                        <div ref="digestbox" className="digest">
-                            <ul className="digest-list">
-                                <ReactCSSTransitionGroup
-                                    transitionName="messagebox"
-                                    transitionEnterTimeout={500}
-                                    transitionLeaveTimeout={300}>
-                                {messagesDigest}
-                                </ReactCSSTransitionGroup>
-                            </ul>
-                        </div>
+
                         <div className="reply">
-                            <div className="textbox">
-                                <textarea ref="replybox" placeholder="Reply"></textarea>
+                            <div className={"cover-sending"+coverReplyOnSending}>
+                                <i className="icon-loader animate-spin"></i>
                             </div>
-                            <div onClick={this._handleSubmitMessage} className="button extra"><h4>Send</h4></div>
+                            <div className="textbox">
+                                <textarea ref="replybox" placeholder={"Reply to " + messageData.receiver.name}></textarea>
+                            </div>
+                            <div onClick={this._handleSubmitMessage.bind(this, messageData)} className="button extra"><h4>Send</h4></div>
                         </div>
+
+                        <DigestBox>
+                            {messagesDigest}
+                        </DigestBox>
+
+
                     </div>
                 </div>
                 <Modal
@@ -291,3 +316,38 @@ var Messages = React.createClass({
 });
 
 module.exports = Messages;
+
+
+
+
+var DigestBox = React.createClass({
+    componentWillReceiveProps: function(nextProps) {
+        //scroll to bottom
+        // console.log("this.refs.digestbox.scrollHeight", this.refs.digestbox.scrollHeight)
+        // this.refs.digestbox.scrollTop = 1000;
+    },
+    render: function() {
+        return (
+            <div ref="digestbox" className="digest">
+                <ul className="digest-list">
+                    <ReactCSSTransitionGroup
+                        transitionName="messagebox"
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={300}>
+                    {this.props.children}
+                    </ReactCSSTransitionGroup>
+                </ul>
+            </div>
+        );
+    }
+});
+
+
+//
+// var InboxList = React.createClass({
+//     render: function() {
+//         return (
+//
+//         )
+//     }
+// });
