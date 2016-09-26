@@ -52,7 +52,7 @@ gulp.task('fonts', function() {
         .pipe(gulp.dest(''))
         .pipe(gulp.dest('./public'))
         .on('end', function() {
-            del(['public/styles', 'fonts']);
+            // del(['public/styles', 'fonts']);
         });
 });
 
