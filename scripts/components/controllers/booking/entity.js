@@ -17,7 +17,6 @@ function mapDispatchToProps(dispatch) {
                 .authBearer(Cache.get(ACTIONS.cache.AUTH_TOKEN))
                 .end(function(err, res) {
                     dispatch(ACTIONS.bookings.setCurrentBookings(res.body.timeslots));
-                    console.log("bookings", res.body.timeslots)
                 });
         },
         clearBookings: function() {

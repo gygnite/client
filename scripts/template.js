@@ -17,7 +17,7 @@ var Templates = React.createClass({
                         {this.props.children}
                     </div>
                 </Transition>
-            
+
                 {/*Alert bar, bottom left*/}
                 <Alert alerts={this.props.ui.alerts}/>
             </div>

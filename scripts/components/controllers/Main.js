@@ -22,6 +22,7 @@ module.exports = {
         Venue: require('./search/venue')
     },
     Booking: {
+        All: require('./booking/all'),
         New: require('./booking/new'),
         SingleDate: require('./booking/singledate'),
         SingleEntity: require('./booking/entity')

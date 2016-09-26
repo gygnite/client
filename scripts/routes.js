@@ -11,14 +11,24 @@ var IndexRoute = require('react-router').IndexRoute;
 var Cache = require('lscache');
 var request = require('superagent');
 require('superagent-auth-bearer')(request);
-// var mapApi = require('./mapApi');
+var io = require('socket.io-client');
+var ioConnection = io.connect(BASE_URL);
 
 var createStore = require('redux').createStore;
+var applyMiddleware = require('redux').applyMiddleware;
+var compose = require('redux').compose;
 var Provider = require('react-redux').Provider;
 var reducers = require('./reducers/main');
+
 var store = createStore(reducers, {},
-    window.devToolsExtension && window.devToolsExtension()
+    // compose(
+        applyMiddleware(socketConnectionMiddleware),
+    //     window.devToolsExtension && window.devToolsExtension()
+    // )
 );
+
+socketReceiver(store);
+
 
 var Template = require('./components/controllers/template');
 
@@ -61,6 +71,7 @@ var AppRouter = React.createClass({
                             </Route>
                             <Route path={ROUTE_CONSTANTS.DASHBOARD.SETTINGS} component={Dashboard.Settings}/>
                             <Route path="/booking">
+                                <IndexRoute component={Booking.All}/>
                                 <Route path="new" component={Booking.New} onEnter={validateStateBeforeBooking}/>
                                 <Route path="e/:entity_slug" component={Booking.SingleEntity}/>
                                 <Route path="e/:entity_slug/t/:booking_id" component={Booking.SingleDate}/>
@@ -135,6 +146,67 @@ function validateStateBeforeBooking(nextState, replace) {
     } else {
         //go
     }
-    // console.log("replace", replace);
-    // console.log("nextState", callback());
+}
+
+
+
+
+function socketReceiver(store) {
+    ioConnection = io.connect(BASE_URL, {
+        query: 'token='+Cache.get(ACTIONS.cache.AUTH_TOKEN)
+    });
+    ioConnection.on('connection', function(socket) {
+        socket.join(Cache.get(ACTIONS.cache.USER).id);
+    });
+    ioConnection.on('message', function(data) {
+        store.dispatch(ACTIONS.messages.addMessage(data.message, data.sender, data.receiver));
+    });
+    ioConnection.on('notification', function(data) {
+        store.dispatch(ACTIONS.ui.createAlert(data.text, 'success'));
+        store.dispatch(ACTIONS.ui.addNotification(data));
+    });
+}
+
+function socketConnectionMiddleware(store) {
+    // console.log("middleware", store);
+    // console.log("ioConnection", ioConnection);
+    return next => action => {
+        var result = next(action);
+        // console.log("io please connect!", ioConnection);
+        // console.log("actiontype?", action.type, action);
+        if (ioConnection && action.type) {
+            // console.log("messages!", store.getState().messages);
+            emitter(ioConnection, action);
+        }
+        return result;
+    }
+}
+
+
+
+function emitter(io, action) {
+    switch (action.type) {
+        case 'SET_USER':
+            io.emit('connectToRoom', {
+                user: action.user.id
+            });
+            break;
+        case 'EMIT_MESSAGE':
+            io.emit('message', {
+                message: action.message,
+                receiver: action.receiver,
+                sender: action.sender
+            });
+            break;
+        case 'EMIT_NOTIFICATION':
+        console.log("fucking action ", action)
+            io.emit('notification', {
+                type: action.notif_type,
+                text: action.notif_text,
+                slug_to_notify: action.notif_slug,
+                id: action.notif_id
+            });
+            break;
+        default: return;
+    }
 }

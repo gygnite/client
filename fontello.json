@@ -131,6 +131,18 @@
       "css": "level-up",
       "code": 59408,
       "src": "entypo"
+    },
+    {
+      "uid": "671f29fa10dda08074a4c6a341bb4f39",
+      "css": "alert",
+      "code": 61683,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "d10920db2e79c997c5e783279291970c",
+      "css": "secondary-menu",
+      "code": 59409,
+      "src": "entypo"
     }
   ]
 }

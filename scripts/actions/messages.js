@@ -31,9 +31,18 @@ exports.markGroupAsRead = function (slug) {
     }
 };
 
-exports.addMessage = function (message, sender, receiver) {
+exports.addMessage = function (message, receiver, sender) {
     return {
         type: MESSAGES.ADD_MESSAGE,
+        message: message,
+        sender: sender,
+        receiver: receiver
+    }
+};
+
+exports.emitMessage = function (message, receiver, sender) {
+    return {
+        type: MESSAGES.EMIT_MESSAGE,
         message: message,
         sender: sender,
         receiver: receiver

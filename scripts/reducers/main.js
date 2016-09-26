@@ -14,7 +14,6 @@ var bookings     = require('./bookings');
 module.exports = combineReducers({
     user: user,
     ui: ui,
-    settings: settings,
     dashboard: dashboard,
     bands: bands,
     venues: venues,

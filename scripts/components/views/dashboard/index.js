@@ -4,7 +4,7 @@ var assign = require('object-assign');
 var Link = require('react-router').Link;
 var cx = require('classnames');
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-
+var moment = require('moment');
 
 var Index = React.createClass({
     getInitialState: function() {
@@ -46,6 +46,18 @@ var Index = React.createClass({
                return (<AssetCard key={"card-"+index} data={asset}/>)
             });
         }
+
+
+        var upcomingGigs = this.props.dashboard.timeslots.map(function(slot, i) {
+            return (
+                <div key={"slot-"+i} className="upcoming-gig-item">
+                    <h1>{slot.band.name}</h1>
+                    <h2>{slot.venue.name}</h2>
+                    <h3>{moment(slot.data.start_time).format('ddd, MMM Do')}</h3>
+                </div>
+            )
+        });
+
         var userImageBoxStyle = {
             backgroundImage: 'url('+this.props.user.profile_image+')'
         };
@@ -81,14 +93,17 @@ var Index = React.createClass({
                                 </Link>
                             </div>
                             <div className="setting-icon">
-                                <Link to="/dashboard/settings">
-                                    <i className="icon-cog"></i>
+                                <Link to="/booking">
+                                    <i className="icon-calendar"></i>
                                 </Link>
                             </div>
                         </div>
                     </div>
                     <div className="dash-section-9 upcoming-gigs">
                         <h1>Upcoming Gigs</h1>
+                        <ul className="upcoming-gigs-list">
+                            {upcomingGigs}
+                        </ul>
                     </div>
                 </section>
                 <section className="dash-section">

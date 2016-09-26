@@ -3,6 +3,7 @@
 var Navbar = require('../../views/global/navbar');
 var connect = require('react-redux').connect;
 var request = require('superagent');
+require('superagent-auth-bearer')(request);
 var Cache = require('lscache');
 var assign = require('object-assign');
 var browserHistory = require('react-router').browserHistory;
@@ -93,7 +94,33 @@ function mapDispatchToProps(dispatch) {
                         dispatch(ACTIONS.ui.createAlert(res.body.message, 'success'));
                     }
                 });
-        }
+        },
+        fetchNotifications: function() {
+            console.log("fetching!");
+            dispatch(ACTIONS.ui.fetchNotifications());
+            request.get(BASE_URL+'/api/admins/notifications')
+                .authBearer(Cache.get(ACTIONS.cache.AUTH_TOKEN))
+                .end(function(err, res) {
+                    if (!err && !res.body.error) {
+                        console.log("notifs!", res.body.notifications);
+                        dispatch(ACTIONS.ui.setNotifications(res.body.notifications));
+                    }
+                    dispatch(ACTIONS.ui.fetchNotificationsComplete());
+                });
+        },
+        markNotificationsAsRead: function(notification_id) {
+            request.put(BASE_URL+'/api/admins/notifications')
+                .authBearer(Cache.get(ACTIONS.cache.AUTH_TOKEN))
+                .send({
+                    notification: notification_id
+                })
+                .end(function(err, res) {
+                    if (!err && !res.body.error) {
+                        // FIXME: Notification err?
+                        dispatch(ACTIONS.ui.setNotificationAsRead(res.body.notification));
+                    }
+                });
+        },
     }
 }
 

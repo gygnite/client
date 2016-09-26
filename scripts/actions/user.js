@@ -3,10 +3,6 @@
 var USER = require('./constants').USER;
 
 
-exports.things = function (stuff) {
-    //do things
-};
-
 exports.setUser = function (user) {
     return {
         type: USER.SET_USER,

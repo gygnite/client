@@ -3,6 +3,7 @@ var moment = require('moment');
 var cx = require('classnames');
 var BookingItem = require('./bookingItem');
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+var Link = require('react-router').Link;
 
 var BookingSingleDate = React.createClass({
     componentWillMount: function() {
@@ -41,7 +42,8 @@ var BookingSingleDate = React.createClass({
                     <BookingItem key={"bk-"+i} booking={bk}
                         type="pending"
                         setAccepted={this._setAccepted}
-                        setRejected={this._setRejected}/>
+                        setRejected={this._setRejected}
+                        sendMessage={this.props.sendMessage}/>
                 );
             }.bind(this));
 
@@ -52,7 +54,8 @@ var BookingSingleDate = React.createClass({
                     <BookingItem key={"bk-"+i} booking={bk}
                         type="accepted"
                         setAccepted={this._setAccepted}
-                        setRejected={this._setRejected}/>
+                        setRejected={this._setRejected}
+                        sendMessage={this.props.sendMessage}/>
                 );
             }.bind(this));
 
@@ -63,7 +66,8 @@ var BookingSingleDate = React.createClass({
                     <BookingItem key={"bk-"+i} booking={bk}
                         type="rejected"
                         setAccepted={this._setAccepted}
-                        setRejected={this._setRejected}/>
+                        setRejected={this._setRejected}
+                        sendMessage={this.props.sendMessage}/>
                 );
             }.bind(this));
 
@@ -97,6 +101,9 @@ var BookingSingleDate = React.createClass({
         return (
             <div className="booking-review container">
                 {date}
+                <Link to="/booking">
+                    <h1 className="view-all-link">View All Bookings</h1>
+                </Link>
                 {bookings}
                 <div className="booking-list-section">
                     {pendingHeader}

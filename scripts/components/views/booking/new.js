@@ -50,7 +50,9 @@ var NewBooking = React.createClass({
             venue: this.state.venue.id,
             date: this.state.date,
             headliner: this.state.order === 1,
-            message: this.state.message
+            message: this.state.message,
+            band_name: this.state.selectedBand.name,
+            venue_slug: this.state.venue.slug
         };
         this.props.createBookingRequest(details);
     },

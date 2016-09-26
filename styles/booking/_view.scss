@@ -1,3 +1,8 @@
+.view-all-link {
+    text-align: center;
+    border: solid 1px;
+}
+
 .list-section-header {
     // @include span-columns(12);
     width: 65%;
@@ -25,6 +30,7 @@
         margin-top: 25px;
         margin-bottom: 40px;
     };
+
 }
 
 .booking-header {
@@ -37,12 +43,15 @@
 }
 
 .booking-item-box {
-    height: 350px;
+    height: 375px;
     @include span-columns(6);
-    @include media($mobile) {
-        @include span-columns(12);
-        margin-bottom: 30px;
-    };
+    @include omega-reset(3);
+    @include omega(2);
+    // @include media($mobile) {
+    //     @include span-columns(12);
+    //     margin-bottom: 30px;
+    // };
+
 
     .content {
         padding-right: 50px;

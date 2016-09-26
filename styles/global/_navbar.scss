@@ -69,36 +69,254 @@ $transition: all cubic-bezier(.62,.28,.23,.99) $menu-speed;
     padding: 0;
     margin: 0;
     float: right;
-    .navbar-list-item {
-        display: inline-block;
-        margin: 6.6px;
-        cursor: pointer;
-        margin-right: 30px;
-        .navbar-link {
-            top: -23px;
-            position: relative;
-        }
-        .user-image {
-            height: 50px;
-            width: 50px;
-            border-radius: 20em;
-            border: 2px solid $main-white;
-            background-size: cover;
-            background-position: center;
-        }
-    }
-    &.no-user {
-        .navbar-link {
-            top: 0;
-        }
-        .navbar-list-item {
-            margin: 18.6px;
-        }
-    }
-    .messages {
-        font-size: 20px;
+    margin: 10px;
+    @include media($mobile) {
+        display: none;
+    };
+}
+.navbar-list-mobile {
+    @include media($tablet) {
+        display: none;
+    };
+    @include media($desktop) {
+        display: none;
+    };
+    // display:block
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    float: right;
+    margin: 10px;
+    .navbar-dropdown {
+        position: absolute;
+        right: 0;
+        @include media($mobile) {
+            width: 100vw;
+        };
     }
 }
+.navbar-list-item {
+    display: inline-block;
+    top: 0;
+    float: left;
+    margin: 6.6px;
+    // cursor: pointer;
+    // margin-right: 30px;
+    .navbar-link {
+        top: -23px;
+        position: relative;
+    }
+    .user-image {
+        height: 30px;
+        width: 30px;
+        border-radius: 20em;
+        border: 2px solid $main-white;
+        background-size: cover;
+        background-position: center;
+    }
+    .user-name {
+        padding: 6px;
+    }
+    &.border-bar {
+        height: 30px;
+        width: 0px;
+        border-right: solid 1px $main-white;
+    }
+    .nav-icon {
+        font-size: 20px;
+        margin: 7px;
+        margin-right: 2px;
+        margin-left: 2px;
+        position: relative;
+        top: 4px;
+        cursor: pointer;
+    }
+}
+&.no-user {
+    .navbar-link {
+        top: 0;
+    }
+    .navbar-list-item {
+        margin: 18.6px;
+    }
+}
+.messages {
+    font-size: 20px;
+}
+.navbar-dropdown {
+    height: auto;
+    width: auto;
+    position: absolute;
+    right: 20px;
+    top: 65px;
+    color: black;
+    background-color: $main-white;
+    display: none;
+    &.show {
+        display: block;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.32), 0 1px 2px rgba(0,0,0,0.44);
+    }
+    &:before {
+        content: '';
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid $main-white;
+        position: absolute;
+        top: -7px;
+        z-index: 1000;
+        transform:translateY(-3px);
+    }
+    &.settings {
+        text-align: left;
+        .dropdown-link {
+            width: 100px;
+            font-size: 18px !important;
+        }
+        &:before {
+            right: 0;
+        }
+    }
+    &.alerts {
+        text-align: left;
+        .dropdown-link {
+            width: 300px;
+        }
+        &:before {
+            right: 47px;
+        }
+    }
+    &.mobile {
+        &:before {
+            right: 23px;
+        }
+    }
+    .dropdown-list {
+        list-style: none;
+        padding: 0;
+        margin:0;
+        .dropdown-link {
+            // width: 200px;
+            font-size: 14px;
+            padding: 13px;
+            cursor: pointer;
+            // text-align: center;
+            cursor: pointer;
+            &:hover {
+                background-color: darken($main-white, 20%);
+            }
+            &.unread {
+                background-color: lighten($main-blue, 25%);
+            }
+        }
+        a.active .dropdown-link{
+            background-color: lighten($main-blue, 30%);
+            color: lighten($gunmetal, 10%);
+        }
+    }
+    .dropdown-header{
+        height: 15px;
+        margin: 5px;
+        border-bottom: solid 1px;
+    }
+}
+.icon-alert-count-badge {
+    border-radius: 20em;
+    background: #E62739;
+    padding: 2px;
+    top: 7px;
+    right: 57px;
+    position: absolute;
+    font-size: 14px;
+    min-width: 20px;
+    min-height: 20px;
+    text-align: center;
+
+}
+
+
+
+
+.mobile-navbar {
+    @include media($mobile) {
+        display: block;
+    };
+    @include media($tablet) {
+        display: none;
+    };
+    @include media($desktop) {
+        display: none;
+    };
+    position: fixed;
+    bottom: 10px;
+    .mobile-trigger {
+        background-color: $crimson;
+        color: white;
+        height: 50px;
+        width: 50px;
+        bottom: 15px;
+        right: 15px;
+        float: right;
+        position: fixed;
+        border-radius: 20em;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.35), 0 4px 8px rgba(0,0,0,0.32);
+        @include transition(all 250ms $swift-out);
+        .icon-secondary-menu {
+            font-size: 30px;
+            text-align: center;
+            top: 0;
+            position: absolute;
+            width: 100%;
+            padding: 8px;
+            height: 100%;
+            cursor: pointer;
+            @include transition(all 250ms $swift-out);
+            &:before {
+                margin: 0;
+            }
+        }
+        &.show {
+            @include transition(all 250ms $swift-out);
+            transform: translateY(-85px);
+            .icon-secondary-menu {
+                @include transition(all 250ms $swift-out);
+                transform: rotate(-540deg)
+            }
+        }
+    }
+    .mobile-dropup {
+        position: fixed;
+        height: 0px;
+        width: 100vw;
+        bottom: 0;
+        margin: 0;
+        padding: 0;
+        background: $gunmetal;
+        color: $main-white;
+        @include transition(all 250ms $swift-out);
+        @include span-columns(12);
+        cursor: pointer;
+        &.show {
+            height: 65px;
+            @include transition(all 250ms $swift-out);
+            box-shadow: 0 -3px 6px rgba(0,0,0,0.35), 0 -2px 6px rgba(0,0,0,0.32);
+        }
+        .mobile-dropup-item {
+            display: inline-block;
+            @include span-columns(4);
+            padding: 15px;
+            font-size: 30px;
+            text-align: center;
+        }
+        a.active .mobile-dropup-item {
+            color: $main-blue;
+        }
+    }
+}
+
+
+
 
 
 .menu {

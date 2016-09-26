@@ -5,11 +5,15 @@ var Link = require('react-router').Link;
 var Input = require('./input');
 var cx = require('classnames');
 var Cache = require('lscache');
+var cx = require('classnames');
 
 var Navbar = React.createClass({
     getInitialState: function() {
         return {
-            menuOpen: false
+            menuOpen: false,
+            alertBox: false,
+            settingsBox: false,
+            showMobileMenu: false
         }
     },
     toggleMenu: function() {
@@ -18,19 +22,106 @@ var Navbar = React.createClass({
         });
     },
     componentWillMount: function() {
-        //check if user exists
-        // console.log("props on template mount: ", !this.props.user.token);
         var token = Cache.get(ACTIONS.cache.AUTH_TOKEN);
         if (!this.props.user.token) {
             this.props.getUser(token);
         }
+
+        this.props.fetchNotifications();
+    },
+    toggleAlertBox: function() {
+        this.setState({
+            alertBox: !this.state.alertBox,
+            settingsBox: false
+        });
+    },
+    toggleSettingsDropdown: function() {
+        this.setState({
+            alertBox: false,
+            settingsBox: !this.state.settingsBox
+        });
+    },
+    toggleMobileMenu: function() {
+        this.setState({
+            showMobileMenu: !this.state.showMobileMenu
+        });
+    },
+    _markNotificationAsRead: function(notification_id, shouldSend) {
+        if (shouldSend) {
+            this.props.markNotificationsAsRead(notification_id);
+        }
     },
     render: function() {
-        // console.log("props on nav", this.props.user);
+        // console.log("props!", this.props.ui);
+        var notifsView = null;
+        if (this.props.ui.notifications.length > 0) {
+            notifsView = this.props.ui.notifications.map(function(notif, index) {
+                var icon = null;
+                var link = (notif.type === 'message') ? '/messages' : '/booking';
+                if (notif.type === 'booking') {
+                    icon = (
+                        <i className="icon-calendar"></i>
+                    );
+                } else if (notif.type === 'message') {
+                    icon = (
+                        <i className="icon-comment"></i>
+                    );
+                }
+                var shouldSend = false;
+                // console.log("should send", notif)
+                if (!notif.seen && notif.id) {
+                    shouldSend = true;
+                }
+                var unread = cx({
+                    ' unread': !notif.seen
+                });
+                return (
+                    <Link key={"notif-"+index} to={link}>
+                        <li className={"dropdown-link "+unread} onMouseEnter={this._markNotificationAsRead.bind(this, notif.id, shouldSend)}>
+                            <p><span>{icon}</span>{notif.text}</p>
+                        </li>
+                    </Link>
+
+                )
+            }.bind(this));
+        } else {
+            notifsView = (
+                <li className="dropdown-link">
+                    <p>No notifications found</p>
+                </li>
+            )
+        }
+
+        var hasUnreadAlert = false;
+        var numUnreadAlerts = 0;
+        for (var i = 0; i < this.props.ui.notifications.length; i++) {
+            var currNotif = this.props.ui.notifications[i];
+            if (!currNotif.seen) {
+                hasUnreadAlert = true;
+                numUnreadAlerts++;
+            }
+        }
+        var showNumUnreadAlerts = null;
+        if (numUnreadAlerts) {
+            showNumUnreadAlerts = (
+                <i className="icon-alert-count-badge">{numUnreadAlerts}</i>
+            );
+        }
+
         var menuOpen = cx({
             ' open': this.state.menuOpen
         });
+        var showAlertBox = cx({
+            ' show': this.state.alertBox
+        });
+        var settingsBox = cx({
+            ' show': this.state.settingsBox
+        });
+        var mobileMenu = cx({
+            ' show': this.state.showMobileMenu
+        })
         var mainNavigation;
+        var mainMobileNavigation;
         if (this.props.ui.isFetchingUser) {
             mainNavigation = (
                 <ul className="navbar-list">
@@ -45,17 +136,78 @@ var Navbar = React.createClass({
             mainNavigation = (
                 <ul className="navbar-list">
                     <li className="navbar-list-item">
-                        <Link to="/dashboard">
-                            <h3 className="navbar-link">
-                                {this.props.user.first_name} {this.props.user.last_name}
-                            </h3>
-                        </Link>
+                        <div className="user-image profile_image" style={imageBoxStyle}></div>
+                    </li>
+                    <Link to="/dashboard">
+                        <li className="navbar-list-item">
+                            <p className="user-name">{this.props.user.first_name}</p>
+                        </li>
+                    </Link>
+                    <li className="border-bar navbar-list-item"></li>
+                    <li className="navbar-list-item">
+                        <i className="icon-alert nav-icon" onClick={this.toggleAlertBox}></i>
+                        {showNumUnreadAlerts}
+                        <div className={"alerts navbar-dropdown"+showAlertBox} onClick={this.toggleAlertBox}>
+                            <h5 className="dropdown-header">Notifications</h5>
+                            <ul className="dropdown-list">
+                                {notifsView}
+                            </ul>
+                        </div>
                     </li>
                     <li className="navbar-list-item">
-                        <div className="user-image profile_image" style={imageBoxStyle}></div>
+                        <i className="icon-cog nav-icon" onClick={this.toggleSettingsDropdown}></i>
+                        <div className={"settings navbar-dropdown"+settingsBox} onClick={this.toggleSettingsDropdown}>
+                            <ul className="dropdown-list">
+                                <Link to="/dashboard/settings" activeClassName="active">
+                                    <li className="dropdown-link">Settings</li>
+                                </Link>
+                                <li className="dropdown-link">Logout</li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             );
+            var mainMobileNavigation = (
+                <div className="mobile-navbar">
+                    <div className={"mobile-trigger"+mobileMenu} onClick={this.toggleMobileMenu}>
+                        <i className="icon-secondary-menu"></i>
+                    </div>
+                    <ul className={"mobile-dropup"+mobileMenu}
+                        onClick={this.toggleMobileMenu}>
+                        <Link to="/dashboard/" activeClassName="active" onlyActiveOnIndex={true}>
+                            <li className="mobile-dropup-item">
+                                <i className="icon-home"></i>
+                            </li>
+                        </Link>
+                        <Link to="/messages" activeClassName="active">
+                            <li className="mobile-dropup-item"
+                                onClick={this.toggleMobileMenu}>
+                                <i className="icon-comment"></i>
+                            </li>
+                        </Link>
+                        <Link to="/dashboard/settings" activeClassName="active">
+                            <li className="mobile-dropup-item"
+                                onClick={this.toggleMobileMenu}>
+                                <i className="icon-cog"></i>
+                            </li>
+                        </Link>
+                    </ul>
+                </div>
+            );
+            var notifs = (
+                <ul className="navbar-list-mobile">
+                    <li className="navbar-list-item">
+                        <i className="icon-alert nav-icon" onClick={this.toggleAlertBox}></i>
+                        {showNumUnreadAlerts}
+                        <div className={"alerts navbar-dropdown mobile"+showAlertBox} onClick={this.toggleAlertBox}>
+                            <h5 className="dropdown-header">Notifications</h5>
+                            <ul className="dropdown-list">
+                                {notifsView}
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            )
         } else {
             mainNavigation = (
                 <ul className="navbar-list no-user">
@@ -84,6 +236,8 @@ var Navbar = React.createClass({
                 </div>
 
                 {mainNavigation}
+                {mainMobileNavigation}
+                {notifs}
 
             </div>
         )
@@ -395,7 +549,7 @@ var MenuList = React.createClass({
                         </div>
                     </div>
 
-                    
+
 
                 </ul>
             </div>

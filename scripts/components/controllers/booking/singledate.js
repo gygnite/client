@@ -6,6 +6,8 @@ var connect = require('react-redux').connect;
 var request = require('superagent');
 require('superagent-auth-bearer')(request);
 var Cache = require('lscache');
+var notify = require('../../../notifier');
+
 
 
 function mapStateToProps(state, ownProps) {
@@ -63,6 +65,50 @@ function mapDispatchToProps(dispatch) {
                         dispatch(ACTIONS.ui.createAlert('Failed to set to rejected.', 'success'));
                     }
                 });
+        },
+        sendMessage: function(content, type, receiver_id, sender_id) {
+            dispatch(ACTIONS.ui.sendingMessage());
+            request.post(BASE_URL+'/api/messages/')
+            .authBearer(Cache.get(ACTIONS.cache.AUTH_TOKEN))
+            .send({
+                content: content,
+                type: type,
+                receiver_id: receiver_id,
+                sender_id: sender_id
+            }).end(function(err, res) {
+                if (!err && !res.body.error) {
+                    var message = res.body.message;
+                    var sender_slug = message.sender_slug;
+                    var receiver_slug = (sender_slug === message.band_slug) ? message.venue_slug : message.band_slug;
+                    var sender_name = (sender_slug === message.band_slug) ? message.band_name : message.venue_name;
+                    dispatch(ACTIONS.messages.emitMessage(message, receiver_slug, sender_slug));
+                    dispatch(ACTIONS.messages.addMessage(message, receiver_slug, sender_slug));
+                    sendNotification('New message from ' + sender_name, receiver_slug);
+                    dispatch(ACTIONS.ui.createAlert('Message sent successfully!', 'success'));
+                } else {
+                    dispatch(ACTIONS.ui.createAlert('Message send failed.', 'error'));
+                }
+                dispatch(ACTIONS.ui.sendingMessageComplete());
+                console.log("res!", res, err);
+                // FIXME: what if error on message send?
+            });
+
+            //emit notification function
+            function sendNotification(text, slug_to_notify) {
+                notify('message', text, slug_to_notify)
+                .then(function(res) {
+                    dispatch(ACTIONS.ui.emitNotification({
+                        type: 'message',
+                        text: text,
+                        slug: slug_to_notify
+                    }));
+                }).catch(function(err) {
+                    //handle error sending notification
+                    // FIXME: Notificatin in message
+                    console.error('err sending notif', err);
+                });
+            }
+
         }
     }
 }

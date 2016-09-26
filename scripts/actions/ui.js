@@ -127,3 +127,47 @@ exports.sendingMessageComplete = function () {
         type: UI.SENDING_MESSAGE_COMPLETE
     }
 };
+
+
+exports.fetchNotifications = function () {
+    return {
+        type: UI.FETCH_NOTIFICATIONS
+    }
+};
+
+exports.fetchNotificationsComplete = function () {
+    return {
+        type: UI.FETCH_NOTIFICATIONS_COMPLETE
+    }
+};
+
+exports.setNotifications = function (notifications) {
+    return {
+        type: UI.SET_NOTIFICATIONS,
+        notifications: notifications
+    }
+};
+
+exports.addNotification = function (notification) {
+    return {
+        type: UI.ADD_NOTIFICATION,
+        notification: notification
+    }
+};
+
+exports.emitNotification = function(notification) {
+    return {
+        type: UI.EMIT_NOTIFICATION,
+        notif_type: notification.type,
+        notif_text: notification.text,
+        notif_slug: notification.slug,
+        notif_id: notification.id
+    }
+};
+
+exports.setNotificationAsRead = function (notif) {
+    return {
+        type: UI.SET_NOTIFICATION_AS_READ,
+        notification: notif
+    }
+};

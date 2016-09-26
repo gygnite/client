@@ -2,6 +2,7 @@
 var React = require('react');
 var moment = require('moment');
 var cx = require('classnames');
+var Link = require('react-router').Link;
 
 var BookingItem = React.createClass({
     getInitialState: function() {
@@ -24,7 +25,17 @@ var BookingItem = React.createClass({
             //don't send
             return;
         }
-        //send message
+        var message = {
+            content: this.refs.messagebox.value.trim(),
+            sender: this.props.booking.venue.id,
+            receiver: this.props.booking.band.id,
+            type: 'venue'
+        };
+        this.props.sendMessage(message.content, message.type, message.receiver, message.sender);
+        this.refs.messagebox.value = '';
+        this.setState({
+            messageOpen: false
+        });
     },
     _getStatus: function(booking) {
         if (booking.pending) {
@@ -83,8 +94,13 @@ var BookingItem = React.createClass({
                 <div className="booking-item-inner">
                     <div className="content">
                         <div className="item-info">
-                            <h2 className="block name">{this.props.booking.band.name}</h2>
-                            <h3 className="block date"><i>{moment(this.props.booking.data.start_time).format('dddd, MMMM Do YYYY')}</i></h3>
+                            <Link to={"/bands/"+this.props.booking.band.slug}>
+                                <h2 className="block name">{this.props.booking.band.name}</h2>
+                            </Link>
+                            <Link to={"/booking/e/"+this.props.booking.venue.slug+"/t/"+this.props.booking.data.timeslot_id}>
+                                <h3 className="block date"><i>{moment(this.props.booking.data.start_time).format('dddd, MMMM Do YYYY')}</i></h3>
+                            </Link>
+                            <h3 className="block venue"><i>{this.props.booking.venue.name}</i></h3>
                             <h3 className={"block status "+this.props.type}>{this._getStatus(this.props.booking.data)}</h3>
                             <h5 className="block headliner"><i>{role}</i></h5>
                         </div>

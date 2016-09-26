@@ -6,7 +6,13 @@ var DASHBOARD = require('../actions/constants').DASHBOARD;
 
 function dashboard(state, action) {
     if (!state) {
-        state = {};
+        state = {
+            timeslots: [],
+            pending: {
+                bands: [],
+                venues: []
+            }
+        };
     }
     switch (action.type) {
         case DASHBOARD.FETCH_DASHBOARD:
@@ -19,6 +25,47 @@ function dashboard(state, action) {
                 isFetchingDashboard: false
             });
             break;
+        case DASHBOARD.SET_TIMESLOTS:
+            return assign({}, state, {
+                timeslots: action.timeslots
+            });
+            break;
+        case DASHBOARD.SET_PENDING:
+            var pending = state.pending;
+            pending.bands = action.bands;
+            pending.venues = action.venues;
+            return assign({}, state, {
+                pending: pending
+            });
+            break;
+        case DASHBOARD.REMOVE_SINGLE_PENDING:
+            var pending = state.pending;
+            console.log("state pending bands", pending.bands);
+
+            for (var i = 0; i < state.pending.bands.length; i++) {
+                var pendingBandSlots = pending.bands[i].slots.filter(function(item) {
+                    console.log("!(item.data.band_id === action.band_id && item.data.venue_id === action.venue_id)", item.data.band_id, action.band_id, item.data.venue_id, action.venue_id);
+                    return !(item.data.band_id === action.band_id && item.data.venue_id === action.venue_id);
+                });
+                pending.bands[i].slots = pendingBandSlots;
+            }
+
+            for (var i = 0; i < state.pending.venues.length; i++) {
+                var pendingVenueSlots = pending.venues[i].slots.filter(function(item) {
+                    console.log("!(item.data.band_id === action.band_id && item.data.venue_id === action.venue_id)", item.data.band_id, action.band_id, item.data.venue_id, action.venue_id);
+                    return !(item.data.band_id === action.band_id && item.data.venue_id === action.venue_id);
+                });
+                pending.venues[i].slots = pendingVenueSlots;
+            }
+
+            pending.bands = pendingBandSlots;
+            pending.venues = pendingVenueSlots;
+
+            return assign({}, state, {
+                pending: pending
+            });
+            break;
+
         default: return state;
     }
     return state;

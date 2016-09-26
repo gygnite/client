@@ -59,9 +59,6 @@ var Messages = React.createClass({
             confirmNavigateBox: false
         });
     },
-    componentWillUpdate: function(nextProps, nextState) {
-        console.log("updating", nextProps, nextState);
-    },
     render: function() {
 
         var coverReplyOnSending = cx({
@@ -116,15 +113,15 @@ var Messages = React.createClass({
             var activeGroup = cx({
                 ' active': mg.identity.isActive
             });
-            var hasUnread = cx({
-                ' hasUnread': mg.hasUnread
-            });
+            // var hasUnread = cx({
+            //     ' hasUnread': mg.hasUnread
+            // });
             return (
                 <li key={"mg-"+mg.identity.slug}
                     className={"messages-group-item"+activeGroup}
                     onClick={this._confirmNavigateAway.bind(this, this._selectAsActiveMessageGroup, mg.identity.slug)}>
                     {mg.identity.name}
-                    <div className={"unread-badge"+hasUnread}></div>
+                    <div className={"unread-badge"}></div>
                 </li>
             );
         }.bind(this));
@@ -239,6 +236,7 @@ var Messages = React.createClass({
                 receiver: currentActiveMessageGroup[0].identity
             };
             activeGroup = currentActiveMessageGroup[0];
+            console.log("messageData", messageData);
         }
 
 

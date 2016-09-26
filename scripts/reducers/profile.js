@@ -15,7 +15,6 @@ function profile(state, action) {
             var tss =  action.band.timeslots.map(function(ts, index) {
                 return  timeslot(ts, action);
             });
-            // var band = assign()
             return assign({}, action.band, {
                 timeslots: tss
             });

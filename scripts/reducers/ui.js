@@ -5,7 +5,8 @@ var UI = require('../actions/constants').UI;
 function ui(state, action) {
     if (!state) {
         state = {
-            alerts: []
+            alerts: [],
+            notifications: []
         };
     }
 
@@ -91,14 +92,48 @@ function ui(state, action) {
                 isSendingMessage: false
             });
             break;
+        case UI.FETCH_NOTIFICATIONS:
+            return assign({}, state, {
+                isFetchingNotifications: true
+            });
+            break;
+        case UI.FETCH_NOTIFICATIONS_COMPLETE:
+            return assign({}, state, {
+                isFetchingNotifications: false
+            });
+            break;
+        case UI.SET_NOTIFICATIONS:
+            return assign({}, state, {
+                notifications: action.notifications
+            });
+            break;
+        case UI.ADD_NOTIFICATION:
+            var notifs = state.notifications;
+            notifs.unshift(action.notification);
+            if (notifs.length > 9) {
+                notifs.pop();
+            }
+            return assign({}, state, {
+                notifications: notifs
+            });
+            break;
+        case UI.SET_NOTIFICATION_AS_READ:
+            var notifs = state.notifications.map(function(notif) {
+                if (notif.id === action.notification.id) {
+                    return action.notification;
+                }
+                return notif;
+            });
+            return assign({}, state, {
+                notifications: notifs
+            });
+            break;
         default: return state;
     }
     return state;
 }
 
 module.exports = ui;
-
-
 
 
 
