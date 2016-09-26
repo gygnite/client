@@ -1,7 +1,7 @@
 node_modules
 # public/css/main.css
 # public/js/bundle.js
-fonts
+# fonts
 .sass-cache
 npm-debug.log
 
