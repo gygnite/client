@@ -26,7 +26,7 @@ gulp.task('dev', function() {
         open: false,
         notify: false
 	});
-    runSequence('fonts', 'watch');
+    runSequence('fonts', 'sass', 'watch');
 });
 
 gulp.task('watch', function() {
@@ -53,7 +53,6 @@ gulp.task('fonts', function() {
         .pipe(gulp.dest('./public'))
         .on('end', function() {
             del(['public/styles', 'fonts']);
-            runSequence('sass');
         });
 });
 
@@ -102,7 +101,6 @@ gulp.task('production', function() {
         .on('error', function(err) {
             gutil.log("[production]", err.toString());
         })
-        .pipe(autoprefixer())
         .pipe(minifycss())
         .pipe(gulp.dest(CSS_BUILD_DIR));
 });
