@@ -7,6 +7,7 @@ const express = require('express'),
 
 
 app.use(logger('dev'));
+app.use(express.static(path.resolve(__dirname, 'fonts')));
 app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(function(req, res, next) {
     res.renderHTML = function(file) {
