@@ -52,7 +52,7 @@ gulp.task('fonts', function() {
         .pipe(gulp.dest(''))
         .pipe(gulp.dest('./public'))
         .on('end', function() {
-            // del(['public/styles', 'fonts']);
+            del(['public/styles', 'fonts']);
         });
 });
 
@@ -96,7 +96,7 @@ gulp.task('minifyjs', function() {
 gulp.task('production', function() {
     return gulp.src([CSS_SOURCE_DIR])
         .pipe(sass({
-            includePaths: ['production'].concat(neat)
+            includePaths: ['sass'].concat(neat)
         }))
         .on('error', function(err) {
             gutil.log("[production]", err.toString());
