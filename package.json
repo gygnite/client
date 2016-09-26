@@ -2,11 +2,12 @@
   "name": "gygnite_client",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "express.js",
   "scripts": {
     "test": "mocha",
     "dev": "pkill gulp && webpack --watch & gulp dev & nodemon",
-    "build-production": "webpack && gulp build-production && npm start"
+    "prod": "webpack && gulp build-production",
+    "start": "node express.js"
   },
   "repository": {
     "type": "git",
