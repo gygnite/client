@@ -49,7 +49,6 @@ var Index = React.createClass({
 
 
         var upcomingGigs = this.props.dashboard.timeslots.map(function(slot, i) {
-            console.log("slog!", slot);
             return (
                 <div key={"slot-"+i} className="upcoming-gig-item">
                     <div className="date-box">
@@ -64,6 +63,17 @@ var Index = React.createClass({
                 </div>
             )
         });
+
+        var recents = [];
+        console.log("this.props.ui.notifications",this.props.ui.notifications);
+        if (this.props.ui.notifications && this.props.ui.notifications.length > 0) {
+            recents = this.props.ui.notifications.map(function(notif, index) {
+                return (
+                    <li className="recent-item" key={index+'notif-li'}><p><span></span>{notif.text}</p></li>
+                )
+            });
+        }
+
 
         var userImageBoxStyle = {
             backgroundImage: 'url('+this.props.user.profile_image+')'
@@ -104,6 +114,12 @@ var Index = React.createClass({
                                     <i className="icon-calendar"></i>
                                 </Link>
                             </div>
+                        </div>
+                        <div className="recent-items-box">
+                            <h5 className="recent-header">Recent Items</h5>
+                            <ul className="recent-items-list">
+                                {recents}
+                            </ul>
                         </div>
                     </div>
                     <div className="dash-section-9 upcoming-gigs">

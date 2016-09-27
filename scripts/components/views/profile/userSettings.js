@@ -45,7 +45,7 @@ var UserSettings = React.createClass({
         this.refs.dropzone.open();
     },
     _handleLogout: function() {
-        // FIXME: handle logout!
+        this.props.logout();
     },
     render: function() {
         console.log("props: ", this.props);
