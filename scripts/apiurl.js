@@ -1,5 +1,5 @@
 module.exports = {
 
-    apiurl: 'http://api.gignite.com'
+    apiurl: 'http://api.gygnite.com'
 
 };
