@@ -4,12 +4,17 @@ var TextArea = require('../../global/textarea');
 var TagInput = require('../../global/taginput');
 var Geosuggest = require('react-geosuggest').default;
 var Joi = require('joi-browser');
+var Dropzone = require('react-dropzone');
+
 
 var NewVenue = React.createClass({
     getInitialState: function() {
         return {
             form: {},
-            errors: []
+            errors: [],
+            image: {
+                preview: null
+            },
         }
     },
     handleInput: function(field, value) {
@@ -41,7 +46,11 @@ var NewVenue = React.createClass({
         }
 
         if (errors.length < 1) {
-            this.props.createVenue(this.state.form);
+            var image = false;
+            if (this.state.image.size) {
+                image = this.state.image;
+            }
+            this.props.createVenue(this.state.form, image);
         } else {
             console.log("validation errors", errors);
             this.setState({
@@ -50,6 +59,16 @@ var NewVenue = React.createClass({
             window.scrollTo(0, 0);
         }
 
+    },
+    _onOpenClick: function () {
+        this.refs.dropzone.open();
+    },
+    _handleDrop: function (files) {
+        if (files[0]) {
+            this.setState({
+                image: files[0]
+            });
+        }
     },
     componentDidMount: function() {
         window.scrollTo(0, 0);
@@ -74,6 +93,10 @@ var NewVenue = React.createClass({
                 </div>
             );
         });
+        var imagePreviewStyle = {
+            backgroundImage: 'url('+this.state.image.preview+')'
+        };
+
         return (
             <div className="container">
                 <h1 className="headline">New Venue</h1>
@@ -95,6 +118,21 @@ var NewVenue = React.createClass({
                         for="bio"
                         label="Biography"
                         handleUserInput={this.handleInput} />
+
+                    <div className="upload-image-box">
+                        <div className="upload-image-button submit" onClick={this._onOpenClick}>
+                            <h4>Upload an Image!</h4>
+                        </div>
+
+
+                        <Dropzone
+                            className="create-upload-image"
+                            ref="dropzone"
+                            onDrop={this._handleDrop}
+                            multiple={false}>
+                            <div className="image-preview" style={imagePreviewStyle}></div>
+                        </Dropzone>
+                    </div>
 
                     <section className="new-band-section">
                         <h1>Details</h1>

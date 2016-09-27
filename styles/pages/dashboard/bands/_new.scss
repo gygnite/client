@@ -37,3 +37,48 @@
     margin-top: 50px;
     text-align: center;
 }
+
+
+
+.upload-image-box {
+    @include span-columns(12);
+    float: none;
+    position: relative;
+    height: 200px;
+    @include media($mobile) {
+        height: 300px;
+    };
+    .upload-image-button {
+        @include span-columns(3);
+        padding: 20px;
+        text-align: center;
+        top: 30%;
+        position: relative;
+        background-color: $main-blue;
+        color: white;
+        @include card-shadow;
+        font-size: 20px;
+        @include media($mobile) {
+            @include span-columns(12);
+            top: 0%;
+        };
+    }
+    .create-upload-image {
+        // float: left;
+        height: 200px;
+        width: 200px;
+        @include span-columns(6);
+        border-radius: 5px;
+        border: dashed 2px;
+        @include media($mobile) {
+            @include span-columns(12);
+        };
+    }
+    .image-preview {
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100%;
+        width: 100%;
+    }
+
+}
