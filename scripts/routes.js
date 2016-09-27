@@ -12,7 +12,9 @@ var Cache = require('lscache');
 var request = require('superagent');
 require('superagent-auth-bearer')(request);
 var io = require('socket.io-client');
-var ioConnection = io.connect(BASE_URL);
+var ioConnection = io.connect(BASE_URL, {
+    query: 'token='+Cache.get(ACTIONS.cache.AUTH_TOKEN)
+});
 
 var createStore = require('redux').createStore;
 var applyMiddleware = require('redux').applyMiddleware;
@@ -129,10 +131,7 @@ function AuthMiddleware(nextState, replace, callback) {
 
 
 function clearProfileStore(prevState) {
-    console.log("prevstate: ", prevState);
-    console.log("store state on exit: ", store.getState());
     store.dispatch(ACTIONS.profile.clearProfile());
-    console.log("store state after clear exit: ", store.getState());
 }
 
 
@@ -152,9 +151,9 @@ function validateStateBeforeBooking(nextState, replace) {
 
 
 function socketReceiver(store) {
-    ioConnection = io.connect(BASE_URL, {
-        query: 'token='+Cache.get(ACTIONS.cache.AUTH_TOKEN)
-    });
+    // ioConnection = io.connect(BASE_URL, {
+    //     query: 'token='+Cache.get(ACTIONS.cache.AUTH_TOKEN)
+    // });
     ioConnection.on('connection', function(socket) {
         socket.join(Cache.get(ACTIONS.cache.USER).id);
     });
@@ -168,14 +167,11 @@ function socketReceiver(store) {
 }
 
 function socketConnectionMiddleware(store) {
-    // console.log("middleware", store);
-    // console.log("ioConnection", ioConnection);
+
     return next => action => {
         var result = next(action);
-        // console.log("io please connect!", ioConnection);
-        // console.log("actiontype?", action.type, action);
+
         if (ioConnection && action.type) {
-            // console.log("messages!", store.getState().messages);
             emitter(ioConnection, action);
         }
         return result;
@@ -199,7 +195,6 @@ function emitter(io, action) {
             });
             break;
         case 'EMIT_NOTIFICATION':
-        console.log("fucking action ", action)
             io.emit('notification', {
                 type: action.notif_type,
                 text: action.notif_text,

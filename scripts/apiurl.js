@@ -1,5 +1,5 @@
 module.exports = {
 
-    apiurl: 'http://api.gygnite.com'
+    apiurl: 'http://gygnite.herokuapp.com'
 
 };
