@@ -4,6 +4,9 @@
     position: relative;
     min-width: 50%;
     max-width: 80%;
+    &.modal-inner {
+        @include outer-container;
+    }
     .headline {
         margin: 0;
         margin-bottom: 15px;
@@ -15,6 +18,15 @@
     .order {
         text-align: center;
         position: relative;
+        @include media($mobile) {
+            padding: 10px;
+            border-top: solid 1px lighten($gunmetal, 60%);
+            border-bottom: solid 1px lighten($gunmetal, 60%);
+            background-color: $main-green;
+            &:before, &:after {
+                display: none;
+            }
+        };
         &:before {
             content: '';
             position: absolute;
@@ -44,6 +56,8 @@
     .band-list {
         padding: 0;
         list-style: none;
+        height: auto;
+        display: inline-block;
         .band-list-item {
             padding: 10px;
             margin: 10px;
@@ -51,6 +65,20 @@
             cursor: pointer;
             border-radius: 2px;
             @include card-shadow;
+            @include media($mobile) {
+                @include span-columns(12);
+                margin: 0;
+                margin-bottom: 20px;
+                height: auto;
+                float: left;
+            };
+            @include media($tablet) {
+                @include span-columns(12);
+                margin: 0;
+                margin-bottom: 20px;
+                height: auto;
+                float: left;
+            };
             &:hover {
                 background-color: lighten($main-blue, 5%);
                 color: white;
@@ -62,6 +90,10 @@
                 border: solid 1px black;
                 height: 50px;
                 width: 50px;
+                position: relative;
+                @include media($mobile) {
+                    display: none;
+                };
                 img {
                     width: auto;
                     max-width: 150px;
@@ -73,9 +105,13 @@
                 @include span-columns(8);
                 width: 80%;
                 overflow: hidden;
+                height: auto;
                 .text {
                     padding: 15px;
                     white-space: nowrap;
+                    @include media($mobile) {
+                        white-space: normal;
+                    };
                 }
             }
         }
@@ -87,6 +123,9 @@
 
 .booking-page {
     background-image: url('../assets/shattered_textile.png');
+    top: 0;
+    position: absolute;
+    @include span-columns(12);
     .booking-checkout {
         @include outer-container;
         .title, .disclaimer {
@@ -100,8 +139,12 @@
             margin-top: 10px;
         }
         .booking-header {
-            border-bottom: solid 1px black;
+            border-bottom: solid 0px black;
             margin-bottom: 25px;
+            height: 150px;
+            @include media($mobile) {
+                height: 200px;
+            };
         }
     }
     .booking-details {

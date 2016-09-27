@@ -49,11 +49,18 @@ var Index = React.createClass({
 
 
         var upcomingGigs = this.props.dashboard.timeslots.map(function(slot, i) {
+            console.log("slog!", slot);
             return (
                 <div key={"slot-"+i} className="upcoming-gig-item">
-                    <h1>{slot.band.name}</h1>
-                    <h2>{slot.venue.name}</h2>
-                    <h3>{moment(slot.data.start_time).format('ddd, MMM Do')}</h3>
+                    <div className="date-box">
+                        <span><i className="icon-success"></i></span>
+                        <h1 className="day">{moment(slot.data.start_time).format('DD')}</h1>
+                        <h4 className="month">{moment(slot.data.start_time).format('MMMM')}</h4>
+                    </div>
+                    <div className="content-box">
+                        <h3 className="content-title"><span><i className="icon-mic"></i></span>{slot.band.name}</h3>
+                        <h3 className="content-title"><span><i className="icon-location"></i></span>{slot.venue.name}</h3>
+                    </div>
                 </div>
             )
         });
@@ -100,7 +107,12 @@ var Index = React.createClass({
                         </div>
                     </div>
                     <div className="dash-section-9 upcoming-gigs">
-                        <h1>Upcoming Gigs</h1>
+                        <div className="dash-section-search">
+                            <Link to="/search/venues">
+                                <h1>Find a venue to book!</h1>
+                            </Link>
+                        </div>
+                        <h1 className="dash-section-header">Upcoming Gigs</h1>
                         <ul className="upcoming-gigs-list">
                             {upcomingGigs}
                         </ul>

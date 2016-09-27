@@ -1,8 +1,34 @@
-
-
 .message-page {
     height: calc(100vh - #{$navbar-height});
     @include outer-container;
+    @include media($mobile) {
+        position: absolute;
+        overflow: hidden;
+    };
+    .inbox-list-mobile-menu-button {
+        display: none;
+        @include media($mobile) {
+            display: block;
+            position: absolute;
+            bottom: 75px;
+            right: 15px;
+            width: 50px;
+            height: 50px;
+            background: blue;
+            border-radius: 20em;
+            padding: 10px;
+            text-align: center;
+            z-index: 2000;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.35), 0 4px 8px rgba(0,0,0,0.32);
+        };
+        .icon-mail {
+            top: 3px;
+            color: $main-white;
+            position: relative;
+            font-size: 20px;
+        }
+    }
     .messages-main {
         height: 627px;
         width: 100%;
@@ -10,6 +36,21 @@
         .inbox-list {
             @include span-columns(3);
             height: 100%;
+            @include media($mobile) {
+                width: 0px;
+                transform: translateX(-300px);
+                position: absolute;
+                overflow: hidden;
+                margin: 0;
+                background-color: $main-white;
+                @include transition(all 350ms $swift-out);
+                z-index: 1000;
+                &.open {
+                    width: 100vw;
+                    transform: translateX(0px);
+                    @include transition(all 350ms $swift-out);
+                }
+            };
             .select-inbox-box {
                 height: 75px;
             }
@@ -17,11 +58,18 @@
                 padding: 22px;
                 text-align: center;
                 color: $gunmetal;
+                @include media($mobile) {
+                    display: none;
+                };
             }
         }
         .messages-window {
             @include span-columns(9);
             height: auto;
+            @include media($mobile) {
+                @include outer-container;
+                width: 100vw;
+            };
             .current-message-chain {
                 height: 75px;
                 overflow: hidden;
@@ -29,6 +77,9 @@
                 .message-chain-title {
                     width: 100%;
                     white-space: nowrap;
+                    @include media($mobile) {
+                        font-size: 12px;
+                    };
                     .title-image {
                         height: 40px;
                         width: 40px;
@@ -37,12 +88,18 @@
                         background-size: cover;
                         margin-right: 10px;
                         border: solid 1px grey;
+                        @include media($mobile) {
+                            display: none;
+                        };
                     }
                 }
             }
             .digest {
                 height: 450px;
                 box-shadow: 0 1px 3px rgba(0,0,0,0.32), 0 1px 2px rgba(0,0,0,0.44);
+                @include media($mobile){
+                    height: 350px;
+                };
             }
             .reply {
                 height: 100px;
@@ -52,6 +109,7 @@
                     @include filter(blur(3px));
                     @include transition(all 300ms $swift-out);
                 }
+
                 .textbox {
                     width: 100%;
                     height: 100%;
@@ -78,6 +136,14 @@
                     width: 100px;
                     color: $main-white;
                     @include transition(all 300ms $swift-out);
+                    @include media($mobile) {
+                        padding: 8px;
+                        margin: 0px;
+                        bottom: 0;
+                        top: inherit;
+                        height: 35%;
+                        width: 60px;
+                    };
                 }
                 .cover-sending {
                     height: 0px;
@@ -236,6 +302,9 @@
                 margin: 10px;
                 border-radius: 5px;
                 border: 0;
+                @include media($mobile) {
+                    width: 75%;
+                };
                 // box-shadow: 0 1px 3px rgba(0,0,0,0.32), 0 1px 2px rgba(0,0,0,0.44);
                 .message-content {
                     white-space: pre-wrap;

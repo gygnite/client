@@ -47,10 +47,11 @@
     @include span-columns(6);
     @include omega-reset(3);
     @include omega(2);
-    // @include media($mobile) {
-    //     @include span-columns(12);
-    //     margin-bottom: 30px;
-    // };
+    @include media($mobile) {
+        @include span-columns(12);
+        margin-bottom: 30px;
+    };
+    
 
 
     .content {

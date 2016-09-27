@@ -121,6 +121,12 @@ function mapDispatchToProps(dispatch) {
                     }
                 });
         },
+        logout: function() {
+            dispatch(ACTIONS.user.logout());
+            dispatch(ACTIONS.ui.createAlert('Successfully logged out.', 'success'));
+            Cache.flush();
+            browserHistory.replace('/');
+        }
     }
 }
 

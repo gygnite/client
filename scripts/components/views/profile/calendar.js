@@ -6,6 +6,8 @@ var Link = require('react-router').Link;
 var browserHistory = require('react-router').browserHistory;
 var Cache = require('lscache');
 var request = require('superagent');
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+
 
 var CalendarView = React.createClass({
     getInitialState: function() {
@@ -97,7 +99,13 @@ var CalendarView = React.createClass({
                         <h2>Events for {this.props.data.name}</h2>
                     </div>
 
-                    {timeslotComponent}
+                    <ReactCSSTransitionGroup
+                        transitionName="timeslot"
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={300}>
+                        {timeslotComponent}
+                    </ReactCSSTransitionGroup>
+
 
                 </div>
             </div>

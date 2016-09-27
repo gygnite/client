@@ -232,7 +232,17 @@ $transition: all cubic-bezier(.62,.28,.23,.99) $menu-speed;
     min-width: 20px;
     min-height: 20px;
     text-align: center;
+    @include media($mobile) {
+        right: 27px;
+        top: 12px;
+    };
+}
 
+.icon-alert {
+    @include media($mobile) {
+        right: 13px;
+        font-size: 25px;
+    };
 }
 
 
@@ -278,7 +288,7 @@ $transition: all cubic-bezier(.62,.28,.23,.99) $menu-speed;
         }
         &.show {
             @include transition(all 250ms $swift-out);
-            transform: translateY(-85px);
+            transform: translateY(-60px);
             .icon-secondary-menu {
                 @include transition(all 250ms $swift-out);
                 transform: rotate(-540deg)

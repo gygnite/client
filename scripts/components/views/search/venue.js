@@ -31,7 +31,11 @@ var VenueSearch = React.createClass({
         }
     },
     _onMapMove: function(mapEvent) {
-        console.log("mapEvent", mapEvent);
+        if (mapEvent.bounds.se.lng - mapEvent.bounds.nw.lng < 0.01) {
+            //handle lack of map on mobile
+            mapEvent.bounds.se.lng += 0.1;
+            mapEvent.bounds.nw.lng -= 0.1;
+        }
         Cache.set('venue_search', mapEvent.center);
         this.props.fetchVenues(mapEvent.bounds);
     },

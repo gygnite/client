@@ -32,7 +32,8 @@ module.exports = {
     },
     USER: {
         SET_USER: 'SET_USER',
-        CLEAR_USER: 'CLEAR_USER'
+        CLEAR_USER: 'CLEAR_USER',
+        LOGOUT_USER: 'LOGOUT_USER'
     },
     CACHE: {
         AUTH_TOKEN: 'auth-token',

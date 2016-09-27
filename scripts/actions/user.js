@@ -16,3 +16,9 @@ exports.clearUser = function () {
         user: {}
     }
 };
+
+exports.logout = function() {
+    return {
+        type: USER.LOGOUT_USER
+    }
+}

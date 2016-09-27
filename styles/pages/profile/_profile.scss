@@ -2,28 +2,124 @@
     @include outer-container;
     position: relative;
     margin-top: 20px;
+    @include media($mobile) {
+        // @include ;
+        margin-top: 0;
+        max-width: 100vw;
+    };
+    @include media($tablet) {
+        // @include ;
+        margin-top: 0;
+        max-width: 100vw;
+    };
     .header-box {
         @include span-columns(12);
         height: 200px;
+        position: relative;
+        @include media($mobile) {
+            @include span-columns(12);
+            margin: 0;
+        };
+        @include media($tablet) {
+            @include span-columns(12);
+            margin: 0;
+        };
+        .view-calendar-action {
+            @include media($mobile) {
+                color: $main-white;
+                bottom: 0;
+                top: inherit;
+                text-align: center;
+            };
+            @include media($tablet) {
+                color: $main-white;
+                bottom: 0;
+                top: inherit;
+                text-align: center;
+            };
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            text-align: right;
+            font-size: 30px;
+            width: 100%;
+        }
         .img {
             @include span-columns(3);
             height: 100%;
             background: rgb(134, 134, 134);
             border-radius: 10em;
             width: 200px;
-            background-size: 250px, cover;
+            background-size: 300px, cover;
             background-repeat: no-repeat;
             background-position: center;
+            @include media($mobile) {
+                @include span-columns(12);
+                border-radius: 0px;
+                margin: 0;
+                background-size: cover;
+                &:after {
+                    content: '\A';
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top:0; left:0;
+                    background: rgba(52, 52, 52, 0.82);
+                    opacity: 1;
+                    transition: all 1s;
+                    -webkit-transition: all 1s;
+                }
+            };
+            @include media($tablet) {
+                @include span-columns(12);
+                border-radius: 0px;
+                margin: 0;
+                background-size: cover;
+                &:after {
+                    content: '\A';
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top:0; left:0;
+                    background: rgba(52, 52, 52, 0.82);
+                    opacity: 1;
+                    transition: all 1s;
+                    -webkit-transition: all 1s;
+                }
+            };
         }
         .headline {
-            @include span-columns(9);
+            @include span-columns(8);
             position: relative;
             height: 100%;
             text-align: left;
+            @include media($mobile) {
+                @include span-columns(12);
+                margin: 0;
+                position: absolute;
+                color: $main-white;
+                text-align: center;
+            };
+            @include media($tablet) {
+                @include span-columns(12);
+                margin: 0;
+                top: 40px;
+                position: absolute;
+                color: $main-white;
+                text-align: center;
+            };
             .headline-text {
                 margin-top: 20px;
                 font-size: 44px;
                 margin-left: 50px;
+                @include media($mobile) {
+                    margin: 0;
+                    font-size: 34px;
+                    margin-top: 30px;
+                };
+                @include media($tablet) {
+                    margin: 0;
+                };
             }
         }
 
@@ -31,17 +127,37 @@
     .main-box {
         @include span-columns(12);
         margin-top: 50px;
+        @include media($mobile) {
+            @include span-columns(12);
+            margin: 0;
+            height: auto;
+        };
+        .details-box, .links-box {
+
+        }
         .details-box {
             @include span-columns(3);
             .details-list {
                 list-style: none;
                 padding: 0;
                 margin: 0;
+                display: inline-block;
+                .detail {
+                    margin: 5px;
+                }
             }
+            @include media($mobile) {
+                @include span-columns(12);
+                border-radius: 0px;
+            };
         }
         .bio-box {
             @include span-columns(9);
-            // @include outer-container;
+            @include media($mobile) {
+                @include outer-container;
+            };
+            padding-left: 5%;
+            padding-right: 5%;
             p {
                 line-height: 1.5;
                 white-space: pre-wrap;
@@ -52,6 +168,7 @@
     .links-box {
         @include span-columns(12);
         margin-top: 30px;
+        margin-bottom: 30px;
         .link-list {
             list-style: none;
             padding: 0;

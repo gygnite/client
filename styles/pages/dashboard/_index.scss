@@ -3,10 +3,14 @@ $blue: darken(mix($teal, $main-blue, 80%), 35%);
 .dashboard {
     section {
         height: 600px;
-        .dash-section {
-            .dash-section-header {
-                position: absolute;
-            }
+
+        .dash-section-header {
+            // position: absolute;
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            font-size: 2em;
+            border-bottom: solid 1px;
         }
         .dash-section-3 {
             @include span-columns(3);
@@ -87,10 +91,24 @@ $blue: darken(mix($teal, $main-blue, 80%), 35%);
             @include span-columns(9);
             height: 100%;
             float: left;
+            overflow: scroll;
+            @include media($mobile){
+                @include span-columns(12);
+                @include outer-container;
+            };
             &.upcoming-gigs {
                 @include media($tablet) {
                     @include span-columns(8);
                 };
+            }
+            .dash-section-search{
+                // @include span-columns(12);
+                height: 50px;
+                padding: 10px;
+                text-align: center;
+                border-bottom: solid 0px;
+                background: $main-blue;
+                @include card-shadow;
             }
         }
         .dash-section-12 {
@@ -244,4 +262,78 @@ $blue: darken(mix($teal, $main-blue, 80%), 35%);
     opacity: 0.01;
     transform: translateY(-20px);
     @include transition(all 150ms $swift-out);
+}
+
+
+.upcoming-gigs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    @include outer-container;
+    .upcoming-gig-item {
+        @include span-columns(12);
+        border-radius: 3px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.32), 0 1px 2px rgba(0,0,0,0.44);
+        height: 85%;
+        padding: 7px;
+        position: relative;
+        @include transition(all 250ms $swift-out);
+        @include media($mobile) {
+            @include span-columns(12);
+        };
+        @include media($tablet) {
+            @include span-columns(12);
+        };
+        .date-box {
+            float: left;
+            border-radius: 2px;
+            @include span-columns(3);
+            position: relative;
+            padding: 10px;
+            .icon-success {
+                position: absolute;
+                top: 28%;
+                left: 0px;
+                font-size: 30px;
+                color: $main-green;
+            }
+            .month, .day {
+                text-align: left;
+                margin-left: 50px;
+            }
+            .day {
+                font-size: 34px;
+            }
+            @include media($mobile) {
+                float: left;
+                border-radius: 2px;
+                @include span-columns(4);
+                position: relative;
+                padding: 10px;
+                .icon-success {
+                    display: none;
+                }
+                .month,.day {
+                    text-align: center;
+                    margin-left: 0px;
+                }
+                .day {
+                    font-size: 26px;
+                }
+            };
+
+        }
+        .content-box {
+            padding: 10px;
+            @include span-columns(9);
+            @include media($mobile) {
+                @include span-columns(8);
+                padding: 5px;
+            };
+            .content-title {
+                margin: 5px;
+                font-size: 20px;
+            }
+        }
+    }
 }
