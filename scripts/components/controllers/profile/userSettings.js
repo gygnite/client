@@ -109,7 +109,12 @@ function mapDispatchToProps(dispatch) {
                 dispatch(ACTIONS.ui.fetchBandsComplete());
                 dispatch(ACTIONS.ui.fetchVenuesComplete());
             });
-        }
+        },
+        logout: function() {
+            dispatch(ACTIONS.user.logout());
+            Cache.flush();
+            browserHistory.replace('/');    
+        },
     }
 }
 

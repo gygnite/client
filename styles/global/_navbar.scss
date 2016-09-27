@@ -45,10 +45,9 @@ $transition: all cubic-bezier(.62,.28,.23,.99) $menu-speed;
         height: 100%;
         float: left;
         .icon-menu {
-            padding: 15px;
+            padding: 16px;
             font-size: 30px;
-            top: 13px;
-            position: relative;
+            position: absolute;
             z-index: 2500;
             cursor: pointer;
             &:before {
@@ -73,6 +72,27 @@ $transition: all cubic-bezier(.62,.28,.23,.99) $menu-speed;
     @include media($mobile) {
         display: none;
     };
+    &.no-user {
+        @include media($mobile) {
+            display: block;
+            width: 100%;
+            background-color: $main-green;
+            position: absolute;
+            top: 65px;
+            @include transition(all 350ms $swift-out);
+            .navbar-list-item {
+                @include span-columns(6);
+                text-align: center;
+                padding: 10px;
+                margin: 0px;
+                &:nth-child(1) {
+                    // border-right: solid 1px white;
+                    margin-right: 0;
+                }
+            }
+
+        };
+    }
 }
 .navbar-list-mobile {
     @include media($tablet) {
@@ -123,18 +143,20 @@ $transition: all cubic-bezier(.62,.28,.23,.99) $menu-speed;
         border-right: solid 1px $main-white;
     }
     .nav-icon {
-        font-size: 20px;
+        font-size: 25px;
         margin: 7px;
         margin-right: 2px;
         margin-left: 2px;
+        padding: 3px;
         position: relative;
-        top: 4px;
         cursor: pointer;
     }
 }
 &.no-user {
+    margin: 0;
     .navbar-link {
         top: 0;
+        cursor: pointer;
     }
     .navbar-list-item {
         margin: 18.6px;
