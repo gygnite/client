@@ -143,6 +143,18 @@
       "css": "secondary-menu",
       "code": 59409,
       "src": "entypo"
+    },
+    {
+      "uid": "fdfbd1fcbd4cb229716a810801a5f207",
+      "css": "angle-right",
+      "code": 61697,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "bf882b30900da12fca090d9796bc3030",
+      "css": "mail",
+      "code": 59410,
+      "src": "fontawesome"
     }
   ]
 }

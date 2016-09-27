@@ -1,7 +1,7 @@
 .profile-calendar {
     @include span-columns(12);
-    margin-bottom: 50px;
-
+    // padding: 10px;
+    margin-top: 50px;
 }
 
 .Cal__Header__root {
@@ -16,12 +16,14 @@
     }
     .Cal__Header__wrapper {
         text-align: center;
+
     }
 }
 .calendar {
     @include span-columns(6);
     margin: 0;
-    height:450px;
+    height: 420px;
+    width: 100%;
     @include media($mobile) {
         display: none;
     };
@@ -30,14 +32,19 @@
     @include span-columns(6);
     padding: 10px;
     height:580px;
-    background-color: rgb(127, 95, 251);
+    background-color: $gunmetal;
+    background-image: url('../assets/edge_textile.png');
     @include media($mobile) {
         @include span-columns(12);
+        height:500px;
     };
     .input-group {
         @include media($desktop) {
             display: none;
         };
+        input {
+            color: $main-white;
+        }
     }
     .bar:before, .bar:after {
         background: white;
@@ -71,6 +78,10 @@
         @include media($mobile) {
             @include span-columns(12);
             height: 100%;
+        };
+        @include media($mobile) {
+            margin: 0;
+            max-height: 50%;
         };
         // .slot {
         //     height: 100px;
@@ -148,7 +159,7 @@
                 background: $main-white;
                 border-radius: 2px;
                 &.blank {
-                    background: $teal;
+                    background: lighten($main-green, 10%);
                 }
                 &.unavailable {
                     background: lighten($crimson, 15%);
@@ -164,4 +175,28 @@
             // }
         }
     }
+}
+
+
+
+.timeslot-enter {
+    opacity: 0.01;
+    transform: translateY(30px);
+}
+
+.timeslot-enter.timeslot-enter-active {
+    opacity: 1;
+    transform: translateY(0px);
+    @include transition(all 150ms $swift-out);
+}
+
+.timeslot-leave {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.timeslot-leave.timeslot-leave-active {
+    opacity: 0.01;
+    transform: translateY(-30px);
+    @include transition(all 150ms $swift-out);
 }

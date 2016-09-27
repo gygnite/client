@@ -10,6 +10,7 @@ var Messages = React.createClass({
         return {
             showInactiveInboxList: false,
             confirmNavigateBox: false,
+            showMobileInboxList: false,
             activeInbox: {},
             activeGroup: {}
         }
@@ -31,6 +32,7 @@ var Messages = React.createClass({
         this.refs.replybox.value = '';
         this._closeConfirmNavigation();
         this.props.setActiveMessageGroup(slug);
+        this._closeMobileInboxList();
     },
     _markGroupAsRead: function(group) {
         this.props.markGroupAsRead(group);
@@ -57,6 +59,16 @@ var Messages = React.createClass({
     _closeConfirmNavigation: function() {
         this.setState({
             confirmNavigateBox: false
+        });
+    },
+    _toggleMobileInboxList: function() {
+        this.setState({
+            showMobileInboxList: !this.state.showMobileInboxList
+        });
+    },
+    _closeMobileInboxList: function() {
+        this.setState({
+            showMobileInboxList: false
         });
     },
     render: function() {
@@ -240,13 +252,20 @@ var Messages = React.createClass({
         }
 
 
+        var mobileMenuState = cx({
+            ' open': this.state.showMobileInboxList
+        });
+
+
 
         return (
             <div className="message-page">
+                <div onClick={this._toggleMobileInboxList} className="inbox-list-mobile-menu-button">
+                    <i className="icon-mail"></i>
+                </div>
                 <div className="messages-main">
-                    <div className="inbox-list">
+                    <div className={"inbox-list"+mobileMenuState}>
                         <h2 className="inbox-list-title">Inbox</h2>
-
                         <div className="messages-group">
                             <div className="select-inbox-box" onClick={this._toggleCurrentActiveInboxDropdown}>
                                 <div className="current-active">

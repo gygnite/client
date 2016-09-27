@@ -161,7 +161,7 @@ var Navbar = React.createClass({
                                 <Link to="/dashboard/settings" activeClassName="active">
                                     <li className="dropdown-link">Settings</li>
                                 </Link>
-                                <li className="dropdown-link">Logout</li>
+                                <li className="dropdown-link" onClick={this.props.logout}>Logout</li>
                             </ul>
                         </div>
                     </li>

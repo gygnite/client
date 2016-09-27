@@ -11,7 +11,7 @@ var search      = require('./search');
 var messages    = require('./messages');
 var bookings     = require('./bookings');
 
-module.exports = combineReducers({
+var appReducer = combineReducers({
     user: user,
     ui: ui,
     dashboard: dashboard,
@@ -22,3 +22,10 @@ module.exports = combineReducers({
     messages: messages,
     bookings: bookings
 });
+
+module.exports = function(state, action) {
+    if (action.type === 'LOGOUT_USER') {
+        state = undefined;
+    }
+    return appReducer(state, action);
+}

@@ -23,6 +23,8 @@ $fall-speed: 350ms;
             background-color: $main-white;
             box-shadow: 0 2px 3px 0 rgba(48, 48, 48, 1);
             border-radius: 3px;
+            max-height: 90vh;
+            overflow: scroll;
             @include transition-property(all);
             @include transition-duration($fall-speed);
             @include transition-timing-function($swift-out);

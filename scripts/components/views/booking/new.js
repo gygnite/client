@@ -18,6 +18,7 @@ var NewBooking = React.createClass({
     },
     componentWillMount: function() {
         this.props.fetchBands();
+        window.scrollTo(0,0);
     },
     _closeModal: function() {
         this.setState({
