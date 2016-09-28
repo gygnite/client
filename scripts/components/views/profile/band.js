@@ -10,7 +10,6 @@ var BandProfile = React.createClass({
         window.scrollTo(0,0);
     },
     render: function() {
-        console.log("this.props.profile: ", this.props.profile);
         //handle graceful degredation for links
         var urls = [];
         for (var url in this.props.profile) {

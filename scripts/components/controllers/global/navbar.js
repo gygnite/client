@@ -31,7 +31,6 @@ function mapDispatchToProps(dispatch) {
             request.get(BASE_URL + '/auth')
                 .authBearer(token)
                 .end(function(err, res) {
-                    console.log("err?", err);
                     if (!err && res.body) {
                         dispatch(ACTIONS.user.setUser(
                             assign({}, res.body.user, {
@@ -53,9 +52,7 @@ function mapDispatchToProps(dispatch) {
                     //else set user
                     if (err || res.status === 401) {
                         //show err state
-                        console.log("invalid user");
                         console.error(res.body);
-                        console.log("here?? ")
                         dispatch(ACTIONS.ui.createAlert('Login failed', 'error'));
                         dispatch(ACTIONS.user.clearUser());
                         Cache.remove(ACTIONS.cache.AUTH_TOKEN);
@@ -96,13 +93,11 @@ function mapDispatchToProps(dispatch) {
                 });
         },
         fetchNotifications: function() {
-            console.log("fetching!");
             dispatch(ACTIONS.ui.fetchNotifications());
             request.get(BASE_URL+'/api/admins/notifications')
                 .authBearer(Cache.get(ACTIONS.cache.AUTH_TOKEN))
                 .end(function(err, res) {
                     if (!err && !res.body.error) {
-                        console.log("notifs!", res.body.notifications);
                         dispatch(ACTIONS.ui.setNotifications(res.body.notifications));
                     }
                     dispatch(ACTIONS.ui.fetchNotificationsComplete());

@@ -151,9 +151,7 @@ function validateStateBeforeBooking(nextState, replace) {
 
 
 function socketReceiver(store) {
-    // ioConnection = io.connect(BASE_URL, {
-    //     query: 'token='+Cache.get(ACTIONS.cache.AUTH_TOKEN)
-    // });
+
     ioConnection.on('connection', function(socket) {
         socket.join(Cache.get(ACTIONS.cache.USER).id);
     });
@@ -167,10 +165,8 @@ function socketReceiver(store) {
 }
 
 function socketConnectionMiddleware(store) {
-
     return next => action => {
         var result = next(action);
-
         if (ioConnection && action.type) {
             emitter(ioConnection, action);
         }

@@ -25,7 +25,6 @@ function mapDispatchToProps(dispatch) {
             request.get(BASE_URL+'/search/venues?'+url)
                 .end(function(err, res) {
                     dispatch(ACTIONS.search.setResults(res.body.venues));
-                    console.log("err, res,", err,res);
                 });
         },
         setActiveHover: function(id) {

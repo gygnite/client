@@ -8,9 +8,6 @@ var SingleEntity = React.createClass({
         this.props.fetchAllBookings(this.props.params.entity_slug);
     },
     render: function() {
-        // console.log("props; ", this.props);
-        console.log("bookings", this.props.bookings);
-
         var pending = [];
         var confirmed = [];
         var rejected = [];

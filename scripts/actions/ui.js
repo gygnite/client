@@ -55,7 +55,6 @@ exports.removeAlert = function () {
 };
 
 exports.fetchBands = function () {
-    console.log("fetching bands");
     return {
         type: UI.FETCH_BANDS
     }

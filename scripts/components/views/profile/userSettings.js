@@ -31,7 +31,6 @@ var UserSettings = React.createClass({
     _doUpdateUser: function(user) {
         this.wait = setTimeout(function() {
             //props update user
-            console.log("updating user", user);
             this.props.updateUser(user);
         }.bind(this), 400);
     },
@@ -48,7 +47,6 @@ var UserSettings = React.createClass({
         this.props.logout();
     },
     render: function() {
-        console.log("props: ", this.props);
         var image = null;
         if (this.state.file && this.state.file.preview) {
             image = this.state.file.preview;
@@ -227,7 +225,6 @@ var UpdateField = React.createClass({
 
 var AdminAsset = React.createClass({
     render: function() {
-        console.log("props on admin asset", this.props);
         var image = this.props.asset.profile_image;
         var imageStyle = {
             backgroundImage: 'url('+image+')'

@@ -13,7 +13,6 @@ var BookingSingleDate = React.createClass({
         this.props.clearBookings();
     },
     _setAccepted: function(vid, bid, date) {
-        console.log("setting?", vid, bid);
         this.props.setAccepted(vid, bid, date);
     },
     _setRejected: function(vid, bid, date) {

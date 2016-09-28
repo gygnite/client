@@ -17,9 +17,6 @@ var BandSearch = React.createClass({
                 this._addGenre(g);
             }.bind(this));
         }
-        // } else if (this.props.search.query || this.props.search.genres.length > 0) {
-        //     this.props.fetchBands(this.props.search.query, this.props.search.genres);
-        // }
     },
 
     getInitialState: function() {

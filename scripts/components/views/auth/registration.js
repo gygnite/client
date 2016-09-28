@@ -12,10 +12,6 @@ var Registration = React.createClass({
 
         this.props.fetchRegistration(code); //call action to show spinner
 
-        request.get('http://api.gygnite.dev/data/1')
-            .end(function(err, res) {
-                console.log("response: ", err, res);
-            });
     },
 
     render: function() {

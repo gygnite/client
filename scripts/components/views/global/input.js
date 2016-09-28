@@ -30,7 +30,6 @@ var Input = React.createClass({
         }
     },
     handleChange: function(e) {
-        // console.log("changing", this.refs[this.props.for].value);
         var value = this.refs[this.props.for].value;
         this.setState({
             value: value,

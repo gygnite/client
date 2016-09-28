@@ -52,7 +52,6 @@ var Navbar = React.createClass({
         }
     },
     render: function() {
-        // console.log("props!", this.props.ui);
         var notifsView = null;
         if (this.props.ui.notifications.length > 0) {
             notifsView = this.props.ui.notifications.map(function(notif, index) {
@@ -68,7 +67,6 @@ var Navbar = React.createClass({
                     );
                 }
                 var shouldSend = false;
-                // console.log("should send", notif)
                 if (!notif.seen && notif.id) {
                     shouldSend = true;
                 }
@@ -309,9 +307,7 @@ var Login = React.createClass({
             if (err) {
                 //don't send
                 console.error('Invalid input');
-                // FIXME:20 Handle errors with form input component
             } else {
-                // console.log("props: ", this.props)
                 this.props.login(this.state.form);
             }
         }.bind(this));
@@ -371,17 +367,13 @@ var Signup = React.createClass({
         var state = this.state;
         state.form[field] = value;
         this.setState(state);
-        console.log("state of form", this.state.form)
     },
     _signupUser: function() {
-        // console.log("signing up", this.state.form);
         Joi.validate(this.state.form, signupSchema, function(err, success) {
             if (err) {
                 //don't send
                 console.error('invalid input');
-                // FIXME:30 Handle errors with form input component
             } else {
-                // console.log("props: ", this.props)
                 this.props.signup(this.state.form);
             }
         }.bind(this));
@@ -469,7 +461,6 @@ var MenuList = React.createClass({
         }
     },
     componentWillReceiveProps: function(nextProps) {
-        // console.log("nextProps", nextProps);
         if (nextProps.open) {
             this.setState({
                 enter: true,

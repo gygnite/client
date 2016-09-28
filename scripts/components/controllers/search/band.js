@@ -36,7 +36,6 @@ function mapDispatchToProps(dispatch) {
 
             request.get(BASE_URL+'/search/bands?'+url)
                 .end(function(err, res) {
-                    console.log("RESPONSE: ", res);
                     dispatch(ACTIONS.search.setResults(res.body.bands));
                     dispatch(ACTIONS.ui.fetchBandsComplete());
                 });

@@ -48,7 +48,6 @@ function ui(state, action) {
             break;
         case UI.REMOVE_ALERT:
             state.alerts.shift();
-            // console.log("state of alerts: ", state.alerts);
             return assign({}, state, {
                 alerts:  state.alerts
             });
@@ -139,7 +138,6 @@ module.exports = ui;
 
 
 function singleAlert(state, action) {
-    // console.log("alert state: ", state, action)
     if (!state) {
         state = {
             message: '',

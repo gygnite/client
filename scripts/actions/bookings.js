@@ -4,7 +4,6 @@ var BOOKINGS = require('./constants').BOOKINGS;
 
 
 exports.setCurrentBookings = function (bookings) {
-    console.log("bookings action", bookings);
     return {
         type: BOOKINGS.SET_CURRENT_BOOKINGS,
         bookings: bookings
