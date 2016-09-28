@@ -83,11 +83,11 @@ function mapDispatchToProps(dispatch) {
 
             //emit notification function
             function sendNotification(text, slug_to_notify) {
-                notify('booking', text, slug_to_notify)
+                notify('message', text, slug_to_notify)
                 .then(function(res) {
                     res.data.notifs.forEach(function(notif){
                         dispatch(ACTIONS.ui.emitNotification({
-                            type: 'booking',
+                            type: 'message',
                             text: text,
                             slug: slug_to_notify,
                             id: notif.id
