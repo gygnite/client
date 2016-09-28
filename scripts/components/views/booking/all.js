@@ -32,7 +32,7 @@ var AllBookings = React.createClass({
             }.bind(this));
         }.bind(this));
 
-        if (venueTimeslots.length === 0) {
+        if (venueTimeslots.length === 0 || venueSlots.length === 0) {
             venueSlots = (
                 <h1>You have no pending bookings!</h1>
             )

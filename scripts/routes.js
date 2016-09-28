@@ -21,10 +21,10 @@ var Provider = require('react-redux').Provider;
 var reducers = require('./reducers/main');
 
 var store = createStore(reducers, {},
-    compose(
+    // compose(
         applyMiddleware(socketConnectionMiddleware),
-        window.devToolsExtension && window.devToolsExtension()
-    )
+        // window.devToolsExtension && window.devToolsExtension()
+    // )
 );
 
 socketReceiver(store);
