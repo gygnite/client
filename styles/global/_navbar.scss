@@ -270,8 +270,8 @@ $transition: all cubic-bezier(.62,.28,.23,.99) $menu-speed;
     min-height: 20px;
     text-align: center;
     @include media($mobile) {
-        right: 25px;
-        top: 8px;
+        right: 16px;
+        top: -8px;
     };
 }
 
