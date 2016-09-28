@@ -3,7 +3,6 @@ $blue: darken(mix($teal, $main-blue, 80%), 35%);
 .dashboard {
     section {
         height: 600px;
-
         .dash-section-header {
             // position: absolute;
             text-align: center;
@@ -22,6 +21,36 @@ $blue: darken(mix($teal, $main-blue, 80%), 35%);
             @include media($mobile) {
                 @include span-columns(12);
             };
+            .recent-items-box {
+            	height: 320px;
+                position: relative;
+                margin: 8px;
+            	margin-top: 75px;
+            	opacity: 1;
+            	color: white;
+            	background-color: transparentize($gunmetal, .4);
+            	border-radius: 3px;
+                overflow: scroll;
+            	.recent-header {
+            		// position: a
+            		text-align: center;
+            		padding: 20px;
+            		font-size: 20px;
+            	}
+            	.recent-items-list {
+            		padding: 0;
+            		list-style: none;
+            		margin: 0;
+            		display: inline-block;
+            		padding-left: 10px;
+            		.recent-item {
+            			border-left: solid 3px $crimson;
+            			padding-left: 20px;
+            			margin-top: 10px;
+            		}
+            	}
+            }
+
             .user-image {
                 padding: 30px;
                 height: 150px;
@@ -123,7 +152,6 @@ $blue: darken(mix($teal, $main-blue, 80%), 35%);
                 position: relative;
                 background-size: cover;
                 color: $main-white;
-                // overflow: hidden;
                 &:before {
                     content: '';
                     position: absolute;
@@ -142,22 +170,18 @@ $blue: darken(mix($teal, $main-blue, 80%), 35%);
                 width: 95vw;
                 padding: 20px;
                 list-style: none;
-                // float: left;
                 @include outer-container(100%);
-                // @include row;
             .asset-card {
                 @include media($mobile) {
                     @include span-columns(12);
                     @include omega(1n);
                 };
                 @include media($tablet) {
-                    // @include omega-reset(1n);
                     @include span-columns(6);
                     @include omega(2n);
                 };
                 @include media($desktop) {
                     @include span-columns(4);
-                    // @include omega-reset(2n);
                     @include omega(3n);
                 };
                 border-radius: 3px;
@@ -175,9 +199,9 @@ $blue: darken(mix($teal, $main-blue, 80%), 35%);
                     height: 50%;
                     background-color: lighten($main-white, 30%);
                     &.img {
-                        background-color: $main-blue;
-                        background-position: center;
-                        background-size: 370px, cover;
+                        background-color: lighten($gunmetal, 60%);
+                        background-position: left;
+                        background-size: cover;
                         background-repeat: no-repeat;
                     }
                     &.content {
@@ -279,12 +303,16 @@ $blue: darken(mix($teal, $main-blue, 80%), 35%);
         height: 85%;
         padding: 7px;
         position: relative;
+        margin-left: 5%;
+        width: 90%;
         @include transition(all 250ms $swift-out);
         @include media($mobile) {
             @include span-columns(12);
+            margin-left: 0%;
         };
         @include media($tablet) {
-            @include span-columns(12);
+            margin-left: 2%;
+            width: 97%;
         };
         .date-box {
             float: left;

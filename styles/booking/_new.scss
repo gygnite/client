@@ -79,6 +79,11 @@
                 height: auto;
                 float: left;
             };
+            @include media($desktop) {
+                @include span-columns(12);
+                
+
+            };
             &:hover {
                 background-color: lighten($main-blue, 5%);
                 color: white;

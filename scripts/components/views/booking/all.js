@@ -32,7 +32,7 @@ var AllBookings = React.createClass({
             }.bind(this));
         }.bind(this));
 
-        if (venueTimeslots.length === 0) {
+        if (venueTimeslots.length === 0 || venueSlots.length === 0) {
             venueSlots = (
                 <h1>You have no pending bookings!</h1>
             )
@@ -40,7 +40,7 @@ var AllBookings = React.createClass({
 
         return (
             <div className="bookings-view container">
-                <h1>Pending Bookings</h1>
+                <h1 className="header">Pending Bookings</h1>
                     <ReactCSSTransitionGroup
                         transitionName="bookingstatus"
                         transitionEnterTimeout={500}

@@ -47,7 +47,9 @@ function dashboard(state, action) {
                     console.log("!(item.data.band_id === action.band_id && item.data.venue_id === action.venue_id)", item.data.band_id, action.band_id, item.data.venue_id, action.venue_id);
                     return !(item.data.band_id === action.band_id && item.data.venue_id === action.venue_id);
                 });
-                pending.bands[i].slots = pendingBandSlots;
+                pending.bands[i] = assign({}, pending.bands[i], {
+                    slots: pendingBandSlots
+                });
             }
 
             for (var i = 0; i < state.pending.venues.length; i++) {
@@ -55,11 +57,11 @@ function dashboard(state, action) {
                     console.log("!(item.data.band_id === action.band_id && item.data.venue_id === action.venue_id)", item.data.band_id, action.band_id, item.data.venue_id, action.venue_id);
                     return !(item.data.band_id === action.band_id && item.data.venue_id === action.venue_id);
                 });
-                pending.venues[i].slots = pendingVenueSlots;
+                pending.venues[i] = assign({}, pending.venues[i], {
+                    slots: pendingVenueSlots
+                });
             }
 
-            pending.bands = pendingBandSlots;
-            pending.venues = pendingVenueSlots;
 
             return assign({}, state, {
                 pending: pending

@@ -165,14 +165,24 @@
                     background: lighten($crimson, 15%);
                     color: $gunmetal;
                 }
+
             }
-            // .text {
-            //     @include span-columns(9);
-            //     height: 50px;
-            // }
-            // .icon {
-            //     @include span-columns(2);
-            // }
+            .timeslot-inner.band {
+                padding-left: 40px;
+                position: relative;
+                .icon-success {
+                    position: absolute;
+                    top: 20px;
+                    left: 2px;
+                    padding: 5px;
+                    color: $main-green;
+                    font-size: 20px;
+                }
+            }
+        }
+        .timeslot-inner.blank.band {
+            color: white;
+            text-align: center;
         }
     }
 }

@@ -51,6 +51,9 @@
 
 .map-components-box {
     margin-top: 10px;
+    max-width: 100vw;
+    min-height: 100vh;
+
     @include span-columns(4);
     @include media($mobile) {
         @include span-columns(11);
@@ -100,20 +103,79 @@
     }
 }
 
+
+.map-search-box {
+    position: relative;
+
+    .icon-search {
+        font-size: 20px;
+        position: absolute;
+        top: 25px;
+        left: 5px;
+    }
+    input {
+        margin-left: 15px;
+        border-bottom: 0px;
+    }
+    .geosuggest__suggests-wrapper {
+        width: calc(100vw - 55px);
+        left: 0;
+        position: absolute;
+        max-width: 100%;
+        .geosuggest-item {
+            white-space: pre-wrap;
+            width: 100%;
+        }
+    }
+    @include media($tablet) {
+        .geosuggest-item {
+            white-space: pre-wrap;
+            max-width: 85%;
+        }
+    };
+    @include media($mobile) {
+        input {
+            margin-left: 15px;
+            max-width: calc(100vw - 55px);
+        }
+        .geosuggest__suggests-wrapper {
+            width: calc(100vw - 55px);
+        }
+    };
+}
+
+
+$border-color: lighten($gunmetal, 60%);
+
+.map-list-box {
+    overflow: scroll;
+    max-height: calc(100vh - 70px - 65px);
+    border-top: solid 1px $border-color;
+}
+
 .marker-list {
     padding: 0;
     list-style: none;
+
     .marker-list-item {
         padding: 20px;
-        border-bottom: solid 1px;
+        border-bottom: solid 1px $border-color;
         cursor: pointer;
-        &:last-child {
-            border-bottom: 0px;
-        }
+
+
         &.active {
             background-color: $teal;
             color: white;
             @include transition(all 150ms #{$swift-out});
+        }
+
+        .title-box  {
+            .name {
+                font-size: 26px;
+            }
+            .location {
+                font-size: 14px;
+            }
         }
     }
 }
