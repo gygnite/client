@@ -12,7 +12,6 @@ var Alert = React.createClass({
         }
     },
     componentWillReceiveProps: function(nextProps) {
-        // console.log("getting props: ", nextProps.alerts);
         if (nextProps.alerts.length > 0) {
             this._mount(nextProps);
         }
@@ -107,7 +106,6 @@ var AlertWindow = React.createClass({
             ' active': this.state.active,
             ' leave': this.state.leave
         });
-        // console.log("alertMotion: ", alertMotion);
         var status = (<i className={"alert-icon icon-"+this.props.alert.status}></i>);
         return (
             <div className={"alert-window" + alertMotion}>

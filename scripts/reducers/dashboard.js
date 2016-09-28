@@ -40,11 +40,9 @@ function dashboard(state, action) {
             break;
         case DASHBOARD.REMOVE_SINGLE_PENDING:
             var pending = state.pending;
-            console.log("state pending bands", pending.bands);
 
             for (var i = 0; i < state.pending.bands.length; i++) {
                 var pendingBandSlots = pending.bands[i].slots.filter(function(item) {
-                    console.log("!(item.data.band_id === action.band_id && item.data.venue_id === action.venue_id)", item.data.band_id, action.band_id, item.data.venue_id, action.venue_id);
                     return !(item.data.band_id === action.band_id && item.data.venue_id === action.venue_id);
                 });
                 pending.bands[i] = assign({}, pending.bands[i], {
@@ -54,7 +52,6 @@ function dashboard(state, action) {
 
             for (var i = 0; i < state.pending.venues.length; i++) {
                 var pendingVenueSlots = pending.venues[i].slots.filter(function(item) {
-                    console.log("!(item.data.band_id === action.band_id && item.data.venue_id === action.venue_id)", item.data.band_id, action.band_id, item.data.venue_id, action.venue_id);
                     return !(item.data.band_id === action.band_id && item.data.venue_id === action.venue_id);
                 });
                 pending.venues[i] = assign({}, pending.venues[i], {

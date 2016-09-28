@@ -43,8 +43,6 @@ var CalendarView = React.createClass({
             //no user, show alert, must be logged in
             var date = moment(this.state.selectedDate);
             var venue = this.props.data;
-            console.log("this.state.selectedDate", date);
-            console.log("this.state.venue", venue);
             browserHistory.push({
                 pathname: '/booking/new',
                 state: { date: date, venue: venue, order: order}
@@ -56,13 +54,11 @@ var CalendarView = React.createClass({
 
     },
     render: function() {
-        console.log("browserHistory: ",browserHistory);
         var timeslots = [];
         if (this.props.data && this.props.data.timeslots) {
             timeslots = this.props.data.timeslots.filter(function(ts, index) {
                 return moment(this.state.selectedDate).isSame(ts.start_time, 'day');
             }.bind(this));
-            console.log("timeslots", timeslots);
         }
 
         var timeslotComponent = null;
@@ -126,7 +122,6 @@ module.exports = CalendarView;
 
 var BandTimeslots = React.createClass({
     render: function() {
-        console.log("timeslots", this.props.timeslots);
         var slot = null;
         if (this.props.timeslots.length === 0) {
             slot = (
@@ -205,7 +200,6 @@ var Slot = React.createClass({
     },
     render: function() {
         var slot = null;
-        console.log("props!", this.props);
         if (this.props.type === 'blank') {
             slot = (
                 <Link onClick={this._handleNewBooking} to="/booking/new">

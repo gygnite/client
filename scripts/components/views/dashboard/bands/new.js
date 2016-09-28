@@ -48,7 +48,6 @@ var NewBand = React.createClass({
                 }
                 break;
             case 'genres':
-                console.log("has genres?", this.state.form.genres);
                 if (this.state.form.genres.length > 0) {
                     errors = errors.filter(function(err) {
                         return err.type !== 'genre';

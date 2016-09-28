@@ -18,7 +18,6 @@ function mapDispatchToProps(dispatch) {
             request.get(BASE_URL+'/api/booking')
                 .authBearer(Cache.get(ACTIONS.cache.AUTH_TOKEN))
                 .end(function(err, res) {
-                    console.log("res!", err,res);
                     dispatch(ACTIONS.dashboard.setPending(res.body.bands, res.body.venues));
                 });
         },
@@ -31,7 +30,6 @@ function mapDispatchToProps(dispatch) {
                 })
                 .end(function(err, res) {
                     if (!err || !res.body.error) {
-                        console.log("res.body!", res.body.timeslot);
                         dispatch(ACTIONS.dashboard.removePending(vid, bid));
                         dispatch(ACTIONS.ui.createAlert('Accepted', 'success'));
                     } else {
@@ -68,7 +66,6 @@ function mapDispatchToProps(dispatch) {
                 sender_id: sender_id
             }).end(function(err, res) {
                 if (!err && !res.body.error) {
-                    console.log("res body!", res.body);
                     var message = res.body.message;
                     var sender_slug = message.sender_slug;
                     var receiver_slug = (sender_slug === message.band_slug) ? message.venue_slug : message.band_slug;
@@ -81,7 +78,6 @@ function mapDispatchToProps(dispatch) {
                     dispatch(ACTIONS.ui.createAlert('Message send failed.', 'error'));
                 }
                 dispatch(ACTIONS.ui.sendingMessageComplete());
-                console.log("res!", res, err);
                 // FIXME: what if error on message send?
             });
 

@@ -13,7 +13,6 @@ function notify(type, text, slug_to_notify) {
                 text: text,
                 slug_to_notify: slug_to_notify
             }).end(function(err, res) {
-                console.log("err,res??",err,res)
                 if (!err || !res.body.error) {
                     resolve({
                         error: false,

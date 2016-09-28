@@ -65,7 +65,6 @@ var Index = React.createClass({
         });
 
         var recents = [];
-        console.log("this.props.ui.notifications",this.props.ui.notifications);
         if (this.props.ui.notifications && this.props.ui.notifications.length > 0) {
             recents = this.props.ui.notifications.map(function(notif, index) {
                 return (

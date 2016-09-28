@@ -52,30 +52,19 @@ var VenueSearch = React.createClass({
     _distanceToMouse: function(markerPos, mousePos, markerProps) {
         var K_CIRCLE_SIZE = 30;
         var K_STICK_SIZE = 20;
-
-
         var x = markerPos.x + 40;
-        // because of marker non symmetric,
-        // we transform it central point to measure distance from marker circle center
-        // you can change distance function to any other distance measure
         var y = (markerPos.y + 40) - 5;
-
         var distanceKoef = 0.8;
-        // it's just a simple example, you can tweak distance function as you wish
-        // console.log("distanceKoef * Math.sqrt((x - mousePos.x) * (x - mousePos.x) + (y - mousePos.y) * (y - mousePos.y))", )
         return distanceKoef * Math.sqrt((x - mousePos.x) * (x - mousePos.x) + (y - mousePos.y) * (y - mousePos.y));
     },
     _showActiveMarker: function(marker, data) {
-        // console.log("data.id", data.id);
         this.props.setActiveHover(data.id);
     },
     _hideActiveMarker: function(marker, data) {
-        // console.log("leaving! marker", data);
         this.props.clearActiveHover(data.id);
     },
     _handleMapClick: function(obj) {
         //close all map balloons
-
     },
     render: function() {
         var markers = this.props.search.results.map(function(marker, index) {
@@ -192,7 +181,6 @@ var MarkerListItem = React.createClass({
         var active = cx({
             ' active':this.props.data.isActive
         });
-        console.log("marker item", this.props.data);
         var imgStyle = {
             backgroundImage: 'url('+this.props.data.profile_image+')'
         };

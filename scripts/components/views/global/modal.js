@@ -74,7 +74,6 @@ var Modal = React.createClass({
     },
 
     unmount: function() {
-        console.log("portal: ", this.portal)
         if (this.portal) {
             this.hide(function() {
                 ReactDOM.unmountComponentAtNode(this.portal);

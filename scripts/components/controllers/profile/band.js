@@ -20,7 +20,6 @@ function mapDispatchToProps(dispatch) {
             request.get(BASE_URL+'/bands/'+slug)
             // .authBearer(Cache.get(ACTIONS.cache.AUTH_TOKEN))
             .end(function(err,res) {
-                console.log("res.body: ", res.body);
                 dispatch(ACTIONS.profile.setBand(res.body.band));
                 dispatch(ACTIONS.ui.fetchBandsComplete());
             });

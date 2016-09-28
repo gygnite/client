@@ -248,15 +248,11 @@ var Messages = React.createClass({
                 receiver: currentActiveMessageGroup[0].identity
             };
             activeGroup = currentActiveMessageGroup[0];
-            console.log("messageData", messageData);
         }
-
 
         var mobileMenuState = cx({
             ' open': this.state.showMobileInboxList
         });
-
-
 
         return (
             <div className="message-page">
@@ -338,11 +334,6 @@ module.exports = Messages;
 
 
 var DigestBox = React.createClass({
-    componentWillReceiveProps: function(nextProps) {
-        //scroll to bottom
-        // console.log("this.refs.digestbox.scrollHeight", this.refs.digestbox.scrollHeight)
-        // this.refs.digestbox.scrollTop = 1000;
-    },
     render: function() {
         return (
             <div ref="digestbox" className="digest">

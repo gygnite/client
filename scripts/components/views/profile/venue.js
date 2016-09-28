@@ -15,7 +15,6 @@ var VenueProfile = React.createClass({
             delay: 250,
             smooth: true
         });
-        // scroll.scrollMore(-20);
     },
     render: function() {
         //handle graceful degredation for links

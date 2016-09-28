@@ -33,7 +33,6 @@ function mapDispatchToProps(dispatch) {
             dispatch(ACTIONS.messages.setActiveMessageGroup(slug));
         },
         markGroupAsRead: function(group) {
-            console.log("markingasread?", group)
             var group_slug = group.identity.slug;
             dispatch(ACTIONS.messages.markGroupAsRead(group_slug));
         },
@@ -59,7 +58,6 @@ function mapDispatchToProps(dispatch) {
                     dispatch(ACTIONS.ui.createAlert('Message send failed.', 'error'));
                 }
                 dispatch(ACTIONS.ui.sendingMessageComplete());
-                console.log("res!", res, err);
                 // FIXME: what if error on message send?
             });
 
@@ -67,7 +65,6 @@ function mapDispatchToProps(dispatch) {
             function sendNotification(text, slug_to_notify) {
                 notify('message', text, slug_to_notify)
                 .then(function(res) {
-                    console.log("RES???",res.data);
 
                     res.data.notifs.forEach(function(notif){
                         dispatch(ACTIONS.ui.emitNotification({

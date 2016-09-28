@@ -25,8 +25,6 @@ function mapDispatchToProps(dispatch) {
                 .send(band)
                 .authBearer(Cache.get(ACTIONS.cache.AUTH_TOKEN))
                 .end(function(err, res) {
-                    console.log("log err", err, res.body);
-
                     if (!err && !res.body.error) {
                         if (image) {
                             saveToCloud(image, res.body.data.band.id);

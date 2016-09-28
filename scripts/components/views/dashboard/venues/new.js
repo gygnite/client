@@ -29,7 +29,6 @@ var NewVenue = React.createClass({
     },
     _createVenue: function() {
         var errors = [];
-        console.log("this state form: ", this.state.form);
 
         if (!this.state.form.hasOwnProperty('name')) {
             errors.push('You must include a venue name');
@@ -52,7 +51,6 @@ var NewVenue = React.createClass({
             }
             this.props.createVenue(this.state.form, image);
         } else {
-            console.log("validation errors", errors);
             this.setState({
                 errors: errors
             });

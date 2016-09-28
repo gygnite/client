@@ -24,7 +24,6 @@ function mapDispatchToProps(dispatch) {
             request.get(BASE_URL+'/api/admins')
             .authBearer(Cache.get(ACTIONS.cache.AUTH_TOKEN))
             .end(function(err,res) {
-                console.log("res.body: ", res.body);
                 dispatch(ACTIONS.bands.setBands(res.body.bands));
                 dispatch(ACTIONS.venues.setVenues(res.body.venues));
                 dispatch(ACTIONS.dashboard.setTimeslots(res.body.timeslots));

@@ -28,7 +28,6 @@ var Uploader = React.createClass({
             this.setState({
                 preview: reader.result
             });
-            console.log("reader!", this.refs.uploadInput.files);
             this.props.saveImage(this.props.for, this.refs.uploadInput.files);
         }.bind(this), false);
 

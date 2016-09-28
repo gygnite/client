@@ -21,15 +21,11 @@ function mapDispatchToProps(dispatch) {
             request.get(BASE_URL+'/api/admins')
             .authBearer(Cache.get(ACTIONS.cache.AUTH_TOKEN))
             .end(function(err,res) {
-                console.log("res.body admin assets: ", res.body);
                 dispatch(ACTIONS.bands.setBands(res.body.bands));
                 dispatch(ACTIONS.ui.fetchBandsComplete());
             });
         },
         createBookingRequest: function(details) {
-            console.log("sending booking request: ", details);
-
-            console.log("booking details", details);
 
             dispatch(ACTIONS.ui.fetchPostBooking());
 

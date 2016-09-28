@@ -20,10 +20,8 @@ function mapDispatchToProps(dispatch) {
             request(BASE_URL+'/api/booking/date/'+id)
                 .authBearer(Cache.get(ACTIONS.cache.AUTH_TOKEN))
                 .end(function(err, res) {
-                    console.log("res!", res.body);
                     if (!err && !res.body.error) {
                         dispatch(ACTIONS.bookings.setCurrentBookings(res.body.timeslots));
-                        console.log("bookigns", res.body.timeslots)
                     } else {
 
                     }
@@ -89,7 +87,6 @@ function mapDispatchToProps(dispatch) {
                     dispatch(ACTIONS.ui.createAlert('Message send failed.', 'error'));
                 }
                 dispatch(ACTIONS.ui.sendingMessageComplete());
-                console.log("res!", res, err);
                 // FIXME: what if error on message send?
             });
 

@@ -85,7 +85,6 @@ var Input = React.createClass({
         var inputIndexStyle = {
             zIndex: 1
         };
-        // console.log("enter icon style!", enterIconStyle)
         return (
             <div className={this.props.className + " input-group text-present" + textPresent}>
                 {tags}

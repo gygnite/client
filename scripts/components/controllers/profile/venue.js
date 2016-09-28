@@ -13,20 +13,16 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         fetchVenue: function(slug) {
-            console.log("slug!", slug)
             dispatch(ACTIONS.ui.fetchVenues());
             request
             .get(BASE_URL+'/venues/'+slug)
             .end(function(err,res) {
-                console.log("res.body: ", res.body);
-                // console.log("ACTIONS: ", ACTIONS);
 
                 // FIXME: Add error handling -> needed on bands too!
 
                 dispatch(ACTIONS.profile.setVenue(res.body.venue));
                 dispatch(ACTIONS.ui.fetchVenuesComplete());
             });
-            console.log("fetching also here")
         }
     }
 }
