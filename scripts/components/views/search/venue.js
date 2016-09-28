@@ -123,6 +123,7 @@ var VenueSearch = React.createClass({
                 </div>
                 <div className="map-components-box">
                     <div className="map-search-box">
+                        <span><i className="icon-search"></i></span>
                         <Input
                             for="search"
                             handleUserInput={this._handleInput}>
@@ -191,13 +192,20 @@ var MarkerListItem = React.createClass({
         var active = cx({
             ' active':this.props.data.isActive
         });
+        console.log("marker item", this.props.data);
+        var imgStyle = {
+            backgroundImage: 'url('+this.props.data.profile_image+')'
+        };
         return (
             <Link to={"/venues/"+this.props.data.slug}>
-                <li
-                    onMouseEnter={this.props.onEnter.bind(null, null, this.props.data)}
+                <li onMouseEnter={this.props.onEnter.bind(null, null, this.props.data)}
                     onMouseLeave={this.props.onLeave.bind(null, null, this.props.data)}
                     className={"marker-list-item"+active}>
-                    <h1>{this.props.data.name}</h1>
+                    <div className="title-box">
+                        <h2 className="name">{this.props.data.name}</h2>
+                        <h3 className="location"><i>{this.props.data.address}</i></h3>
+                        <h3 className="location"><i>{this.props.data.city_state}</i></h3>
+                    </div>
                 </li>
             </Link>
         )

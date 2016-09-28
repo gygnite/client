@@ -123,7 +123,6 @@ $blue: darken(mix($teal, $main-blue, 80%), 35%);
                 position: relative;
                 background-size: cover;
                 color: $main-white;
-                // overflow: hidden;
                 &:before {
                     content: '';
                     position: absolute;
@@ -142,22 +141,18 @@ $blue: darken(mix($teal, $main-blue, 80%), 35%);
                 width: 95vw;
                 padding: 20px;
                 list-style: none;
-                // float: left;
                 @include outer-container(100%);
-                // @include row;
             .asset-card {
                 @include media($mobile) {
                     @include span-columns(12);
                     @include omega(1n);
                 };
                 @include media($tablet) {
-                    // @include omega-reset(1n);
                     @include span-columns(6);
                     @include omega(2n);
                 };
                 @include media($desktop) {
                     @include span-columns(4);
-                    // @include omega-reset(2n);
                     @include omega(3n);
                 };
                 border-radius: 3px;
@@ -175,9 +170,9 @@ $blue: darken(mix($teal, $main-blue, 80%), 35%);
                     height: 50%;
                     background-color: lighten($main-white, 30%);
                     &.img {
-                        background-color: $main-blue;
-                        background-position: center;
-                        background-size: 370px, cover;
+                        background-color: lighten($gunmetal, 60%);
+                        background-position: left;
+                        background-size: cover;
                         background-repeat: no-repeat;
                     }
                     &.content {

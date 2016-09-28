@@ -40,7 +40,7 @@ var AllBookings = React.createClass({
 
         return (
             <div className="bookings-view container">
-                <h1>Pending Bookings</h1>
+                <h1 className="header">Pending Bookings</h1>
                     <ReactCSSTransitionGroup
                         transitionName="bookingstatus"
                         transitionEnterTimeout={500}

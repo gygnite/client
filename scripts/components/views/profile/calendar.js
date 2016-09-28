@@ -15,7 +15,10 @@ var CalendarView = React.createClass({
             selectedDate: new Date()
         }
     },
-    _setSelectedDate: function(date) {
+    _setSelectedDate: function(date, inputdate) {
+        if (date === 'date' && inputdate) {
+            date = inputdate;
+        }
         this.setState({
             selectedDate: date
         });
@@ -64,7 +67,9 @@ var CalendarView = React.createClass({
 
         var timeslotComponent = null;
         if (this.props.type === 'band') {
-            timeslotComponent = (<BandTimeslots timeslots={timeslots}/>);
+            timeslotComponent = (
+                <BandTimeslots timeslots={timeslots}/>
+            );
         } else {
             timeslotComponent = (
                 <VenueTimeslots
@@ -91,7 +96,7 @@ var CalendarView = React.createClass({
                     selectedDate={this.state.selectedDate}/>
                 <div className="date-details">
                     <div className="form modal-form">
-                        <Input handleUserInput={this._setSelectedDate}>
+                        <Input for="date" handleUserInput={this._setSelectedDate}>
                             <input type="date" required/>
                         </Input>
                     </div>
@@ -122,16 +127,27 @@ module.exports = CalendarView;
 var BandTimeslots = React.createClass({
     render: function() {
         console.log("timeslots", this.props.timeslots);
-        return (
-            <div className="timeslots">
-                {this.props.timeslots.map(function(ts, index) {
-                    return (
-                        <div key={"ts-"+index}>
-                            <h2>{moment(ts.start_time).format('dddd, hA')}</h2>
+        var slot = null;
+        if (this.props.timeslots.length === 0) {
+            slot = (
+                <div className="timeslot-inner blank band"><h3>No events scheduled for this date.</h3></div>
+            )
+        } else {
+            slot = this.props.timeslots.map(function(ts, index) {
+                return (
+                    <div key={"ts-"+index} className="timeslot">
+                        <div className="timeslot-inner band">
+                            <span><i className="icon-success"></i></span>
+                            <h2>{moment(ts.start_time).format('dddd, MMM Do')}</h2>
                             <h3>at {ts.name}</h3>
                         </div>
-                    );
-                })}
+                    </div>
+                );
+            });
+        }
+        return (
+            <div className="timeslots">
+                {slot}
             </div>
         )
     }
