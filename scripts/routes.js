@@ -168,7 +168,6 @@ function socketConnectionMiddleware(store) {
 }
 
 
-
 function emitter(io, action) {
     switch (action.type) {
         case 'SET_USER':
