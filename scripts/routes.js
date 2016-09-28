@@ -23,14 +23,10 @@ var Provider = require('react-redux').Provider;
 var reducers = require('./reducers/main');
 
 var store = createStore(reducers, {},
-    // compose(
-        applyMiddleware(socketConnectionMiddleware),
-        // window.devToolsExtension && window.devToolsExtension()
-    // )
+    applyMiddleware(socketConnectionMiddleware)
 );
 
 socketReceiver(store);
-
 
 var Template = require('./components/controllers/template');
 
@@ -142,8 +138,6 @@ function validateStateBeforeBooking(nextState, replace) {
     } else if (!nextState.location.state.date && !nextState.location.state.order && !nextState.location.state.venue) {
         store.dispatch(ACTIONS.ui.createAlert('Please choose a venue and date.', 'error'))
         replace('/search/venues');
-    } else {
-        //go
     }
 }
 
@@ -151,7 +145,6 @@ function validateStateBeforeBooking(nextState, replace) {
 
 
 function socketReceiver(store) {
-
     ioConnection.on('connection', function(socket) {
         socket.join(Cache.get(ACTIONS.cache.USER).id);
     });
