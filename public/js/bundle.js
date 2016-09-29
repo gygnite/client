@@ -20623,7 +20623,7 @@
 
 	module.exports = {
 
-	    apiurl: 'http://gygnite.herokuapp.com'
+	    apiurl: 'http://localhost:4000'
 
 	};
 
@@ -65179,7 +65179,7 @@
 	        }.bind(this), 10);
 	        setTimeout(function () {
 	            this._handleLeave();
-	        }.bind(this), 3000);
+	        }.bind(this), 300000);
 	    },
 	    _showActive: function _showActive() {
 	        this.setState({
@@ -65772,123 +65772,122 @@
 /* 449 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(1);
+	var Link = __webpack_require__(177).Link;
 
 	var Footer = React.createClass({
-	    displayName: "Footer",
+	    displayName: 'Footer',
 
 	    render: function render() {
 	        return React.createElement(
-	            "footer",
-	            { className: "app-footer" },
+	            'footer',
+	            { className: 'app-footer' },
 	            React.createElement(
-	                "div",
-	                { className: "footer-inner" },
+	                'div',
+	                { className: 'footer-inner' },
 	                React.createElement(
-	                    "div",
-	                    { className: "connect footer-list" },
+	                    'div',
+	                    { className: 'connect footer-list' },
 	                    React.createElement(
-	                        "ul",
-	                        { className: "footer-list-inner" },
+	                        'ul',
+	                        { className: 'footer-list-inner' },
 	                        React.createElement(
-	                            "h3",
-	                            { className: "footer-list-inner-header" },
-	                            "Gygnite"
+	                            'h3',
+	                            { className: 'footer-list-inner-header' },
+	                            'Gygnite'
 	                        ),
 	                        React.createElement(
-	                            "li",
-	                            { className: "footer-list-inner-item" },
+	                            Link,
+	                            { to: '/' },
 	                            React.createElement(
-	                                "p",
-	                                null,
-	                                "Home"
-	                            )
-	                        ),
-	                        React.createElement(
-	                            "li",
-	                            { className: "footer-list-inner-item" },
-	                            React.createElement(
-	                                "p",
-	                                null,
-	                                "Signup"
-	                            )
-	                        ),
-	                        React.createElement(
-	                            "li",
-	                            { className: "footer-list-inner-item" },
-	                            React.createElement(
-	                                "p",
-	                                null,
-	                                "More Information"
+	                                'li',
+	                                { className: 'footer-list-inner-item' },
+	                                React.createElement(
+	                                    'p',
+	                                    null,
+	                                    'Home'
+	                                )
 	                            )
 	                        )
 	                    )
 	                ),
 	                React.createElement(
-	                    "div",
-	                    { className: "about footer-list" },
+	                    'div',
+	                    { className: 'about footer-list' },
 	                    React.createElement(
-	                        "ul",
-	                        { className: "footer-list-inner" },
+	                        'ul',
+	                        { className: 'footer-list-inner' },
 	                        React.createElement(
-	                            "h3",
-	                            { className: "footer-list-inner-header" },
-	                            "About"
+	                            'h3',
+	                            { className: 'footer-list-inner-header' },
+	                            'About'
 	                        ),
 	                        React.createElement(
-	                            "li",
-	                            { className: "footer-list-inner-item" },
+	                            'a',
+	                            { href: 'https://github.com/gygnite' },
 	                            React.createElement(
-	                                "p",
-	                                null,
-	                                "Project"
+	                                'li',
+	                                { className: 'footer-list-inner-item' },
+	                                React.createElement(
+	                                    'p',
+	                                    null,
+	                                    'Project'
+	                                )
 	                            )
 	                        ),
 	                        React.createElement(
-	                            "li",
-	                            { className: "footer-list-inner-item" },
+	                            'a',
+	                            { href: 'https://www.linkedin.com/in/mhottman' },
 	                            React.createElement(
-	                                "p",
-	                                null,
-	                                "Author"
+	                                'li',
+	                                { className: 'footer-list-inner-item' },
+	                                React.createElement(
+	                                    'p',
+	                                    null,
+	                                    'Author'
+	                                )
 	                            )
 	                        )
 	                    )
 	                ),
 	                React.createElement(
-	                    "div",
-	                    { className: "connect footer-list" },
+	                    'div',
+	                    { className: 'connect footer-list' },
 	                    React.createElement(
-	                        "ul",
-	                        { className: "footer-list-inner" },
+	                        'ul',
+	                        { className: 'footer-list-inner' },
 	                        React.createElement(
-	                            "h3",
-	                            { className: "footer-list-inner-header" },
-	                            "Connect"
+	                            'h3',
+	                            { className: 'footer-list-inner-header' },
+	                            'Connect'
 	                        ),
 	                        React.createElement(
-	                            "li",
-	                            { className: "footer-list-inner-item" },
-	                            React.createElement("i", { className: "icon-github-circled" })
+	                            'a',
+	                            { href: 'https://github.com/gygnite' },
+	                            React.createElement(
+	                                'li',
+	                                { className: 'footer-list-inner-item' },
+	                                React.createElement('i', { className: 'icon-github-circled' })
+	                            )
 	                        )
 	                    )
 	                ),
 	                React.createElement(
-	                    "div",
-	                    { className: "copyright" },
+	                    'div',
+	                    { className: 'copyright' },
 	                    React.createElement(
-	                        "div",
-	                        { className: "copyright-inner" },
-	                        React.createElement("i", { className: "icon-copyright" }),
+	                        'div',
+	                        { className: 'copyright-inner' },
+	                        React.createElement('i', { className: 'icon-copyright' }),
 	                        React.createElement(
-	                            "p",
+	                            'p',
 	                            null,
 	                            React.createElement(
-	                                "i",
+	                                'i',
 	                                null,
-	                                "Copyright Gygnite 2016 - Michael Hottman"
+	                                'Copyright Gygnite 2016 - Michael Hottman'
 	                            )
 	                        )
 	                    )
@@ -66509,7 +66508,7 @@
 	        logout: function logout() {
 	            dispatch(ACTIONS.user.logout());
 	            Cache.flush();
-	            browserHistory.replace('/');
+	            browserHistory.push('/');
 	        }
 	    };
 	}

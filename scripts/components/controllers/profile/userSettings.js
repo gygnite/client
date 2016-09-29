@@ -108,7 +108,7 @@ function mapDispatchToProps(dispatch) {
         logout: function() {
             dispatch(ACTIONS.user.logout());
             Cache.flush();
-            browserHistory.replace('/');
+            browserHistory.push('/');
         },
     }
 }
