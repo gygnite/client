@@ -65179,7 +65179,7 @@
 	        }.bind(this), 10);
 	        setTimeout(function () {
 	            this._handleLeave();
-	        }.bind(this), 300000);
+	        }.bind(this), 3000);
 	    },
 	    _showActive: function _showActive() {
 	        this.setState({
