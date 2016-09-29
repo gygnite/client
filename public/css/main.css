@@ -669,8 +669,8 @@ a {
   text-align: center; }
   @media screen and (max-width: 480px) {
     .icon-alert-count-badge {
-      right: 25px;
-      top: 8px; } }
+      right: 16px;
+      top: -8px; } }
 
 @media screen and (max-width: 480px) {
   .icon-alert {
