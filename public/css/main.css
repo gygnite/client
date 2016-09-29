@@ -78,8 +78,8 @@ html {
 
 @font-face {
   font-family: 'fontello';
-  src: url("../fonts/fontello.eot?10770939");
-  src: url("../fonts/fontello.eot?10770939#iefix") format("embedded-opentype"), url("../fonts/fontello.woff2?10770939") format("woff2"), url("../fonts/fontello.woff?10770939") format("woff"), url("../fonts/fontello.ttf?10770939") format("truetype"), url("../fonts/fontello.svg?10770939#fontello") format("svg");
+  src: url("../fonts/fontello.eot?90318455");
+  src: url("../fonts/fontello.eot?90318455#iefix") format("embedded-opentype"), url("../fonts/fontello.woff2?90318455") format("woff2"), url("../fonts/fontello.woff?90318455") format("woff"), url("../fonts/fontello.ttf?90318455") format("truetype"), url("../fonts/fontello.svg?90318455#fontello") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -89,7 +89,7 @@ html {
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url('../fonts/fontello.svg?10770939#fontello') format('svg');
+    src: url('../fonts/fontello.svg?90318455#fontello') format('svg');
   }
 }
 */
@@ -301,6 +301,12 @@ html {
   left: 30px;
   position: fixed;
   z-index: 6000; }
+  @media screen and (max-width: 480px) {
+    .alert-box {
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      z-index: 500; } }
   .alert-box .alert-window {
     padding: 15px;
     max-height: 50px;
@@ -310,6 +316,9 @@ html {
     display: table;
     margin-top: 10px;
     bottom: 0; }
+    @media screen and (max-width: 480px) {
+      .alert-box .alert-window {
+        width: 100%; } }
     .alert-box .alert-window.enter {
       opacity: 0;
       transform: translateY(20px); }
@@ -669,8 +678,8 @@ a {
   text-align: center; }
   @media screen and (max-width: 480px) {
     .icon-alert-count-badge {
-      right: 25px;
-      top: 8px; } }
+      right: 16px;
+      top: -8px; } }
 
 @media screen and (max-width: 480px) {
   .icon-alert {
@@ -839,15 +848,6 @@ footer.app-footer {
   color: black;
   background: url("../assets/shattered_textile.png");
   background: url("../assets/shattered_textile.png"); }
-  footer.app-footer:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    opacity: .6;
-    background: rgba(29, 28, 28, 0.61); }
   footer.app-footer .copyright {
     float: left;
     display: block;
@@ -878,7 +878,8 @@ footer.app-footer {
       padding: 0;
       list-style: none; }
       footer.app-footer .footer-list .footer-list-inner .footer-list-inner-item {
-        margin-top: 10px; }
+        margin-top: 10px;
+        cursor: pointer; }
 
 .Cal__Today__root {
   position: absolute;

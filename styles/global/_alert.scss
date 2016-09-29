@@ -3,6 +3,12 @@
     left: 30px;
     position: fixed;
     z-index: 6000;
+    @include media($mobile) {
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        z-index: 500;
+    };
     .alert-window {
         padding: 15px;
         max-height: 50px;
@@ -12,6 +18,9 @@
         display: table;
         margin-top: 10px;
         bottom: 0;
+        @include media($mobile) {
+            width: 100%;
+        };
         &.enter {
             opacity: 0;
             transform: translateY(20px);
